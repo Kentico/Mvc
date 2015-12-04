@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <licenseUrl>http://kentico.github.io/licenses/kentico-mvc.txt</licenseUrl>
+        <iconUrl>http://www.kentico.com/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>$description$</description>
+        <tags>kentico debug glimpse</tags>
+        <copyright>© 2015 Kentico Software.</copyright>
+        <language>en-US</language>
+        <releaseNotes></releaseNotes>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Kentico.Libraries" version="[9,10)" />
+                <dependency id="Glimpse" version="1.8.6" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files />
+</package>

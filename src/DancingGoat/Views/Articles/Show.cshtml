@@ -1,0 +1,56 @@
+﻿@using CMS.DocumentEngine.Types;
+
+@model Article
+
+@{
+    ViewBag.Title = @Model.Fields.Title;
+
+    var relatedNodes = Model.Fields.RelatedArticles.ToList();
+}
+
+<article class="article-detail col-lg-9 col-md-12 article-detail-related-box">
+    <h2>@Model.Fields.Title</h2>
+    <div class="article-detail-datetime">
+        @Model.PublicationDate.ToString("D")
+    </div>
+    <div class="row">
+        <div class="article-detail-image col-md-push-2 col-md-8">
+            @Html.AttachmentImage(Model.Fields.Teaser, Model.Fields.Title, "img-responsive")
+        </div>
+    </div>
+    <div class="row">
+        <div class="article-detail-content">
+            @Html.Kentico().ResolveUrls(Model.Fields.Text)
+        </div>
+    </div>
+</article>
+
+@if (relatedNodes.Any())
+{
+    <div class=" article-related-articles">
+        <h1 class="title-tab">@ResHelper.GetString("DancingGoatMvc.Articles.RelatedArticles")</h1>
+        <div class="row">
+            @foreach (var article in relatedNodes.OfType<Article>())
+            {
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="article-tile">
+                        <a href="@Url.ForArticle(article)">
+                            @Html.AttachmentImage(article.Fields.Teaser, "Article " + article.Fields.Title, "article-tile-image", SizeConstraint.Height(301))
+                        </a>
+                        <div class="article-tile-date">
+                            @article.PublicationDate.ToString("m")
+                        </div>
+                        <div class="article-tile-content">
+                            <h2 class="h4">
+                                <a href="@Url.ForArticle(article)">@article.Fields.Title </a>
+                            </h2>
+                            <p class="article-tile-text">
+                                @article.Fields.Summary
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

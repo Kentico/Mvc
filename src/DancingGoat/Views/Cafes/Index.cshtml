@@ -1,0 +1,68 @@
+﻿@model DancingGoat.Models.Cafes.IndexViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Cafes");
+}
+
+<h2>@ResHelper.GetString("DancingGoatMvc.CompanyCafes")</h2>
+<div class="row">
+    @foreach (var cafe in Model.CompanyCafes)
+    {
+        <div class="col-md-6">
+            <div class="cafe-image-tile cursor-hand js-scroll-to-map" data-address="@cafe.Contact.City,@cafe.Contact.Street">
+                <div class="cafe-image-tile-image-wrapper">
+                    @if (cafe.Photo != null)
+                    {
+                        @Html.AttachmentImage(cafe.Photo, "Cafe " + cafe.Contact.Name, "cafe-image-tile-image")
+                    }
+                </div>
+                <div class="cafe-image-tile-content">
+                    <h3 class="cafe-image-tile-name">@cafe.Contact.Name</h3>
+                    <address class="cafe-tile-address">
+                        <a href="javascript:void(0)" class="cafe-tile-address-anchor">
+                            @cafe.Contact.Street, @cafe.Contact.City
+                            <br />
+                            @cafe.Contact.ZIP, @cafe.Contact.Country, @cafe.Contact.State
+                        </a>
+                    </address>
+                    <p>@cafe.Contact.Phone</p>
+                    <p>@cafe.Note</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<h2>@ResHelper.GetString("DancingGoatMvc.PartnerCafes.Title")</h2>
+<div class="row">
+    @foreach (var city in Model.PartnerCafes.Keys)
+    {
+        var first = true;
+        foreach (var contact in Model.PartnerCafes[city])
+        {
+            if (first)
+            {
+                <h3>@GetCafeAddress(contact)</h3>
+            }
+            <p>
+                @contact.Name, @contact.Street, @contact.Phone
+            </p>
+            first = false;
+        }
+    }
+</div>
+
+<h2 class="map-title">@ResHelper.GetString("DancingGoatMvc.Cafes.MapTitle")</h2>
+<div class="map js-map"></div>
+
+@helper GetCafeAddress(DancingGoat.Models.Contacts.ContactModel model)
+{
+    var tokens = new string[] { model.City, model.Country, model.State };
+
+    @String.Join(", ", tokens.Where(x => !String.IsNullOrEmpty(x)));
+}
+
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    @Scripts.Render("~/Scripts/map.js")
+}

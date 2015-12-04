@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.NotFound.Title");
+}
+
+<div class="row">
+    <div class="not-found">
+        <div class="col-md-5 col-lg-4 col-lg-offset-1 sm-hidden xs-hidden">
+            <img class="img-responsive" alt="Page not found" src="@Url.Content("~/Content/Images/404.jpg")">
+        </div>
+        <div class="col-md-7 col-lg-6">
+            <div class="not-found-content">
+                <h2 class="">
+                    @ResHelper.GetString("DancingGoatMvc.NotFound.Title")
+                </h2>
+                <p>@ResHelper.GetString("DancingGoatMvc.NotFound.Message")</p>
+                <p>
+                    @Html.Raw(ResHelper.GetStringFormat("DancingGoatMvc.NotFound.Instructions", 
+                      Html.ActionLink(ResHelper.GetString("DancingGoatMvc.NotFound.Homepage"), "Index", "Home"), 
+                      Html.ActionLink(ResHelper.GetString("DancingGoatMvc.NotFound.ContactUs"), "Index", "Contacts")))
+                </p>
+                <a href="@Url.Action("Index", "Home")" class="btn">
+                    @ResHelper.GetString("DancingGoatMvc.NotFound.GoHome")
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

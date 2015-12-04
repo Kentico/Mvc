@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <!-- Add empty CMSHashStringSalt -->
+  <!-- Disable CMSEnable51D -->
+  <appSettings xdt:Transform="InsertIfMissing">
+    <add key="CMSHashStringSalt" value="" 
+         xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+
+    <add key="CMSEnable51D" value="false" 
+         xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
+  </appSettings>
+
+  <!-- Add empty CMS connection string -->
+  <connectionStrings xdt:Transform="InsertIfMissing">
+    <add name="CMSConnectionString" connectionString="" 
+         xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)"/>
+  </connectionStrings>
+
+  <!-- Enable relaxedUrlToFileSystemMapping -->
+  <!-- Set requestValidationMode: 2.0 -->
+  <!-- Change max. url length to 512 -->
+  <system.web xdt:Transform="InsertIfMissing">
+    <httpRuntime relaxedUrlToFileSystemMapping="true" 
+                 requestValidationMode="2.0"
+                 maxUrlLength="512"
+                 xdt:Transform="SetAttributes"/>
+  </system.web>
+  
+  <system.webServer xdt:Transform="InsertIfMissing">
+
+	  <modules xdt:Transform="InsertIfMissing">
+      <!-- Register CMSApplicationModule -->
+      <add name="CMSApplicationModule" type="CMS.Base.ApplicationModule, CMS.Base" 
+           xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
+    </modules>
+  </system.webServer>
+
+  <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true" xdt:Transform="SetAttributes" />
+  </system.webServer>
+  
+</configuration>

@@ -1,0 +1,105 @@
+﻿@model DancingGoat.Models.Home.IndexViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Home");
+}
+
+@helper MoreButton(string text, string actionName, string controllerName)
+{
+    <div class="row">
+        <div class="clear center-text">
+            <a href="@Url.Action(actionName, controllerName)" class="btn btn-more">
+                @text
+            </a>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <h1 class="title-tab">@ResHelper.GetString("DancingGoatMvc.Articles.LatestOne")</h1>
+    @{var first = true; }
+    @foreach (var article in @Model.LatestArticles)
+    {
+        if (first)
+        {
+            first = false;
+            <div class="article-tile article-tile-large">
+                <div class="col-md-12 col-lg-6">
+                    <a href="@Url.ForArticle(article)">
+                        @Html.AttachmentImage(article.Fields.Teaser, article.Fields.Title, "article-tile-image")
+                    </a>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <div class="article-tile-date">
+                        @article.PublicationDate.ToString("m")
+                    </div>
+                    <div class="article-tile-content">
+                        <h2>
+                            <a href="@Url.ForArticle(article)">@article.Fields.Title</a>
+                        </h2>
+                        <p class="article-tile-text lead-paragraph">
+                            @article.Fields.Summary
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-3">
+                <div class="article-tile">
+                    <a href="@Url.ForArticle(article)">
+                        @Html.AttachmentImage(article.Fields.Teaser, "Article " + article.Fields.Title, "article-tile-image")
+                    </a>
+                    <div class="article-tile-date">
+                        @article.PublicationDate.ToString("m")
+                    </div>
+                    <div class="article-tile-content">
+                        <h2 class="h4">
+                            <a href="@Url.ForArticle(article)">@article.Fields.Title</a>
+                        </h2>
+                        <p class="article-tile-text">
+                            @article.Fields.Summary
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@MoreButton(ResHelper.GetString("DancingGoatMvc.Articles.More"), "Index", "Articles")
+
+@if (!String.IsNullOrEmpty(Model.OurStory))
+{
+    <div class="row">
+        <h1 class="title-tab">@ResHelper.GetString("DancingGoatMvc.Story.Title")</h1>
+        <div class="col-sm-12">
+            <div class="ourstory-background-image center-text">
+                @Html.Raw(Model.OurStory)
+            </div>
+        </div>
+    </div>
+
+    @MoreButton(ResHelper.GetString("DancingGoatMvc.Story.WholeStory"), "Index", "About")
+}
+
+<div class="row">
+    <div>
+        <h1 class="title-tab">@ResHelper.GetString("DancingGoatMvc.CompanyCafes.Title")</h1>
+    </div>
+    @foreach (var cafe in @Model.CompanyCafes)
+    {
+        <div class="col-xs-6 col-md-3">
+            <div>
+                <a href="@Url.Action("Index", "Cafes")" class="ourcoffee-tile-link">
+                    <h2 class="ourcoffee-tile-text center-text">@cafe.Fields.Name</h2>
+                    <span class="cafe-overlay"> </span>
+                    @Html.AttachmentImage(cafe.Fields.Photo, cafe.Fields.Name, "ourcoffee-tile-image")
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+@MoreButton(ResHelper.GetString("DancingGoatMvc.Cafes.More"), "Index", "Cafes")

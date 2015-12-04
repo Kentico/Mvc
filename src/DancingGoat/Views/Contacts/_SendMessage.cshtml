@@ -1,0 +1,14 @@
+﻿@model DancingGoat.Models.Contacts.MessageModel
+
+@using (Html.BeginForm("SendMessage", "Contacts"))
+{
+    @Html.AntiForgeryToken()
+    <div class="FormPanel">
+        @Html.ValidationSummary(true, "", new { @class = "ErrorLabel" })
+        @Html.ValidatedEditorFor(model => model.FirstName)
+        @Html.ValidatedEditorFor(model => model.LastName)
+        @Html.ValidatedEditorFor(model => model.Email)
+        @Html.ValidatedEditorFor(model => model.MessageText)
+        <input type="submit" value="@ResHelper.GetString("General.Submit")" class="btn btn-primary" />
+    </div>
+}

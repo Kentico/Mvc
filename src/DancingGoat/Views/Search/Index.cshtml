@@ -1,0 +1,63 @@
+﻿@using DancingGoat.Models.Pager
+@using DancingGoat.Models.Search
+@model SearchResults
+
+@{
+    ViewBag.Title = "Search results for: " + Model.Query;
+}
+
+<h2>@string.Format(ResHelper.GetString("DancingGoatMvc.Search.ResultsFor"), Model.Query)</h2>
+
+@if (Model.Items == null)
+{
+    if (!String.IsNullOrWhiteSpace(Model.Query))
+    {
+        @:@string.Format(ResHelper.GetString("DancingGoatMvc.Search.NoResults"), Model.Query)
+    }
+}
+
+else
+{
+    foreach (var item in Model.Items)
+    {
+        <div class="row search-tile">
+            <div class="col-md-4 col-lg-3">
+                @if (item.ImageAttachment != null)
+                {
+                    <a href="@GetUrl(item.PageTypeCodeName, item.NodeId)" title="@item.Title">@Html.AttachmentImage(item.ImageAttachment, item.Title, "img-responsive")</a>
+                }
+            </div>
+            <div class="col-md-8 col-lg-9 search-tile-content">
+                <h3 class="h4 search-tile-title">
+                    <a href="@GetUrl(item.PageTypeCodeName, item.NodeId)">@item.Title</a>
+                </h3>
+                <div class="search-tile-badge">@item.PageTypeDispayName</div>
+                <div class="search-tile-subtitle">@item.Date</div>
+                <div>@Html.Raw(CMS.Helpers.HTMLHelper.StripTags(item.Content, false))</div>
+            </div>
+        </div>
+    }
+
+    @Html.Action("Index", "Pager", new PagerModel { DataSource = Model, CreateUrlForPageIndex = i => Url.Action("Index", "Search", new { searchText = Model.Query, page = i }) })
+}
+
+@helper GetUrl(string pageTypeCodeName, int nodeId)
+{
+    switch (pageTypeCodeName)
+    {
+        case "DancingGoatMvc.Cafe":
+            @Url.Action("Index", "Cafes")
+            break;
+        case "DancingGoatMvc.Article":
+        @Url.Action("Show", "Articles", new { id = nodeId })
+            break;
+        case "DancingGoatMvc.AboutUsSection":
+        @Url.Action("Index", "About")
+            break;
+        case "DancingGoatMvc.AboutUs":
+        @Url.Action("Index", "Home")
+            break;
+        default:
+            throw new NotImplementedException("Unknown PageType: " + pageTypeCodeName);
+    }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <!-- Remove CMSHashStringSalt -->
+    <add xdt:Transform="Remove" 
+         xdt:Locator="Condition(@key='CMSHashStringSalt' and @value='') "/>
+
+    <!-- Remove CMSEnable51D -->
+    <add xdt:Transform="Remove" 
+         xdt:Locator="Condition(@key='CMSEnable51D' and @value='false')"/>
+  </appSettings>
+
+  <!-- Remove CMS connection string -->
+  <connectionStrings>
+    <add xdt:Transform="Remove" 
+         xdt:Locator="Condition(@name='CMSConnectionString' and @connectionString='')"/>
+  </connectionStrings>
+
+  <system.web>
+    <!-- Disable relaxedUrlToFileSystemMapping -->
+    <httpRuntime relaxedUrlToFileSystemMapping="false"
+                 xdt:Transform="SetAttributes"/>
+  </system.web>
+  
+  <system.webServer>
+    <!-- Disable runAllManagedModulesForAllRequests -->
+    <modules runAllManagedModulesForAllRequests="false" xdt:Transform="SetAttributes">
+      <!-- Unregister CMSApplicationModule -->
+      <add name="CMSApplicationModule" xdt:Transform="Remove" xdt:Locator="Match(name)"/>
+    </modules>
+
+  </system.webServer>
+  
+</configuration>

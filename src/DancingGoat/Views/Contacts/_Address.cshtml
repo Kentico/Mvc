@@ -1,0 +1,7 @@
+﻿@model DancingGoat.Models.Contacts.ContactModel
+
+@Model.Phone<br />
+@Html.MailTo(Model.Email)<br /><br />
+@Model.Name<br />
+@Model.Street @Model.City,<br />
+@Model.StateCode @Model.ZIP, @Model.Country

@@ -1,0 +1,59 @@
+﻿@model DancingGoat.Models.Contacts.IndexViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Contact");
+}
+
+<div class="col-md-6">
+    <h2 class="contact-title">@ResHelper.GetString("DancingGoatMvc.Roastery")</h2>
+    <ul class="contact-info">
+        <li>@Model.CompanyContact.Phone</li>
+        <li>@Html.MailTo(Model.CompanyContact.Email)</li>
+        <li>
+            <a href="javascript:void(0)" data-address="@Model.CompanyContact.City, @Model.CompanyContact.Street" class="js-scroll-to-map">@Model.CompanyContact.Street @Model.CompanyContact.City,<br />
+                @Model.CompanyContact.ZIP, @Model.CompanyContact.CountryCode, @Model.CompanyContact.State<br />
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="col-md-6">
+    <h2>@ResHelper.GetString("DancingGoatMvc.ContactUs.Title")</h2>
+    @if (Model.MessageSent)
+    {
+        <div class="info-label">@ResHelper.GetString("DancingGoatMvc.ContactUs.Thanks")</div>
+    }
+    else
+    {
+        <div id="message-form">
+            @Html.Partial("_SendMessage", Model.Message)
+        </div>
+    }
+</div>
+
+<h2>@ResHelper.GetString("DancingGoatMvc.CompanyCafes")</h2>
+<div class="row">
+    @foreach (var cafe in @Model.CompanyCafes)
+    {
+        <div class="col-md-6 col-lg-3">
+            <div class="cafe-tile cursor-hand js-scroll-to-map" data-address="@cafe.City, @cafe.Street">
+                <div class="cafe-tile-content">
+                    <h3 class="cafe-tile-name">@cafe.Name</h3>
+                    <address class="cafe-tile-address">
+                        <a href="javascript:void(0)" class="cafe-tile-address-anchor">@cafe.Street, @cafe.City<br />
+                            @cafe.ZIP, @cafe.Country, @cafe.State
+                        </a>
+                    </address>
+                    <p class="cafe-tile-phone">@cafe.Phone</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<h2 class="map-title">@ResHelper.GetString("DancingGoatMvc.ContactUs.MapTitle")</h2>
+<div class="map js-map"></div>
+
+@section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    @Scripts.Render("~/Scripts/map.js")
+}

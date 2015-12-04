@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <licenseUrl>http://kentico.github.io/licenses/kentico-mvc.txt</licenseUrl>
+        <iconUrl>http://kentico.com/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>$description$</description>
+        <tags>kentico, aspnet, mvc, aspnetmvc</tags>
+        <copyright>© 2015 Kentico Software.</copyright>
+        <language>en-US</language>
+        <releaseNotes></releaseNotes>
+        <dependencies>
+            <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
+            <dependency id="Kentico.Libraries" version="[9,10)" />
+            <dependency id="Kentico.LanguagePack.English" version="[9,10)" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="NugetResources\ApplicationConfig.cs.pp" target="content\App_Start\ApplicationConfig.cs.pp" />
+        <file src="NugetResources\mimetypes.txt" target="content\App_Data\mimetypes.txt" />
+        <file src="NugetResources\web.config.install.xdt" target="content\web.config.install.xdt" />
+        <file src="NugetResources\web.config.uninstall.xdt" target="content\web.config.uninstall.xdt" />
+    </files>
+</package>

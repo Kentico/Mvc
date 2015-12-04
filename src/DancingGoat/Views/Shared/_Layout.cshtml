@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head id="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>@ViewBag.Title - Dancing Goat</title>
+    <link href="@Url.Content("~/Content/Styles/Site.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="page-wrap">
+        <header class="header" role="banner">
+            <div class="menu">
+                <div class="container">
+                    <nav role="navigation">
+                        <ul>
+                            <li>
+                                @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Home"), "Index", "Home")
+                            </li>
+                            <li>
+                                @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Articles"), "Index", "Articles")
+                            </li>
+                            <li>
+                                @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.AboutUs"), "Index", "About")
+                            </li>
+                            <li>
+                                @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Cafes"), "Index", "Cafes")
+                            </li>
+                            <li>
+                                @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Contact"), "Index", "Contacts")
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="additional-menu-buttons user-menu">
+                        <nav role="navigation">
+                            <ul class="dropdown-items-list dropdown-desktop-visible">
+                                <li>
+                                    @Html.CultureLink("English", "en-US")
+                                </li>
+                                <li>
+                                    @Html.CultureLink("Español", "es-ES")
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="header-row">
+                <div class="container">
+                    <div class="col-xs-8 col-md-5 col-lg-4 logo">
+                        <h1 class="logo">
+                            @Html.ActionLink("Dancing Goat", "Index", new { controller = "Home" }, new { @class = "logo-link" })
+                        </h1>
+                    </div>
+                    <div class="col-xs-12 col-md-7 col-lg-8">
+                        @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @Id = "searchForm", @Class = "searchBox" }))
+                        {
+                            <input type="text" id="searchtext" name="searchtext" placeholder="@ResHelper.GetString("General.Search")" maxlength="1000" class="search-box-watermark" autocomplete="off">
+                            <input type="submit" value="" class="search-box-btn">
+                        }
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <footer role="contentinfo">
+            <div class="footer-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4 footer-col">
+                            <h3 class="contact-title">@ResHelper.GetString("DancingGoatMvc.Contact.Title")</h3>
+                            <p>
+                                @Html.Action("CompanyAddress", "Contacts")
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-lg-4 footer-col">
+                            <h3>@ResHelper.GetString("DancingGoatMvc.FollowUs.Title")</h3>
+                            @Html.Action("CompanySocialLinks", "Contacts")
+                        </div>
+                        <div class="col-md-4 col-lg-4 footer-col">
+                            <h3>@ResHelper.GetString("DancingGoatMvc.News.Title")</h3>
+                            @Html.Action("Show", "Subscription")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container copyright">
+                Copyright &copy; 2014 Dancing Goat. All rights reserved.
+            </div>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

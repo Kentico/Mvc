@@ -1,0 +1,22 @@
+﻿@model DancingGoat.Models.Subscription.UnsubscriptionModel
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.News.Unsubscribtion");
+}
+
+<section class="row text-and-image">
+    <div class="col-md-6">
+        <div class="text-and-image-text">
+            <img class="img-responsive" src="@Url.Content("~/Content/Images/empty_cup.jpg")" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>@ResHelper.GetString(Model.IsError ? "DancingGoatMvc.News.UnsubscribeError" : "DancingGoatMvc.News.UnsubscribeOK")</h2>
+        <p>
+            @if (!String.IsNullOrEmpty(Model.UnsubscriptionResult))
+            {
+                <span class="InfoLabel">@Model.UnsubscriptionResult</span>
+            }
+        </p>
+    </div>
+</section>
+

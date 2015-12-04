@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = ResHelper.GetString("General.Error");
+}
+
+<h2>@ResHelper.GetString("DancingGoatMvc.ContactUs.ErrorSending")</h2>
+<div class="error-label">
+    @Html.Raw(ResHelper.GetStringFormat("DancingGoatMvc.ContactUs.ErrorText", Html.ActionLink("Contact", "Index")))
+</div>

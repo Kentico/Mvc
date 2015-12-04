@@ -1,0 +1,247 @@
+﻿/*# Menu #*/
+.menu {
+    display: block;
+    background: #B24143;
+    text-transform: uppercase;
+    line-height: 3rem;
+}
+
+.menu nav {
+    display: inline-block;
+    float: left;
+}
+
+.menu li:first-child > a:focus,
+.menu li:first-child > a:hover {
+    background-color: #BA5455;
+}
+
+.menu .CMSListMenuHighlightedLI > a,
+.menu a:focus,
+.menu a:hover {
+    background-color: #BA5455;
+}
+
+.menu a,
+.menu a:hover,
+.menu a:focus {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.menu ul {
+    list-style: none;
+    display: inline;
+}
+
+.menu li:first-child > a {
+    background-color: transparent;
+}
+
+.menu li, .menu a {
+    float: left;
+}
+
+.menu li > a {
+    padding: 0 .625rem;
+}
+
+/*# Mobile menu button #*/
+#mobile-menu-btn {
+    line-height: 3rem;
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 0 1rem;
+    float: left;
+}
+
+#mobile-menu-btn:focus,
+#mobile-menu-btn:hover {
+    background-color: #BA5455;
+    outline: none;
+}
+
+#mobile-menu-btn a:focus,
+#mobile-menu-btn a:hover {
+    outline: none;
+}
+
+#mobile-menu-icon {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    margin: 4px;
+    vertical-align: middle;
+}
+
+/*# Mobile menu #*/
+.mobile-menu {
+    background: #B24143;
+    text-transform: uppercase;
+    line-height: 3rem;
+}
+
+.mobile-menu li:first-child > a:focus,
+.mobile-menu li:first-child > a:hover {
+    background-color: #BA5455;
+    outline: none;
+}
+
+.mobile-menu .CMSListMenuHighlightedLI > a,
+.mobile-menu a:focus,
+.mobile-menu a:hover {
+    background-color: #BA5455;
+    outline: none;
+}
+
+.mobile-menu a,
+.mobile-menu a:hover,
+.mobile-menu a:focus {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu li:first-child > a {
+    background-color: transparent;
+}
+
+.mobile-menu li > a {
+    padding: 0 1rem;
+    display: block;
+}
+
+
+/*# Second level menu #*/
+.sub-menu {
+    font-size: 1.25rem;
+    text-transform: none;
+    line-height: 100%;
+}
+
+.sub-menu ul {
+    list-style: none;
+    display: inline;
+}
+
+.sub-menu li, .sub-menu a {
+    float: left;
+}
+
+.sub-menu a {
+    padding: 1.25rem;
+}
+
+.sub-menu a,
+.sub-menu a:hover,
+.sub-menu a:focus {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.sub-menu .sub-menu-item-selected {
+    background-color: #333;
+}
+
+.sub-menu .sub-menu-item-selected > a,
+.sub-menu li:first-child > a:focus,
+.sub-menu li:first-child > a:hover,
+.sub-menu a:hover,
+.sub-menu a:focus {
+    background-color: #333;
+}
+
+.additional-menu-buttons {
+    -moz-user-select: none;
+    color: #fff;
+    cursor: pointer;
+    text-transform: none;
+}
+
+.additional-menu-buttons .dropdown-opened {
+    background-color: #ba5455;
+}
+
+.menu .additional-menu-buttons {
+    float: right;
+}
+
+.menu .menu-hover:hover {
+    background-color: #ba5455;
+}
+
+.menu .dropdown-header {
+    padding: 0 1rem;
+}
+
+ul.dropdown-items-list {
+    background: none repeat scroll 0 0 #b24143;
+    display: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    text-align: left;
+    z-index: 2;
+}
+
+ul.dropdown-items-list a, ul.dropdown-items-list li {
+    display: block;
+    float: none;
+    white-space: nowrap;
+}
+
+.mobile-menu ul.dropdown-items-list {
+    display: block;
+    position: static;
+}
+
+.dropdown-icon-tablet, .dropdown-desktop {
+    display: none;
+}
+
+.dropdown-arrow {
+    padding-left: 0.5rem;
+}
+
+.mobile-menu ul.dropdown-items-list {
+    display: block;
+    position: relative;
+    width: inherit;
+}
+
+.mobile-menu .dropdown-mobile {
+    display: block;
+    padding: 0 1rem;
+    text-align: left;
+}
+
+.mobile-menu ul.dropdown-items-list.dropdown-items-list-mobile {
+    display: none;
+}
+
+.mobile-menu ul.dropdown-items-list-mobile a {
+    padding-left: 2rem;
+}
+
+.dropdown-desktop, ul.dropdown-items-list.dropdown-desktop-visible {
+    display: block;
+    position: static;
+}
+
+ul.dropdown-items-list.dropdown-desktop-visible li, ul.dropdown-items-list.dropdown-desktop-visible a {
+    float: left;
+}
+
+@media (min-width: 768px) and (max-width: 1111px) {
+    .dropdown-icon-tablet {
+        display: block;
+    }
+}
+
