@@ -7,8 +7,8 @@
     <ProjectGuid>{8A7673AF-1986-4D07-A168-03775F4EED76}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcDemo.Web.Tests</RootNamespace>
-    <AssemblyName>MvcDemo.Web.Tests</AssemblyName>
+    <RootNamespace>DancingGoat.Tests</RootNamespace>
+    <AssemblyName>DancingGoat.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
