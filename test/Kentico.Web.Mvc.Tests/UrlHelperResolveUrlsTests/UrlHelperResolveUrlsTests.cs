@@ -12,7 +12,7 @@ namespace Kentico.Web.Mvc.Tests
     {
         private string mUnresolvedHtml;
         private string mResolvedHtml;
-        private const string APPLICATIONPATH = "/MVCDemo/SomeVirtualFolder";
+        private const string APPLICATIONPATH = "/DancingGoatMvc/SomeVirtualFolder";
         private HtmlHelper mHtmlHelper;
 
 
@@ -34,9 +34,9 @@ namespace Kentico.Web.Mvc.Tests
 
 
         [Test]
-        [TestCase("(~/Folder/File.jpg)", "(/MVCDemo/SomeVirtualFolder/Folder/File.jpg)")]
-        [TestCase("'~/Folder/File.jpg'", "'/MVCDemo/SomeVirtualFolder/Folder/File.jpg'")]
-        [TestCase(@"""~/Folder/File.jpg""", @"""/MVCDemo/SomeVirtualFolder/Folder/File.jpg""")]
+        [TestCase("(~/Folder/File.jpg)", "(/DancingGoatMvc/SomeVirtualFolder/Folder/File.jpg)")]
+        [TestCase("'~/Folder/File.jpg'", "'/DancingGoatMvc/SomeVirtualFolder/Folder/File.jpg'")]
+        [TestCase(@"""~/Folder/File.jpg""", @"""/DancingGoatMvc/SomeVirtualFolder/Folder/File.jpg""")]
         public void UrlHelper_ResolveSingleUrl_Correctly(string input, string expectedOutput)
         {
             input = mHtmlHelper.Kentico().ResolveUrls(input).ToString();

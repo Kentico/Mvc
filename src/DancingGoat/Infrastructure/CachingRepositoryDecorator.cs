@@ -97,7 +97,7 @@ namespace DancingGoat
         private string GetCacheItemKey(IInvocation invocation)
         {
             var builder = new StringBuilder(127)
-                .Append("MvcDemo|Data")
+                .Append("DancingGoatMvc|Data")
                 .Append("|").Append(invocation.TargetType.FullName)
                 .Append("|").Append(invocation.Method.Name)
                 .Append("|").Append(CultureInfo.CurrentUICulture.Name);
