@@ -27,11 +27,12 @@ The repository consists of the following projects:
 
 1. [Install](https://docs.kentico.com/display/K9/Installation) Kentico.
 2. [Import](https://docs.kentico.com/display/K9/Importing+a+site+or+objects) the Dancing Goat site from the `webtemplates/DancingGoatMvc.zip` import package.
-3. Rename the `src\DancingGoat\ConnectionStrings.Template.config` file to `ConnectionStrings.config`.
-4. Rename the `src\DancingGoat\AppSettings.Template.config` file to `AppSettings.config`.
-5. Copy the `CMSConnectionString` connection string from the Kentico `web.config` file to the `src\DancingGoat\ConnectionStrings.config` file.
-6. Copy the `CMSHashStringSalt` app setting from the Kentico `web.config` file to the `src\DancingGoat\AppSettings.config` file.
-7. Open the `KenticoMvc` solution in Visual Studio and run the Dancing Goat web application.
-8. Open the Smart search application and rebuild the `Dancing Goat MVC` search index. 
+3. [Enable](https://docs.kentico.com/display/K9/Configuring+web+farm+servers#Configuringwebfarmservers-Configuringwebfarmsautomatically) web farm in the automatic mode.
+4. Rename the `src\DancingGoat\ConnectionStrings.Template.config` file to `ConnectionStrings.config`.
+5. Rename the `src\DancingGoat\AppSettings.Template.config` file to `AppSettings.config`.
+6. Copy the `CMSConnectionString` connection string from the Kentico `web.config` file to the `src\DancingGoat\ConnectionStrings.config` file.
+7. Copy the `CMSHashStringSalt` app setting from the Kentico `web.config` file to the `src\DancingGoat\AppSettings.config` file.
+8. Open the `KenticoMvc` solution in Visual Studio and run the Dancing Goat web application.
+9. Open the Smart search application and rebuild the `Dancing Goat MVC` search index. 
 
 **Note:** The initial build can take a little longer as it needs to restore NuGet packages.
