@@ -480,6 +480,8 @@
     <Compile Include="ApplicationHttpModule.cs" />
     <Compile Include="FeatureSet.cs" />
     <Compile Include="HelperMethods\RouteCollectionMapRoutesMethods.cs" />
+    <Compile Include="NotFoundHandler\AsyncActionInvokerWrapper.cs" />
+    <Compile Include="NotFoundHandler\AsyncResultWrapper.cs" />
     <Compile Include="RouteCollectionExtensions.cs" />
     <Compile Include="HttpContextExtensions.cs" />
     <Compile Include="NotFoundHandler\ActionInvokerWrapper.cs" />
