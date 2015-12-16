@@ -11,7 +11,7 @@
         <tags>kentico, aspnet, mvc, aspnetmvc</tags>
         <copyright>© 2015 Kentico Software.</copyright>
         <language>en-US</language>
-        <releaseNotes>https://github.com/Kentico/Mvc/releases/tag/Kentico.Web.Mvc.1.0.1</releaseNotes>
+        <releaseNotes>https://github.com/Kentico/Mvc/blob/master/CHANGELOG.md</releaseNotes>
         <dependencies>
             <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
             <dependency id="Kentico.Libraries" version="[9,10)" />
