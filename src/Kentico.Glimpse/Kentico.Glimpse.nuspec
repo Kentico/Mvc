@@ -11,7 +11,7 @@
         <tags>kentico debug glimpse</tags>
         <copyright>© 2015 Kentico Software.</copyright>
         <language>en-US</language>
-        <releaseNotes></releaseNotes>
+        <releaseNotes>https://github.com/Kentico/Mvc/blob/master/CHANGELOG.md</releaseNotes>
         <dependencies>
             <group targetFramework=".NETFramework4.5">
                 <dependency id="Kentico.Libraries" version="[9,10)" />
