@@ -3,7 +3,7 @@
 @foreach (var link in Model)
 {
     <a class="followus-link" href="@link.Fields.Url" target="_blank">
-        @Html.AttachmentImage(link.Fields.Icon, link.Fields.Title, "cafe-image-tile-image")
+        @Html.AttachmentImage(link.Fields.Icon, link.Fields.Title)
     </a>
 }
 
