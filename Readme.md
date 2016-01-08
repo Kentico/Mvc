@@ -1,5 +1,7 @@
 # Kentico MVC
 
+[![Build status](https://ci.appveyor.com/api/projects/status/59lkg4bmkiwtoa6x/branch/master?svg=true)](https://ci.appveyor.com/project/kentico/mvc/branch/master)
+
 Starting from [Kentico 9](https://docs.kentico.com/display/K9/) development of ASP.NET MVC 5 applications is [supported](https://docs.kentico.com/display/K9/Developing+sites+using+ASP.NET+MVC). This repository contains a sample web application `Dancing Goat` that demonstrates all features related to MVC development support. We hope it helps you when building your projects.
 
 ## Repository structure
