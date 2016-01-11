@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#q").keyup(function () {
+            if ($("#q").val().length > 2) {
+                Suggest($("#q").val(), $("#cbfuzzy").is(':checked'));
+            }
+            else {
+                $("#suggestions").html('');
+            }
+        });
+
+        // Execute search if user clicks enter
+        $("#q").keyup(function (event) {
+            if (event.keyCode == 13) {
+                Search();
+            }
+
+        });
+    });
+
+    function IndexAction(strAction) {
+
+        var strUrl = "";
+
+        switch (strAction) {
+            case 'createindex':
+                strUrl = '/DancingGoatMvc9/en-us/AzureSearch/CreateIndex';
+                break;
+            case 'loadindex':
+                strUrl = '/DancingGoatMvc9/en-us/AzureSearch/LoadIndex';
+                break;
+            case 'deleteindex':
+                var r = confirm("Are you sure you want to delete the index?");
+                if (r == true) {
+                    strUrl = '/DancingGoatMvc9/en-us/AzureSearch/DeleteIndex';
+                }
+                else {
+                    return;
+                }
+                break;
+        }
+
+        $.post(strUrl,
+            null,
+            function (message) {
+                $("#message").html(message);
+
+            });
+    }
+
+
+    function Suggest(search, fuzzy) {
+        // We will post to the MVC controller and parse the full results on the client side
+        // You may wish to do additional pre-processing on the data before sending it back to the client
+        $.post('/DancingGoatMvc9/en-us/AzureSearch/suggest',
+        {
+            search: search, fuzzy: fuzzy
+        },
+        function (suggestresults) {
+            var suggestionsHTML = "<strong>Suggested Authors:</strong> ";
+            //Loop through the facets to build the list
+            for (var j = 0; j < suggestresults.Data.length; j++) {
+                if (suggestionsHTML.indexOf(suggestresults.Data[j].Text) == -1) {
+                    suggestionsHTML += "<a href=\"javascript: selectauthor('" + suggestresults.Data[j].Text  + "');\">" + suggestresults.Data[j].Text + "</a>&nbsp;&nbsp;";
+                }
+            }
+
+            $("#suggestions").html(suggestionsHTML);
+        });
+    };
+
+    function Search(filter) {
+        // We will post to the MVC controller and parse the full results on the client side
+        // You may wish to do additional pre-processing on the data before sending it back to the client
+        var q = $("#q").val();
+        var h = $("#cbhighlights").is(':checked');
+        var f = $("#cbfacets").is(':checked');
+        var s = $("#cbscores").is(':checked');
+        var fi = filter;
+        var sp = $("#selscoringprofile").val();
+
+        $.post('/DancingGoatMvc9/en-us/AzureSearch/search',
+        {
+            q: q, h: h, f: f, s: s, fi: fi, sp: sp
+        },
+        function (searchresults) {
+            var data = searchresults[0];
+            var facets = searchresults[1];
+            var resultsHTML = "";
+            var facetsHTML = "";
+            //Get the total records
+            $("#resultstotal").html('Total Records: ' + data.length);
+            //Determine if the facets should be displayed
+            if (facets != null) {
+                //Loop through the facets to build the list
+                for (var j = 0; j < facets.QuoteAuthor.length; j++) {
+                    facetsHTML += "<a style=\"cursor: pointer;\" onclick=\"FacetClick('" + facets.QuoteAuthor[j].Value + "');\">" + facets.QuoteAuthor[j].Value + " (" + facets.QuoteAuthor[j].Count + ")<br />";
+                }
+                facetsHTML += "<a style=\"cursor: pointer;\" onclick=\"FacetClick('All');\">All";
+                $("#resultsleft").html(facetsHTML);
+            }
+            else {
+                $("#resultsleft").html('');
+            }
+
+            //Loop through the results
+            for (var i = 0; i < data.length; i++) {
+                //Build up the result link
+                resultsHTML += "<div><a href=\"/DancingGoatMvc9/en-us" + data[i].Document["NodeAliasPath"] + "\">";
+                //Determine if highlights should be displayed
+                if (data[i].Highlights != null) {
+                    if (data[i].Highlights.QuoteAuthor != null) {
+                        resultsHTML += data[i].Highlights.QuoteAuthor + " - ";
+                    }
+                    else {
+                        resultsHTML += data[i].Document.QuoteAuthor + " - ";
+                    }
+
+                    if (data[i].Highlights.QuoteText != null) {
+                        resultsHTML += data[i].Highlights.QuoteText.toString().replace("''", "'");
+                    }
+                    else {
+                        resultsHTML += data[i].Document.QuoteText.toString().replace("''", "'");
+                    }
+
+                }
+                else {
+                    resultsHTML += data[i].Document.QuoteAuthor + " - ";
+                    resultsHTML += data[i].Document.QuoteText.toString().replace("''", "'");
+                }
+
+                resultsHTML += "</a><br />";
+
+                if (s) {
+                    resultsHTML += "Score:" + data[i].Score + "</br >";
+                }
+
+                resultsHTML += "</br>";
+            }
+
+            if (resultsHTML != '') {
+                $("#results").html(resultsHTML);
+            }
+            else {
+                $("#results").html('No results found.');
+            }
+
+        });
+
+        function parseJsonDate(jsonDateString) {
+            if (jsonDateString != null)
+                return new Date(parseInt(jsonDateString.replace('/Date(', '')));
+            else
+                return "";
+        }
+    };
+
+    function Reset() {
+        $("#message").html('');
+        $("#results").html('');
+        $("#resultstotal").html('');
+        $("#resultsleft").html('');
+        $("#cbhighlights").prop('checked', false);
+        $("#cbfacets").prop('checked', false);
+        $("#cbscores").prop('checked', false);
+        $("#cbfuzzy").prop('checked', false);
+        $("#q").val('');
+        $("#selscoringprofile").val('');
+    }
+
+    function FacetClick(facet) {
+        if (facet != 'All') {
+            Search(facet);
+        }
+        else {
+            Search('');
+        }
+
+    }
+
+    function selectauthor(author) {
+        $("#q").val(author);
+        Search('');
+    }
+
+</script>
+
+<style>
+    #resultstotal {
+        margin-left: 200px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #resultsleft {
+        width: 200px;
+        float: left;
+    }
+
+    #results {
+        margin-left: 200px; /* Change this to whatever the width of your left column is*/
+    }
+
+    .highlight {
+        background-color: yellow;
+    }
+
+    #suggestions{
+        padding-top:10px;
+    }
+
+    #message{
+        color:red;
+    }
+</style>
+
+<h2>Azure Search</h2>
+<div class="container">
+    <div id="message"></div>
+    <h3>Index Actions</h3>
+    <button onclick="IndexAction('createindex');" class="btn btn-primary">Create Index</button>
+    <button onclick="IndexAction('loadindex');" class="btn btn-primary">Load Index</button>
+    <button onclick="IndexAction('deleteindex');" class="btn btn-danger">Delete Index</button>
+    <h3>Search Text</h3>
+    <input type="search" name="q" id="q" autocomplete="off" />
+    <br />
+    <h3>Suggestion Options</h3>
+    <input type="checkbox" id="cbfuzzy" />&nbsp;Use Fuzzy Search
+    <br />
+    <div id="suggestions"></div>
+    <h3>Search Options</h3>
+    <input type="checkbox" id="cbhighlights" />&nbsp;Show Highlights
+    <br />
+    <input type="checkbox" id="cbfacets" />&nbsp;Show Facets
+    <br />
+    <input type="checkbox" id="cbscores" />&nbsp;Show Score
+    <br />
+    Scoring Profile: <select id="selscoringprofile">
+        <option value="">Default</option>
+        <option value="QuoteAuthor">Quote Author</option>
+        <option value="QuoteText">Quote Text</option>
+    </select>
+    <br />
+    <br />
+    <button onclick="Search('');" class="btn btn-primary">Search</button>&nbsp;
+    <button onclick="Reset();" class="btn btn-primary">Reset</button>
+</div>
+<br />
+<div class="container">
+    <div id="resultstotal"></div>
+    <div id="resultsleft">
+    </div>
+    <div id="results">
+    </div>
+</div>
