@@ -1,10 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 
 using CMS.DocumentEngine.Types;
 
 using DancingGoat.Infrastructure;
 using DancingGoat.Models.Home;
 using DancingGoat.Repositories;
+using DancingGoat.Models.Articles;
 
 namespace DancingGoat.Controllers
 {
@@ -31,7 +33,7 @@ namespace DancingGoat.Controllers
         {
             var viewModel = new IndexViewModel
             {
-                LatestArticles = mArticleRepository.GetArticles(5)
+                LatestArticles = mArticleRepository.GetArticles(5).Select(ArticleViewModel.GetViewModel)
             };
 
             var ourStory = mAboutUsRepository.GetOurStory();

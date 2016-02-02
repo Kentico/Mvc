@@ -2,11 +2,13 @@
 
 using CMS.DocumentEngine.Types;
 
+using DancingGoat.Models.Articles;
+
 namespace DancingGoat.Models.Home
 {
     public class IndexViewModel
     {
-        public IEnumerable<Article> LatestArticles 
+        public IEnumerable<ArticleViewModel> LatestArticles 
         {
             get;
             set;
