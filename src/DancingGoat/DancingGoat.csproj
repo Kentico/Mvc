@@ -617,6 +617,7 @@
     <Compile Include="Infrastructure\IContentItemMetadataProvider.cs" />
     <Compile Include="Infrastructure\IOutputCacheDependencies.cs" />
     <Compile Include="Infrastructure\OutputCacheDependencies.cs" />
+    <Compile Include="Models\Articles\ArticleViewModel.cs" />
     <Compile Include="Models\Generated\Pages\ArticleSection.generated.cs" />
     <Compile Include="Models\Generated\Pages\ArticleSectionProvider.generated.cs" />
     <Compile Include="Models\Generated\Pages\CafeSection.generated.cs" />

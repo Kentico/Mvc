@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 
 using CMS.DocumentEngine.Types;
 
 using DancingGoat.Infrastructure;
+using DancingGoat.Models.Articles;
 using DancingGoat.Repositories;
 
 namespace DancingGoat.Controllers
@@ -22,14 +24,13 @@ namespace DancingGoat.Controllers
 
 
         // GET: Articles
-        [OutputCache(CacheProfile="Default", VaryByParam="none")]
+        [OutputCache(CacheProfile = "Default", VaryByParam = "none")]
         public ActionResult Index()
         {
             var articles = mArticleRepository.GetArticles();
-
             mOutputCacheDependencies.AddDependencyOnPages<Article>();
 
-            return View(articles);
+            return View(articles.Select(ArticleViewModel.GetViewModel));
         }
 
 
@@ -52,7 +53,7 @@ namespace DancingGoat.Controllers
 
             mOutputCacheDependencies.AddDependencyOnPages<Article>();
 
-            return View(article);
+            return View(ArticleViewModel.GetViewModel(article));
         }
     }
 }
