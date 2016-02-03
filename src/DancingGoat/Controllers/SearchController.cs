@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 using PagedList;
 
@@ -29,7 +30,7 @@ namespace DancingGoat.Controllers
 
             var model = new SearchResultsModel
             {
-                Items = new StaticPagedList<SearchResultItem>(searchResults, pageIndex, PAGE_SIZE, totalItemsCount),
+                Items = new StaticPagedList<SearchResultItem>(searchResults ?? new List<SearchResultItem>(), pageIndex, PAGE_SIZE, totalItemsCount),
                 Query = searchText
             };
 
