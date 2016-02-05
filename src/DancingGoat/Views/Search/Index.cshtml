@@ -9,7 +9,7 @@
 
 <h2>@string.Format(ResHelper.GetString("DancingGoatMvc.Search.ResultsFor"), Model.Query)</h2>
 
-@if (Model.Items == null)
+@if (!Model.Items.Any())
 {
     if (!String.IsNullOrWhiteSpace(Model.Query))
     {
