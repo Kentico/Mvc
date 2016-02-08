@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+
+using PagedList;
 
 using DancingGoat.Models.Search;
 using Kentico.Search;
@@ -21,15 +24,14 @@ namespace DancingGoat.Controllers
         [ValidateInput(false)]
         public ActionResult Index(string searchText, int? page)
         {
-            var pageIndex = (page ?? 1) - 1;
             int totalItemsCount;
-            var model = new SearchResults()
+            var pageIndex = (page ?? 1);
+            var searchResults = mService.Search(searchText, pageIndex, PAGE_SIZE, out totalItemsCount);
+
+            var model = new SearchResultsModel
             {
-                Items = mService.Search(searchText, pageIndex, PAGE_SIZE, out totalItemsCount),
-                PageIndex = pageIndex,
-                PageSize = PAGE_SIZE,
-                Query = searchText,
-                TotalItemCount = totalItemsCount
+                Items = new StaticPagedList<SearchResultItem>(searchResults ?? new List<SearchResultItem>(), pageIndex, PAGE_SIZE, totalItemsCount),
+                Query = searchText
             };
 
             return View(model);

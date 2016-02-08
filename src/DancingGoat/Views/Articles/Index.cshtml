@@ -1,26 +1,24 @@
-﻿@model IEnumerable<CMS.DocumentEngine.Types.Article>
-
+﻿@model IEnumerable<DancingGoat.Models.Articles.ArticleViewModel>
 @{
     ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Articles");
-    var i = 1; 
+    var i = 1;
 }
-
 @foreach (var article in @Model)
 {
     <div class="col-md-3">
         <div class="article-tile">
             <a href="@Url.ForArticle(article)">
-                @Html.AttachmentImage(article.Fields.Teaser, "Article " + article.Fields.Title, "article-tile-image", SizeConstraint.Height(200))
+                @Html.AttachmentImage(article.Teaser, "Article " + article.Title, "article-tile-image", SizeConstraint.Height(200))
             </a>
             <div class="article-tile-date">
                 @article.PublicationDate.ToString("m")
             </div>
             <div class="article-tile-content">
                 <h2 class="h4">
-                    <a href="@Url.ForArticle(article)">@article.Fields.Title </a>
+                    <a href="@Url.ForArticle(article)">@article.Title </a>
                 </h2>
                 <p class="article-tile-text">
-                    @article.Fields.Summary
+                    @article.Summary
                 </p>
             </div>
         </div>

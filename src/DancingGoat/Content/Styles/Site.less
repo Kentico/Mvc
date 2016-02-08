@@ -320,7 +320,7 @@ footer {
 .article-related-articles {
     margin-top: 5rem;
 
-    .title-tab{
+    .title-tab {
         margin: 0;
     }
 
@@ -344,34 +344,42 @@ footer {
     list-style-type: none;
     padding: 0;
 }
+
 /*# Pager #*/
-.pager {
+.pagination {
     text-align: center;
     padding: 0;
     list-style-type: none;
+
+    & > li {
+        display: inline;
+
+        & > a {
+            color: black;
+            padding: 3px 5px;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                border-bottom: 2px solid #E6E6E6;
+            }
+        }
+
+        &.active {
+            color: #08768C;
+            border: 2px solid #08768C;
+            padding: 3px 9px;
+        }
+
+        &.PagedList-skipToPrevious > a,
+        &.PagedList-skipToNext > a {
+            text-decoration: underline;
+            color: #08768C;
+            border-bottom: none;
+        }
+    }
 }
 
-.pager > li {
-    display: inline;
-}
-
-.pager .pager-active {
-    color: #08768C;
-    border: 2px solid #08768C;
-    padding: 3px 9px;
-    text-decoration: none;
-}
-
-.pager .pager-page {
-    color: black;
-    padding: 3px 5px;
-    text-decoration: none;
-}
-
-.pager .pager-page:hover,
-.pager .pager-page:focus {
-    border-bottom: 2px solid #E6E6E6;
-}
 /*# Not found - 404 #*/
 @media (min-width: 768px) {
     .not-found-content {

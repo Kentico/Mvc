@@ -8,6 +8,7 @@ using CMS.Tests;
 
 using DancingGoat.Controllers;
 using DancingGoat.Infrastructure;
+using DancingGoat.Models.Articles;
 using DancingGoat.Repositories;
 using DancingGoat.Tests.Extensions;
 
@@ -23,14 +24,13 @@ namespace DancingGoat.Tests.Unit
         private ArticlesController mController;
         private Article mArticle;
         private IOutputCacheDependencies mDependencies;
-        private string mDocumentName = "Article1";
-
+        private const string ARTICLE_TITLE = "Article1";
 
         [SetUp]
         public void SetUp()
         {
             Fake().DocumentType<Article>(Article.CLASS_NAME);
-            mArticle = TreeNode.New<Article>().With(a => a.DocumentName = mDocumentName);
+            mArticle = TreeNode.New<Article>().With(a => a.Fields.Title = ARTICLE_TITLE);
             mDependencies = Substitute.For<IOutputCacheDependencies>();
             
             var repository = Substitute.For<IArticleRepository>();
@@ -53,7 +53,7 @@ namespace DancingGoat.Tests.Unit
         {
             mController.WithCallTo(c => c.Show(1, null))
                 .ShouldRenderDefaultView()
-                .WithModelMatchingCondition<Article>(x => x.DocumentName == mDocumentName);
+                .WithModelMatchingCondition<ArticleViewModel>(x => x.Title == ARTICLE_TITLE);
         }
 
 

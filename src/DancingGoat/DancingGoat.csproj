@@ -467,6 +467,18 @@
       <HintPath>..\..\packages\Kentico.Libraries.9.0.5\lib\net45\MaxMindGEOIP.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -481,6 +493,7 @@
       <HintPath>..\..\packages\Kentico.Libraries.9.0.5\lib\net45\PDFClown.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -537,6 +550,14 @@
       <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="X.PagedList, Version=1.24.1.31653, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\X.PagedList.1.24.1.320\lib\net45\X.PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc, Version=4.9.1.31908, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\X.PagedList.Mvc.4.9.1.310\lib\net45\X.PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\mimetypes.txt" />
@@ -575,7 +596,6 @@
     <Content Include="Views\Subscription\_Subscribe.cshtml" />
     <Content Include="Views\Subscription\Unsubscribe.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Pager\_Pager.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config">
@@ -593,22 +613,22 @@
     <Compile Include="Helpers\Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Infrastructure\CachingRepositoryDecorator.cs" />
     <Compile Include="Infrastructure\ContentItemMetadataProvider.cs" />
+    <Compile Include="Infrastructure\CustomPagedListRenderOptions.cs" />
     <Compile Include="Infrastructure\IContentItemMetadataProvider.cs" />
     <Compile Include="Infrastructure\IOutputCacheDependencies.cs" />
     <Compile Include="Infrastructure\OutputCacheDependencies.cs" />
+    <Compile Include="Models\Articles\ArticleViewModel.cs" />
     <Compile Include="Models\Generated\Pages\ArticleSection.generated.cs" />
     <Compile Include="Models\Generated\Pages\ArticleSectionProvider.generated.cs" />
     <Compile Include="Models\Generated\Pages\CafeSection.generated.cs" />
     <Compile Include="Models\Generated\Pages\CafeSectionProvider.generated.cs" />
-    <Compile Include="Models\Pager\IPagedDataSource.cs" />
-    <Compile Include="Models\Search\SearchResults.cs" />
+    <Compile Include="Models\Search\SearchResultsModel.cs" />
     <Compile Include="Repositories\IAboutUsRepository.cs" />
     <Compile Include="Repositories\IArticleRepository.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\CafesController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PagerController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -650,7 +670,6 @@
     <Compile Include="Models\Generated\Pages\SocialLinkProvider.generated.cs" />
     <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Contacts\MessageModel.cs" />
-    <Compile Include="Models\Pager\PagerModel.cs" />
     <Compile Include="Repositories\ICafeRepository.cs" />
     <Compile Include="Repositories\IContactRepository.cs" />
     <Compile Include="Repositories\ISocialLinkRepository.cs" />
@@ -752,4 +771,9 @@
     <Error Condition="!Exists('..\..\packages\Kentico.Libraries.9.0.5\build\net45\Kentico.Libraries.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Kentico.Libraries.9.0.5\build\net45\Kentico.Libraries.targets'))" />
   </Target>
   <Import Project="..\..\packages\Kentico.Libraries.9.0.5\build\net45\Kentico.Libraries.targets" Condition="Exists('..\..\packages\Kentico.Libraries.9.0.5\build\net45\Kentico.Libraries.targets')" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>

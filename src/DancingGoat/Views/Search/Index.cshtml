@@ -1,14 +1,15 @@
-﻿@using DancingGoat.Models.Pager
-@using DancingGoat.Models.Search
-@model SearchResults
+﻿@using PagedList.Mvc;
+@using DancingGoat.Models.Search;
+@using DancingGoat.Infrastructure;
 
+@model SearchResultsModel
 @{
     ViewBag.Title = "Search results for: " + Model.Query;
 }
 
 <h2>@string.Format(ResHelper.GetString("DancingGoatMvc.Search.ResultsFor"), Model.Query)</h2>
 
-@if (Model.Items == null)
+@if (!Model.Items.Any())
 {
     if (!String.IsNullOrWhiteSpace(Model.Query))
     {
@@ -38,24 +39,23 @@ else
         </div>
     }
 
-    @Html.Action("Index", "Pager", new PagerModel { DataSource = Model, CreateUrlForPageIndex = i => Url.Action("Index", "Search", new { searchText = Model.Query, page = i }) })
+    @Html.PagedListPager(Model.Items, i => Url.Action("Index", "Search", new { searchText = Model.Query, page = i }), new CustomPagedListRenderOptions());
 }
-
 @helper GetUrl(string pageTypeCodeName, int nodeId)
 {
     switch (pageTypeCodeName)
     {
         case "DancingGoatMvc.Cafe":
-            @Url.Action("Index", "Cafes")
+                @Url.Action("Index", "Cafes")
             break;
         case "DancingGoatMvc.Article":
-        @Url.Action("Show", "Articles", new { id = nodeId })
+                @Url.Action("Show", "Articles", new { id = nodeId })
             break;
         case "DancingGoatMvc.AboutUsSection":
-        @Url.Action("Index", "About")
+                @Url.Action("Index", "About")
             break;
         case "DancingGoatMvc.AboutUs":
-        @Url.Action("Index", "Home")
+                @Url.Action("Index", "Home")
             break;
         default:
             throw new NotImplementedException("Unknown PageType: " + pageTypeCodeName);

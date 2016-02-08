@@ -1633,28 +1633,33 @@ footer {
   padding: 0;
 }
 /*# Pager #*/
-.pager {
+.pagination {
   text-align: center;
   padding: 0;
   list-style-type: none;
 }
-.pager > li {
+.pagination > li {
   display: inline;
 }
-.pager .pager-active {
-  color: #08768C;
-  border: 2px solid #08768C;
-  padding: 3px 9px;
-  text-decoration: none;
-}
-.pager .pager-page {
+.pagination > li > a {
   color: black;
   padding: 3px 5px;
   text-decoration: none;
 }
-.pager .pager-page:hover,
-.pager .pager-page:focus {
+.pagination > li > a:hover,
+.pagination > li > a:focus {
   border-bottom: 2px solid #E6E6E6;
+}
+.pagination > li.active {
+  color: #08768C;
+  border: 2px solid #08768C;
+  padding: 3px 9px;
+}
+.pagination > li.PagedList-skipToPrevious > a,
+.pagination > li.PagedList-skipToNext > a {
+  text-decoration: underline;
+  color: #08768C;
+  border-bottom: none;
 }
 /*# Not found - 404 #*/
 @media (min-width: 768px) {
