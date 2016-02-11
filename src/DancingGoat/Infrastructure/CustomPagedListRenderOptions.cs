@@ -5,7 +5,7 @@ using CMS.Helpers;
 namespace DancingGoat.Infrastructure
 {
     /// <summary>
-    /// Customized render option definitons for X.PagedList.
+    /// Customized render option definitions for X.PagedList.
     /// </summary>
     /// <remarks>
     /// For more customization options see https://github.com/kpi-ua/X.PagedList/blob/master/src/X.PagedList.Mvc/PagedListRenderOptions.cs.
