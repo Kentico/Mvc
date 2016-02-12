@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 using PagedList;
@@ -25,12 +26,14 @@ namespace DancingGoat.Controllers
         public ActionResult Index(string searchText, int? page)
         {
             int totalItemsCount;
-            var pageIndex = (page ?? 1);
-            var searchResults = mService.Search(searchText, pageIndex, PAGE_SIZE, out totalItemsCount);
+            var pageNumber = (page ?? 1);
+            pageNumber = Math.Max(pageNumber, 1);
+
+            var searchResults = mService.Search(searchText, pageNumber - 1, PAGE_SIZE, out totalItemsCount);
 
             var model = new SearchResultsModel
             {
-                Items = new StaticPagedList<SearchResultItem>(searchResults ?? new List<SearchResultItem>(), pageIndex, PAGE_SIZE, totalItemsCount),
+                Items = new StaticPagedList<SearchResultItem>(searchResults ?? new List<SearchResultItem>(), pageNumber, PAGE_SIZE, totalItemsCount),
                 Query = searchText
             };
 
