@@ -12,13 +12,13 @@ using CMS.Search;
 namespace Kentico.Search
 {
     /// <summary>
-    /// Provides access to Kentico smart search.
+    /// Provides access to Kentico Smart search.
     /// </summary>
     public class SearchService
     {
         #region "Variables"
 
-        private DataSet mRawResults;
+        internal DataSet mRawResults;
         private readonly string mCultureName;
         private readonly string[] mSearchIndexNames;
         private readonly string mDefaultCulture;
@@ -76,7 +76,7 @@ namespace Kentico.Search
         #endregion
 
 
-        #region "Private Methods"
+        #region "Private methods"
 
         /// <summary>
         /// Performs search and populates the returned raw data into the internal search service dataset.
@@ -106,8 +106,17 @@ namespace Kentico.Search
             };
 
             // Search and save results
-            mRawResults = SearchHelper.Search(parameters);
+            mRawResults = Search(parameters);
             numberOfResults = parameters.NumberOfResults;
+        }
+
+
+        /// <summary>
+        /// Returns dataset with search results using Kentico Smart search. If search is used for non-page index, path and class name values are ignored (can be null).
+        /// </summary>
+        internal virtual DataSet Search(SearchParameters parameters)
+        {
+            return SearchHelper.Search(parameters);
         }
 
 
@@ -168,7 +177,7 @@ namespace Kentico.Search
             // Add page attachments to the searchItems collection
             if (pageAttachmentGUIDs.Count > 0)
             {
-                var attachments = AttachmentInfoProvider.GetAttachments().OnSite(mSiteName).BinaryData(false).WhereIn("AttachmentGUID", pageAttachmentGUIDs).ToDictionary(x => x.AttachmentGUID);
+                var attachments = GetPageAttachments(pageAttachmentGUIDs);
                 foreach (var item in searchItems)
                 {
                     if (item.Image != Guid.Empty)
@@ -220,6 +229,15 @@ namespace Kentico.Search
             int j = key.IndexOf(objectType, StringComparison.Ordinal) - 1;
 
             return ValidationHelper.GetInteger(key.Substring(i, j - i), 0);
+        }
+
+
+        /// <summary>
+        /// Gets the page attachment info objects for the given attachment GUIDs.
+        /// </summary>
+        internal virtual Dictionary<Guid, AttachmentInfo> GetPageAttachments(ICollection<Guid> attachmentGuids)
+        {
+            return AttachmentInfoProvider.GetAttachments().OnSite(mSiteName).BinaryData(false).WhereIn("AttachmentGUID", attachmentGuids).ToDictionary(x => x.AttachmentGUID);
         }
 
         #endregion
