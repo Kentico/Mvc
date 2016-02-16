@@ -161,7 +161,7 @@ namespace Kentico.Search
                     // General object info
                     Title = row["title"].ToString(),
                     Content = row["content"].ToString(),
-                    Image = imageGuid,
+                    ImageGuid = imageGuid,
                     Date = date,
                     ObjectType = objectType,
 
@@ -180,10 +180,10 @@ namespace Kentico.Search
                 var attachments = GetPageAttachments(pageAttachmentGUIDs);
                 foreach (var item in searchItems)
                 {
-                    if (item.Image != Guid.Empty)
+                    if (item.ImageGuid != Guid.Empty)
                     {
                         AttachmentInfo attachmentInfo;
-                        if (attachments.TryGetValue(item.Image, out attachmentInfo))
+                        if (attachments.TryGetValue(item.ImageGuid, out attachmentInfo))
                         {
                             item.ImageAttachment = new Attachment(attachmentInfo);
                         }

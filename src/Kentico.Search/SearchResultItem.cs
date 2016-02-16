@@ -41,7 +41,7 @@ namespace Kentico.Search
         /// <summary>
         /// Gets the image GUID associated with the search item. Contains data from the field configured as 'Image field' in search index configuration.
         /// </summary>
-        public Guid Image
+        public Guid ImageGuid
         {
             get;
             internal set;

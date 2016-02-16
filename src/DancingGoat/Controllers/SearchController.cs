@@ -12,6 +12,7 @@ namespace DancingGoat.Controllers
     public class SearchController : Controller
     {
         private readonly SearchService mService;
+        private const int DEFAULT_PAGE_NUMBER = 1;
         private const int PAGE_SIZE = 5;
 
 
@@ -23,12 +24,12 @@ namespace DancingGoat.Controllers
 
         // GET: Search
         [ValidateInput(false)]
-        public ActionResult Index(string searchText, int? page)
+        public ActionResult Index(string searchText, int page = DEFAULT_PAGE_NUMBER)
         {
-            int totalItemsCount;
-            var pageNumber = (page ?? 1);
-            pageNumber = Math.Max(pageNumber, 1);
+            // Validate page number (starting from 1)
+            var pageNumber = Math.Max(page, DEFAULT_PAGE_NUMBER);
 
+            int totalItemsCount;
             var searchResults = mService.Search(searchText, pageNumber - 1, PAGE_SIZE, out totalItemsCount);
 
             var model = new SearchResultsModel

@@ -11,7 +11,7 @@ namespace Kentico.Search.Tests
 {
     public class FakeSearchService : SearchService
     {
-        private string _dataSetFilePath = null;
+        private string mDataSetFilePath = null;
 
 
         public DataSet RawResults
@@ -33,7 +33,7 @@ namespace Kentico.Search.Tests
         public FakeSearchService(string[] indexes, string culture, string sitename, bool combineWithDefaultCulture, string dataSetFilePath)
             : base(indexes, culture, sitename, combineWithDefaultCulture)
         {
-            _dataSetFilePath = dataSetFilePath;
+            mDataSetFilePath = dataSetFilePath;
         }
 
 
@@ -76,13 +76,13 @@ namespace Kentico.Search.Tests
         /// </summary>
         private DataSet GetFakeSearchResults()
         {
-            if (String.IsNullOrEmpty(_dataSetFilePath))
+            if (String.IsNullOrEmpty(mDataSetFilePath))
             {
                 return null;
             }
 
             DataSet ds = new DataSet();
-            ds.ReadXml(_dataSetFilePath, XmlReadMode.InferTypedSchema);
+            ds.ReadXml(mDataSetFilePath, XmlReadMode.InferTypedSchema);
             foreach (DataRow row in ds.Tables[0].Rows)
             {
                 // Empty image GUIDs are represented in the original Smart search dataset by DBNull
