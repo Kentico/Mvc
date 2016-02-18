@@ -1,4 +1,5 @@
-﻿using CMS.DocumentEngine;
+﻿using System;
+using CMS.DocumentEngine;
 
 namespace Kentico.Search
 {
@@ -34,6 +35,16 @@ namespace Kentico.Search
         {
             get;
             set;
+        }
+
+
+        /// <summary>
+        /// Gets the image GUID associated with the search item. Contains data from the field configured as 'Image field' in search index configuration.
+        /// </summary>
+        public Guid ImageGuid
+        {
+            get;
+            internal set;
         }
 
 
@@ -74,6 +85,16 @@ namespace Kentico.Search
         {
             get;
             set;
+        }
+
+
+        /// <summary>
+        /// Gets the type of an object where the search item was found in (i.e. cms.document, cms.customtable).
+        /// </summary>
+        public string ObjectType
+        {
+            get;
+            internal set;
         }
     }
 }
