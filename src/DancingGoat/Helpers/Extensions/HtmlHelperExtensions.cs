@@ -99,6 +99,8 @@ namespace DancingGoat.Helpers
             // Adds query parameters (eg. when performing search)
             foreach (string key in queryParams)
             {
+                // Remove key from collection before adding a new value to prevent throwing exception
+                newRouteValues.Remove(key);
                 newRouteValues.Add(key, queryParams[key]);
             }
 
