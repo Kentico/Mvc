@@ -5,7 +5,8 @@
     "Microsoft.Owin.Security": "3.0.1",
     "Microsoft.Owin.Security.Cookies": "3.0.1",
     "Newtonsoft.Json": "8.0.3",
-    "NUnit": "3.2.0"
+    "NUnit": "3.2.0",
+    "System.Data.SqlLocalDb": "1.15.0"
   },
   "frameworks": {
     "net45": { }
