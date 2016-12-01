@@ -13,286 +13,289 @@ using System;
 using System.Collections.Generic;
 
 using CMS;
+using CMS.Base;
 using CMS.Helpers;
 using CMS.DataEngine;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.DocumentEngine;
 
 [assembly: RegisterDocumentType(Article.CLASS_NAME, typeof(Article))]
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
-	/// <summary>
-	/// Represents a content item of type Article.
-	/// </summary>
-	public partial class Article : TreeNode
-	{
-		#region "Constants and variables"
+    /// <summary>
+    /// Represents a content item of type Article.
+    /// </summary>
+    public partial class Article : TreeNode
+    {
+        #region "Constants and variables"
 
-		/// <summary>
-		/// The name of the data class.
-		/// </summary>
-		public const string CLASS_NAME = "DancingGoatMvc.Article";
-
-
-		/// <summary>
-		/// The instance of the class that provides extended API for working with Article fields.
-		/// </summary>
-		private readonly ArticleFields mFields;
-
-		#endregion
+        /// <summary>
+        /// The name of the data class.
+        /// </summary>
+        public const string CLASS_NAME = "DancingGoatMvc.Article";
 
 
-		#region "Properties"
+        /// <summary>
+        /// The instance of the class that provides extended API for working with Article fields.
+        /// </summary>
+        private readonly ArticleFields mFields;
 
-		/// <summary>
-		/// ArticleID.
-		/// </summary>
-		[DatabaseIDField]
-		public int ArticleID
-		{
-			get
-			{
-				return ValidationHelper.GetInteger(GetValue("ArticleID"), 0);
-			}
-			set
-			{
-				SetValue("ArticleID", value);
-			}
-		}
+        #endregion
 
 
-		/// <summary>
-		/// Title.
-		/// </summary>
-		[DatabaseField]
-		public string ArticleTitle
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("ArticleTitle"), "");
-			}
-			set
-			{
-				SetValue("ArticleTitle", value);
-			}
-		}
+        #region "Properties"
+
+        /// <summary>
+        /// ArticleID.
+        /// </summary>
+        [DatabaseIDField]
+        public int ArticleID
+        {
+            get
+            {
+                return ValidationHelper.GetInteger(GetValue("ArticleID"), 0);
+            }
+            set
+            {
+                SetValue("ArticleID", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Teaser.
-		/// </summary>
-		[DatabaseField]
-		public Guid ArticleTeaser
-		{
-			get
-			{
-				return ValidationHelper.GetGuid(GetValue("ArticleTeaser"), Guid.Empty);
-			}
-			set
-			{
-				SetValue("ArticleTeaser", value);
-			}
-		}
+        /// <summary>
+        /// Title.
+        /// </summary>
+        [DatabaseField]
+        public string ArticleTitle
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("ArticleTitle"), "");
+            }
+            set
+            {
+                SetValue("ArticleTitle", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Summary.
-		/// </summary>
-		[DatabaseField]
-		public string ArticleSummary
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("ArticleSummary"), "");
-			}
-			set
-			{
-				SetValue("ArticleSummary", value);
-			}
-		}
+        /// <summary>
+        /// Teaser.
+        /// </summary>
+        [DatabaseField]
+        public Guid ArticleTeaser
+        {
+            get
+            {
+                return ValidationHelper.GetGuid(GetValue("ArticleTeaser"), Guid.Empty);
+            }
+            set
+            {
+                SetValue("ArticleTeaser", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Text.
-		/// </summary>
-		[DatabaseField]
-		public string ArticleText
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("ArticleText"), "");
-			}
-			set
-			{
-				SetValue("ArticleText", value);
-			}
-		}
+        /// <summary>
+        /// Summary.
+        /// </summary>
+        [DatabaseField]
+        public string ArticleSummary
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("ArticleSummary"), "");
+            }
+            set
+            {
+                SetValue("ArticleSummary", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Images.
-		/// </summary>
-		[DatabaseField]
-		public string ArticleImages
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("ArticleImages"), "");
-			}
-			set
-			{
-				SetValue("ArticleImages", value);
-			}
-		}
+        /// <summary>
+        /// Text.
+        /// </summary>
+        [DatabaseField]
+        public string ArticleText
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("ArticleText"), "");
+            }
+            set
+            {
+                SetValue("ArticleText", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Gets an object that provides extended API for working with Article fields.
-		/// </summary>
-		public ArticleFields Fields
-		{
-			get
-			{
-				return mFields;
-			}
-		}
+        /// <summary>
+        /// Images.
+        /// </summary>
+        [DatabaseField]
+        public string ArticleImages
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("ArticleImages"), "");
+            }
+            set
+            {
+                SetValue("ArticleImages", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Provides extended API for working with Article fields.
-		/// </summary>
-		public partial class ArticleFields
-		{
-			/// <summary>
-			/// The content item of type Article that is a target of the extended API.
-			/// </summary>
-			private readonly Article mInstance;
+        /// <summary>
+        /// Gets an object that provides extended API for working with Article fields.
+        /// </summary>
+        [RegisterProperty]
+        public ArticleFields Fields
+        {
+            get
+            {
+                return mFields;
+            }
+        }
 
 
-			/// <summary>
-			/// Initializes a new instance of the <see cref="CMS.DocumentEngine.Types.Article+ArticleFields" /> class with the specified content item of type Article.
-			/// </summary>
-			/// <param name="instance">The content item of type Article that is a target of the extended API.</param>
-			public ArticleFields(Article instance)
-			{
-				mInstance = instance;
-			}
+        /// <summary>
+        /// Provides extended API for working with Article fields.
+        /// </summary>
+        [RegisterAllProperties]
+        public partial class ArticleFields : AbstractHierarchicalObject<ArticleFields>
+        {
+            /// <summary>
+            /// The content item of type Article that is a target of the extended API.
+            /// </summary>
+            private readonly Article mInstance;
 
 
-			/// <summary>
-			/// ArticleID.
-			/// </summary>
-			public int ID
-			{
-				get
-				{
-					return mInstance.ArticleID;
-				}
-				set
-				{
-					mInstance.ArticleID = value;
-				}
-			}
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ArticleFields" /> class with the specified content item of type Article.
+            /// </summary>
+            /// <param name="instance">The content item of type Article that is a target of the extended API.</param>
+            public ArticleFields(Article instance)
+            {
+                mInstance = instance;
+            }
 
 
-			/// <summary>
-			/// Title.
-			/// </summary>
-			public string Title
-			{
-				get
-				{
-					return mInstance.ArticleTitle;
-				}
-				set
-				{
-					mInstance.ArticleTitle = value;
-				}
-			}
+            /// <summary>
+            /// ArticleID.
+            /// </summary>
+            public int ID
+            {
+                get
+                {
+                    return mInstance.ArticleID;
+                }
+                set
+                {
+                    mInstance.ArticleID = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Teaser.
-			/// </summary>
-			public Attachment Teaser
-			{
-				get
-				{
-					return mInstance.GetFieldAttachment("ArticleTeaser");
-				}
-			}
+            /// <summary>
+            /// Title.
+            /// </summary>
+            public string Title
+            {
+                get
+                {
+                    return mInstance.ArticleTitle;
+                }
+                set
+                {
+                    mInstance.ArticleTitle = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Summary.
-			/// </summary>
-			public string Summary
-			{
-				get
-				{
-					return mInstance.ArticleSummary;
-				}
-				set
-				{
-					mInstance.ArticleSummary = value;
-				}
-			}
+            /// <summary>
+            /// Teaser.
+            /// </summary>
+            public Attachment Teaser
+            {
+                get
+                {
+                    return mInstance.GetFieldAttachment("ArticleTeaser");
+                }
+            }
 
 
-			/// <summary>
-			/// Text.
-			/// </summary>
-			public string Text
-			{
-				get
-				{
-					return mInstance.ArticleText;
-				}
-				set
-				{
-					mInstance.ArticleText = value;
-				}
-			}
+            /// <summary>
+            /// Summary.
+            /// </summary>
+            public string Summary
+            {
+                get
+                {
+                    return mInstance.ArticleSummary;
+                }
+                set
+                {
+                    mInstance.ArticleSummary = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Images.
-			/// </summary>
-			public IEnumerable<Attachment> Images
-			{
-				get
-				{
-					return mInstance.GetFieldAttachments("ArticleImages");
-				}
-			}
+            /// <summary>
+            /// Text.
+            /// </summary>
+            public string Text
+            {
+                get
+                {
+                    return mInstance.ArticleText;
+                }
+                set
+                {
+                    mInstance.ArticleText = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Related articles.
-			/// </summary>
-			public IEnumerable<TreeNode> RelatedArticles
-			{
-				get
-				{
-					return mInstance.GetRelatedDocuments("ArticleRelatedArticles");
-				}
-			}
-		}
-
-		#endregion
+            /// <summary>
+            /// Images.
+            /// </summary>
+            public IEnumerable<Attachment> Images
+            {
+                get
+                {
+                    return mInstance.GetFieldAttachments("ArticleImages");
+                }
+            }
 
 
-		#region "Constructors"
+            /// <summary>
+            /// Related articles.
+            /// </summary>
+            public IEnumerable<TreeNode> RelatedArticles
+            {
+                get
+                {
+                    return mInstance.GetRelatedDocuments("ArticleRelatedArticles");
+                }
+            }
+        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CMS.DocumentEngine.Types.Article" /> class.
-		/// </summary>
-		public Article() : base(CLASS_NAME)
-		{
-			mFields = new ArticleFields(this);
-		}
+        #endregion
 
-		#endregion
-	}
+
+        #region "Constructors"
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Article" /> class.
+        /// </summary>
+        public Article() : base(CLASS_NAME)
+        {
+            mFields = new ArticleFields(this);
+        }
+
+        #endregion
+    }
 }

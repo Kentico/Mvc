@@ -1,0 +1,12 @@
+﻿@model DancingGoat.Models.Checkout.CustomerViewModel
+
+<div>@Model.FirstName @Model.LastName</div>
+<div>@Model.Email</div>
+<div>@Model.PhoneNumber</div>
+@if (Model.IsCompanyAccount)
+{
+    <br />
+    <div>@Model.Company</div>
+    <div>@Model.OrganizationID</div>
+    <div>@Model.TaxRegistrationID</div>
+}

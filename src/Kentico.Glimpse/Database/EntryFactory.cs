@@ -37,7 +37,7 @@ namespace Kentico.Glimpse.Database
             }
             catch (Exception exception)
             {
-                throw new ArgumentException("Cannot create debug log entry from the specified row", "row", exception);
+                throw new ArgumentException("Cannot create debug log entry from the specified row", nameof(row), exception);
             }
         }
     }

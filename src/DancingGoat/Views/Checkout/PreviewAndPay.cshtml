@@ -1,0 +1,63 @@
+﻿@model DancingGoat.Models.Checkout.PreviewViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Checkout.ShoppingCartPreview");
+}
+
+<div class="checkout-container">
+    <div class="cart">
+        <div class="continue-shopping-link">
+            <a href="@Url.Action("DeliveryDetails")">&larr; @ResHelper.GetString("DancingGoatMvc.Checkout.BackToCustomerDetails")</a>
+        </div>
+
+        @Html.ValidationSummary(true, ResHelper.GetString("DancingGoatMvc.Checkout.OrderFailed"), new { @class = "ErrorLabel red" })
+        <div>
+            @Html.ValidationMessage("shipping", new { @class = "red" })
+        </div>
+        <div>
+            @Html.ValidationMessage("cart.empty", new { @class = "red" })
+        </div>
+
+        <div class="col-md-8 cart-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>@ResHelper.GetString("DancingGoatMvc.Checkout.BillingDetails")</h2>
+
+                    @Html.DisplayFor(m => m.CustomerDetails)
+
+                    <br />
+
+                    @Html.DisplayFor(m => m.BillingAddress)
+                </div>
+                <div class="col-md-6">
+                    <h2>@ResHelper.GetString("DancingGoatMvc.Checkout.ShippingDetails")</h2>
+                    <span>@Model.ShippingName</span>
+                    <br />
+                    <div>@Model.CustomerDetails.Company</div>
+
+                    <br />
+
+                    @Html.DisplayFor(m => m.BillingAddress)
+
+                </div>
+            </div>
+            <div class="row">
+                <h2>@ResHelper.GetString("DancingGoatMvc.Checkout.OrderedItems")</h2>
+                <hr class="first-separator" />
+
+                @Html.Partial("_ShoppingCartContentPreview", Model.CartModel)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cart-right-panel floating-box">
+                @Html.Partial("_ShoppingCartTotals", Model.Cart)
+                @using (Html.BeginForm("PreviewAndPay", "Checkout", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.EditorFor(m => m.PaymentMethod)
+                    <input type="submit" value="@ResHelper.GetString("DancingGoatMvc.Checkout.ConfirmAndPayButton")" class="btn-primary checkout-button btn btn-default" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

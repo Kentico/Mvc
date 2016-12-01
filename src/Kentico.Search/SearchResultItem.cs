@@ -1,47 +1,16 @@
-﻿using System;
-using CMS.DocumentEngine;
+﻿using CMS.DataEngine;
 
 namespace Kentico.Search
 {
     /// <summary>
     /// Represents one search result.
     /// </summary>
-    public class SearchResultItem
+    public sealed class SearchResultItem<TInfo> where TInfo : BaseInfo
     {
         /// <summary>
-        /// Image associated with the page. Contains data from field configured as 'Image field' in search index configuration.
+        /// Common search fields
         /// </summary>
-        public Attachment ImageAttachment
-        {
-            get;
-            set;
-        }
-
-
-        /// <summary>
-        /// Title of the page. Contains data from field configured as 'Title field' in search index configuration.
-        /// </summary>
-        public string Title
-        {
-            get;
-            set;
-        }
-
-
-        /// <summary>
-        /// Content of the page. Contains data from field configured as 'Content field' in search index configuration.
-        /// </summary>
-        public string Content
-        {
-            get;
-            set;
-        }
-
-
-        /// <summary>
-        /// Gets the image GUID associated with the search item. Contains data from the field configured as 'Image field' in search index configuration.
-        /// </summary>
-        public Guid ImageGuid
+        public SearchFields Fields
         {
             get;
             internal set;
@@ -49,49 +18,9 @@ namespace Kentico.Search
 
 
         /// <summary>
-        /// Display name of result's page type.
+        /// Info object to get type specific data
         /// </summary>
-        public string PageTypeDispayName
-        {
-            get;
-            set;
-        }
-
-
-        /// <summary>
-        /// Code name of result's page type.
-        /// </summary>
-        public string PageTypeCodeName
-        {
-            get;
-            set;
-        }
-
-
-        /// <summary>
-        /// ID of the result's node.
-        /// </summary>
-        public int NodeId
-        {
-            get;
-            set;
-        }
-
-
-        /// <summary>
-        /// Contains data from field configured as 'Date field' in search index configuration.
-        /// </summary>
-        public string Date
-        {
-            get;
-            set;
-        }
-
-
-        /// <summary>
-        /// Gets the type of an object where the search item was found in (i.e. cms.document, cms.customtable).
-        /// </summary>
-        public string ObjectType
+        public TInfo Data
         {
             get;
             internal set;

@@ -1,0 +1,8 @@
+﻿@model DancingGoat.Models.Products.ProductViewModel
+
+@if ((Model.ProductOptionCategories != null) && Model.ProductOptionCategories.Any())
+{
+    <div class="cart-item-selector form-horizontal" data-variant-action="@Url.Action("Variant")">
+        @Html.EditorFor(m => m.ProductOptionCategories)
+    </div>
+}

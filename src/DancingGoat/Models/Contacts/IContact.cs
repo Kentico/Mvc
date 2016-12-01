@@ -2,44 +2,24 @@
 {
     public interface IContact
     {
-        string Name
-        {
-            get;
-        }
-
-        string Phone
-        {
-            get;
-        }
+        string Name { get; }
 
 
-        string Email
-        {
-            get;
-        }
+        string Phone { get; }
 
 
-        string ZIP
-        {
-            get;
-        }
+        string Email { get; }
 
 
-        string Street
-        {
-            get;
-        }
+        string ZIP { get; }
 
 
-        string City
-        {
-            get;
-        }
+        string Street { get; }
 
 
-        string Country
-        {
-            get;
-        }
+        string City { get; }
+
+
+        string Country { get; }
     }
 }

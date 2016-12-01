@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>MVC Sandbox site</h1>
+    <p>
+        This is a testing MVC site where all scenarios which are not possible to present at the MVC Dancing Goat should be placed to.
+    </p>
+    <p>
+        The site is shared across all the development teams, so be careful when you modify it.
+    </p>
+
+    <ul>
+        <li>@Html.ActionLink("Log in", "login", "membershipexamples")</li>
+        <li>@Html.ActionLink("Register", "register", "membershipexamples")</li>
+        <li>@Html.ActionLink("Your account", "YourAccount", "membershipexamples")</li>
+        <li>@Html.ActionLink("All users on site", "allusers", "membershipexamples")</li>
+    </ul>
+</body>
+</html>

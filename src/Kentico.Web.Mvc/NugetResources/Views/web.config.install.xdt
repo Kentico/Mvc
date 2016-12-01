@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.web.webPages.razor>
+    <pages>
+      <namespaces>
+        <add namespace="Kentico.Web.Mvc" 
+             xdt:Transform="InsertIfMissing" xdt:Locator="Match(namespace)" />
+      </namespaces>
+    </pages>
+  </system.web.webPages.razor>
+</configuration>

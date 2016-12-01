@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Product listing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using LearningKit.Models.Products
+@model IEnumerable<LearningKit.Models.Products.ProductListItemViewModel>
+@*DocSection:ListingTable*@
+@using Kentico.Ecommerce
+
+<h2>Product listing of the LearningProductType</h2>
+
+<div>
+    @foreach (ProductListItemViewModel product in Model)
+    {
+        @* Creates a hyperlink to the product controller to display the product detail page *@
+        <a href="@Url.RouteUrl("Product", new {id = product.ProductPageID, productAlias = product.ProductPageAlias})">
+            <h3>@product.Name</h3>
+
+            @* Displays information about the product's public status *@
+            @if (!string.IsNullOrEmpty(product.PublicStatusName))
+            {
+                <span>@product.PublicStatusName</span>
+            }
+
+            @* Displays the product's image *@
+            @if (!string.IsNullOrEmpty(product.ImagePath))
+            {
+                <img src="@Url.Kentico().ImageUrl(product.ImagePath, SizeConstraint.Size(300, 300))" alt="@product.Name">
+            }
+
+            @* Displays the product's other properties *@
+
+            @{
+                ProductPrice price = product.PriceDetail;
+                Currency currency = price.Currency;
+            }
+            <div>
+                @if (!product.Available)
+                {
+                    <span>Out of stock</span>
+                }
+
+                <span>@currency.FormatPrice(price.Price)</span>
+
+                @if (price.ListPrice > price.Price)
+                {
+                    <s>@currency.FormatPrice(price.ListPrice)</s>
+                }
+            </div>
+        </a>
+    }
+</div>
+@*EndDocSection:ListingTable*@
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

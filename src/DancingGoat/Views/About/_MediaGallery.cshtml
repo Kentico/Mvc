@@ -1,0 +1,17 @@
+﻿@model DancingGoat.Models.MediaGallery.MediaGalleryViewModel
+@{
+    int index = 0;
+}
+
+<div class="media-gallery">
+    <h1 class="title-tab">@Model.MediaGalleryName</h1>
+    <div class="row">
+    @foreach (var mediaFile in Model.MediaFiles)
+    {
+        <div class="media-item col-lg-@(index++ == 0 ? "6" : "3") col-md-6">
+            <span class="cafe-overlay"><h2 class="ourcoffee-tile-text center-text">@mediaFile.Title</h2></span>
+            <div class="ratio-4-3" style="background-image: url('@Url.Kentico().ImageUrl(mediaFile.Url, SizeConstraint.MaxWidthOrHeight(400))')"></div>
+        </div>
+    }
+    </div>
+</div>

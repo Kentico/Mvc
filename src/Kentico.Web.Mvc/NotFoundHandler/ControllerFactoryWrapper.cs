@@ -27,7 +27,7 @@ namespace Kentico.Web.Mvc
         {
             if (controllerFactory == null)
             {
-                throw new ArgumentNullException("controllerFactory");
+                throw new ArgumentNullException(nameof(controllerFactory));
             }
 
             this.mControllerFactory = controllerFactory;

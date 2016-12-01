@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Kentico.Glimpse.Tests.Unit.Database
 {
     [TestFixture]
-    [Category("Kentico.Glimpse.Database")]
+    [Category("Unit")]
     public class EntryFactoryTests
     {
         [TestCase(null, null, "Operation", typeof(ConnectionEntry))]
@@ -59,7 +59,6 @@ namespace Kentico.Glimpse.Tests.Unit.Database
 
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void CreateEntry_ThrowsArgumentExceptionForInvalidRows()
         {
             var factory = CreateFactory();
@@ -69,7 +68,7 @@ namespace Kentico.Glimpse.Tests.Unit.Database
             row["Counter"] = 0;
             row["QueryText"] = DBNull.Value;
 
-            var entry = factory.CreateEntry(row);
+            Assert.Throws<ArgumentException>(() => factory.CreateEntry(row));
         }
 
 

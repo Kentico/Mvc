@@ -1,0 +1,27 @@
+﻿{
+  "dependencies": {
+    "Antlr": "3.5.0.2",
+    "Kentico.LanguagePack.English": "10.0.0-*",
+    "Kentico.Libraries": "10.0.0-*",
+    "Microsoft.AspNet.Identity.Owin": "2.2.1",
+    "Microsoft.AspNet.Mvc": "5.2.3",
+    "Microsoft.AspNet.Web.Optimization": "1.1.3",
+    "Microsoft.IdentityModel.Protocol.Extensions": "1.0.0",
+    "Microsoft.Owin.Host.SystemWeb": "3.0.1",
+    "Microsoft.Owin.Security.Cookies": "3.0.1",
+    "Microsoft.Owin.Security.Facebook": "3.0.1",
+    "Microsoft.Owin.Security.Google": "3.0.1",
+    "Microsoft.Owin.Security.OAuth": "3.0.1",
+    "Microsoft.Owin.Security.OpenIdConnect": "3.0.1",
+    "Microsoft.Owin.Security.WsFederation": "3.0.1",
+    "Microsoft.Web.Infrastructure": "1.0.0.0",
+    "Newtonsoft.Json": "8.0.3",
+    "WebGrease": "1.6.0"
+  },
+  "frameworks": {
+    "net45": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

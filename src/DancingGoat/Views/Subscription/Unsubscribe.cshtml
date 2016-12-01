@@ -10,13 +10,19 @@
         </div>
     </div>
     <div class="col-md-6">
-        <h2>@ResHelper.GetString(Model.IsError ? "DancingGoatMvc.News.UnsubscribeError" : "DancingGoatMvc.News.UnsubscribeOK")</h2>
+        <h2>@ResHelper.GetString(ViewData.ModelState.IsValid ? "DancingGoatMvc.News.UnsubscribeOK" : "DancingGoatMvc.News.UnsubscribeError")</h2>
         <p>
-            @if (!String.IsNullOrEmpty(Model.UnsubscriptionResult))
-            {
-                <span class="InfoLabel">@Model.UnsubscriptionResult</span>
-            }
-        </p>
+            <span class="InfoLabel">
+                @if (!String.IsNullOrEmpty(Model.UnsubscriptionResult))
+                {
+                    @Model.UnsubscriptionResult
+                }
+                else
+                {
+                    @Html.ValidationMessage(String.Empty)
+                }
+            </span>
+</p>
     </div>
 </section>
 

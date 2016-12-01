@@ -1,22 +1,15 @@
 ﻿@model DancingGoat.Models.Subscription.SubscribeModel
 
-@if (Model.SubscriptionSaved)
+@using (Ajax.BeginForm("Subscribe", "Subscription", null, new AjaxOptions
 {
-    @ResHelper.GetString("DancingGoatMvc.News.Subscribed");
-}
-else
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "SubscribeForm"
+}, new { id = "SubscribeForm" }))
 {
-    using (Ajax.BeginForm("Subscribe", "Subscription", null, new AjaxOptions
-    {
-        HttpMethod = "POST",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "SubscribeForm"
-    }, new { id = "SubscribeForm" }))
-    {
-        @Html.AntiForgeryToken()
-    
-        @Html.ValidatedEditorFor(m => m.Email)
-    
-        <input type="submit" value="@ResHelper.GetString("DancingGoatMvc.News.Subscribe")" class="btn btn-primary" />
-    }
+    @Html.AntiForgeryToken()
+
+    @Html.ValidatedEditorFor(m => m.Email)
+
+    <input type="submit" value="@ResHelper.GetString("DancingGoatMvc.News.Subscribe")" class="btn btn-primary" />
 }

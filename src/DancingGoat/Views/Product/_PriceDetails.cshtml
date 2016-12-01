@@ -1,0 +1,33 @@
+﻿@model DancingGoat.Models.Products.ProductViewModel
+
+@{
+    var price = Model.PriceDetail;
+    var currency = price.Currency;
+    var beforeDiscount = price.Price + price.Discount;
+}
+
+<div class="price-details">
+    @if (price.ListPrice > 0)
+    {
+        <div class="row">
+            <div class="col-xs-6">List price</div>
+            <div class="col-xs-6">@currency.FormatPrice(price.ListPrice)</div>
+        </div>
+    }
+
+    <div class="discount-price @((price.Discount > 0) ? "" : "hidden")">
+        <div class="row">
+            <div class="col-xs-6">@ResHelper.GetString("DancingGoatMvc.Product.Price")</div>
+            <div id="js-before-discount" class="col-xs-6">@currency.FormatPrice(beforeDiscount)</div>
+        </div>
+        @if (price.Price > 0)
+        {
+            var discountPercentage = Math.Round(price.Discount * 100 / beforeDiscount);
+
+            <div class="row">
+                <div class="col-xs-6">@ResHelper.GetString("DancingGoatMvc.Product.YouSave")</div>
+                <div id="js-savings" class="col-xs-6">@currency.FormatPrice(price.Discount) (@(discountPercentage)%)</div>
+            </div>
+        }
+    </div>
+</div>

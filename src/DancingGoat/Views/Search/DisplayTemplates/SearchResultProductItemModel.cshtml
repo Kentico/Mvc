@@ -1,0 +1,27 @@
+﻿@model DancingGoat.Models.Search.SearchResultProductItemModel
+
+@{
+    var price = Model.PriceDetail;
+    var currency = price.Currency;
+}
+
+<div class="row search-tile">
+    <div class="col-md-4 col-lg-3">
+        @if (Model.ImagePath != null)
+        {
+            <a href="@Model.Url" title="@Model.Title">
+                <div class="search-tile-product-image">
+                    @Html.Image(@Model.ImagePath, @Model.Title, null, SizeConstraint.Empty)
+                </div>
+            </a>
+        }
+    </div>
+    <div class="col-md-8 col-lg-9 search-tile-content">
+        <h3 class="h4 search-tile-title">
+            <a href="@Model.Url">@Model.Title</a>
+        </h3>
+        <div class="search-tile-badge">@Model.Type</div>
+        <div class="search-tile-subtitle">@currency.FormatPrice(price.Price)</div>
+        <div>@Html.Raw(Model.ShortDescription)</div>
+    </div>
+</div>

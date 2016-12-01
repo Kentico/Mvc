@@ -1,0 +1,18 @@
+﻿@model DancingGoat.Models.Coffees.CoffeeViewModel
+
+<div class="product-detail-properties">
+    <h4>@ResHelper.GetString("DancingGoatMvc.Product.Parameters")</h4>
+    <dl class="row">
+        <dt class="col-xs-12 col-sm-4">@ResHelper.GetString("DancingGoatMvc.Coffee.Farm")</dt>
+
+        <dd class="col-xs-12 col-sm-8">@(string.IsNullOrEmpty(Model.Farm) ? "-" : Model.Farm)</dd>
+        <dt class="col-xs-12 col-sm-4">@ResHelper.GetString("DancingGoatMvc.Coffee.Variety")</dt>
+        <dd class="col-xs-12 col-sm-8">@(string.IsNullOrEmpty(Model.Variety) ? "-" : Model.Variety)</dd>
+        <dt class="col-xs-12 col-sm-4">@ResHelper.GetString("DancingGoatMvc.Coffee.Processing")</dt>
+        <dd class="col-xs-12 col-sm-8">@(string.IsNullOrEmpty(Model.Processing) ? "-" : Model.Processing)</dd>
+        <dt class="col-xs-12 col-sm-4">@ResHelper.GetString("DancingGoatMvc.Coffee.Altitude")</dt>
+        <dd class="col-xs-12 col-sm-8">@Model.Altitude feet</dd>
+        <dt class="col-xs-12 col-sm-4">@ResHelper.GetString("DancingGoatMvc.Coffee.IsDecaf")</dt>
+        <dd class="col-xs-12 col-sm-8">@ResHelper.GetString(Model.IsDecaf ? "DancingGoatMvc.General.Yes" : "DancingGoatMvc.General.No")</dd>
+    </dl>
+</div>

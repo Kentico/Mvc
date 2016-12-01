@@ -1,7 +1,14 @@
 ﻿
+@import "./variables.less";
 @import "./Fonts.less";
 @import "./Grid.less";
 @import "./Menu.less";
+@import "./Products.less";
+@import "./Checkout.less";
+@import "./icons-core.less";
+@import "./Controls.less";
+@import "./Gallery.less";
+@import "./YourAccount.less";
 
 /*# Page wrap #*/
 html, body {
@@ -193,6 +200,16 @@ footer {
     background-color: transparent;
     color: #fff;
 }
+
+.btn.btn-disabled {
+    background-color: #a3a2a2;
+    box-shadow: none;
+    color: #696663;
+    cursor: not-allowed;
+    text-shadow: none;
+    border: 2px solid #a3a2a2;
+}
+
 /*# Messages #*/
 .message,
 .error-label,
@@ -320,7 +337,7 @@ footer {
 .article-related-articles {
     margin-top: 5rem;
 
-    .title-tab {
+    .title-tab{
         margin: 0;
     }
 
@@ -386,9 +403,44 @@ footer {
         margin-left: 1rem;
     }
 }
+
+/*# Home banner #*/
+.banner-section {
+  min-height: 380px;
+  width: 100%;
+  padding: 10.5rem 1.5rem 1.8rem 1.5rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 60%;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.banner-heading {
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: #B24143;
+  font-family: "Source Sans Pro";
+  font-weight: normal;
+  font-size: 1.375rem;
+  padding: 1rem;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.banner-text {
+  color: #000000;
+  background-color: #FFFFFF;
+  font-size: 1.375rem;
+  padding: 1rem;
+  display: block;
+  max-width: 40rem;
+  margin: 0;
+  font-weight: 300;
+}
+
 /*# Our story #*/
-.ourstory-background-image {
-    background-image: url(../Images/our-story.jpg);
+.ourstory-section {
     color: #fff;
     padding: 3rem 3rem;
     background-repeat: no-repeat;
@@ -652,4 +704,189 @@ footer {
     .search-tile-title {
         margin-top: 0;
     }
+}
+
+/*# Registration #*/
+
+@media (max-width: 768px) {
+  .signin-register .form-group-input input[type="text"],
+  .signin-register .form-group-input input[type="password"],
+  .signin-register .form-group-input input[type="email"],
+  .signin-register .form-group-input textarea {
+    width: 100% !important;
+  }
+}
+
+.signin-register {
+    .validation-summary-errors {
+        ul {
+            margin: 0;
+            list-style-type: none;
+            padding: 0;
+
+            li {
+                color: white !important;
+                display: block;
+                font-weight: bold;
+                text-align: left;
+                background-color: #D12127;
+                padding: 10px 12px;
+                margin-top: .3rem;
+                margin-bottom: .6rem;
+            }
+        }
+    }
+
+    .input-validation-error {
+        border-color: #d12127 !important;
+    }
+
+    .field-validation-error {
+        color: #d12127;
+        display: block;
+        padding-bottom: 10px;
+        text-align: left;
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+
+    .zone-dark {
+        background: #E7E7E7;
+        padding: 1rem;
+    }
+
+    .zone-light {
+        padding: 1rem;
+    }
+
+    .separator {
+        line-height:1em;
+        border-bottom:2px solid #bebebe;
+        margin:1rem 0;  
+    }
+
+    .separator:before {
+        position:relative;
+        left:50%;
+        margin-left:-2.0rem;
+        padding:0 0.5rem;
+        top:0.5rem;
+        background:#E7E7E7;
+    }
+
+    input[type="submit"] {
+        margin: .5rem 0;
+    }
+
+    input[type="password"],
+    input[type="text"],
+    input[type="email"] {  
+        height: 2.6rem;
+        margin-top: 0.25rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border: 2px solid #BEBEBE;
+    }
+
+    .logon-password-retrieval-result {
+        color: white;
+        display: block;
+        text-align: left;
+        background-color: green;
+        padding: 10px 12px;
+        margin-bottom: 0.7rem;
+    }
+
+    .logon-password-retrieval-result-failed {
+        background-color: #D12127 !important;
+        font-weight: bold;
+    }
+
+    .EditingFormErrorLabel{
+        color: #D12127;
+    }
+}
+
+/*# Logon password and remember me #*/
+
+.logon-remember-me-checkbox {
+  display: block;
+
+    input[type="checkbox"] {
+        width: auto;
+        margin-right: 0.15rem;
+    }
+}
+
+.logon-password-retrieval-link {
+  background-color: white;
+  display: block;
+  padding: 8px 16px;
+  margin: 0 -16px;
+  top: 16px;
+  position: relative;
+}
+
+/*# Buttons #*/
+.btn {
+  padding: .6rem 2rem;
+  cursor: pointer;
+  color: #08768C;
+  background: #fff;
+  border: 2px solid #08768C;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary {
+  text-transform: uppercase;
+  background: #08768C;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  color: #fff;
+}
+
+.btn-primary:focus {
+  color: #fff;
+}
+
+.btn-secondary {
+  text-transform: uppercase;  
+  font-weight: bold;
+  background-color: transparent;  
+}
+
+.btn-terciary {
+  text-transform: uppercase;
+  border: 0;
+  font-weight: bold;
+  background-color: transparent;
+  padding: 0.6rem 0.5rem;
+}
+
+.btn-more {
+  margin: 1.25rem 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn-hide-and-seek {
+  background-color: transparent;
+  transition: all 0.3s ease 0s;
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn-hide-and-seek:hover {
+  background-color: #fff;
+  color: #1C1C1C;
+}
+
+.btn-hide-and-seek:focus {
+  background-color: transparent;
+  color: #fff;
 }

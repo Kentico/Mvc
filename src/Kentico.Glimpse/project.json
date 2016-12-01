@@ -1,0 +1,12 @@
+﻿{
+  "dependencies": {
+    "Glimpse": "1.8.6",
+    "Kentico.Libraries": "10.0.0-*"
+  },
+  "frameworks": {
+    "net45": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

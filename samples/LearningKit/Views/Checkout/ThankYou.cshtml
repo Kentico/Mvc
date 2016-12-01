@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Thank-you page";
+}
+
+<h2>Thank-you page</h2>
+
+
+@if (ViewBag.OrderID == 0)
+{
+    <p>Your order was created</p>
+}
+else
+{
+    <p>Your order was created with ID: @ViewBag.OrderID</p>
+}
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

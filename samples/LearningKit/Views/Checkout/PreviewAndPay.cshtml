@@ -1,0 +1,62 @@
+﻿@model LearningKit.Models.Checkout.PreviewAndPayViewModel
+@using Kentico.Ecommerce
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Preview step";
+
+    Currency currency = Model.Cart.Currency;
+}
+
+@*DocSection:DeliveryDetailsView*@
+<div id="customerDetails">
+    <h2>Customer Details</h2>
+    <div>
+        @Html.LabelFor(m => m.DeliveryDetails.Customer.FirstName)
+        @Html.DisplayFor(m => m.DeliveryDetails.Customer.FirstName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DeliveryDetails.Customer.LastName)
+        @Html.DisplayFor(m => m.DeliveryDetails.Customer.LastName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DeliveryDetails.Customer.Company)
+        @Html.DisplayFor(m => m.DeliveryDetails.Customer.Company)
+    </div>
+</div>
+
+<div id="cartContent">
+    <ul>
+        @* Loops through all shopping cart items. *@
+        @foreach (Kentico.Ecommerce.ShoppingCartItem cartItem in Model.Cart.Items)
+        {
+            @* Displays the shopping cart items' properties. *@
+            <li>
+                @cartItem.Units&times; @cartItem.Name ... @currency.FormatPrice(cartItem.Subtotal)
+            </li>
+        }
+    </ul>
+</div>
+
+<div id="shoppingCartTotals">
+    <p>Total tax: @currency.FormatPrice(Model.Cart.TotalTax)</p>
+    <p>Total shipping: @currency.FormatPrice(Model.Cart.Shipping)</p>
+    <p>Total (incl. tax): @currency.FormatPrice(Model.Cart.TotalPrice)</p>
+</div>
+
+@using (Html.BeginForm("PreviewAndPay", "Checkout", FormMethod.Post))
+{
+    <div id="paymentMethod">
+        @Html.LabelFor(m => m.PaymentMethod.PaymentMethodID)
+        @Html.DropDownListFor(m => m.PaymentMethod.PaymentMethodID, Model.PaymentMethod.PaymentMethods)
+    </div>
+
+    <input type="submit" value="Create an order" />
+}
+@*EndDocSection:DeliveryDetailsView*@
+
+<p>
+    @Html.ActionLink("> Back to the customer details step", "DeliveryDetails")<br />
+    @Html.ActionLink("> Back to the customer details step with pre-filling addresses", "DeliveryDetailsAddressSelector")<br />
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

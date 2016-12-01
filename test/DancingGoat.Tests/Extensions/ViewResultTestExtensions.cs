@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
@@ -8,7 +10,7 @@ using TestStack.FluentMVCTesting;
 namespace DancingGoat.Tests.Extensions
 {
     /// <summary>
-    /// Provides a set of static methods for testing controllers.
+    /// Provides a set of static methods for testing controllers results.
     /// </summary>
     public static class ViewResultTestExtensions
     {

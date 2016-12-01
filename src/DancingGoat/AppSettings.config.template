@@ -1,0 +1,4 @@
+<appSettings>
+  <add key="CMSHashStringSalt" value="" />
+  <add key="GoogleMapsApiKey" value="" />
+</appSettings>

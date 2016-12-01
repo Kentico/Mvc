@@ -8,14 +8,16 @@
         <iconUrl>http://kentico.com/favicon.ico</iconUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>$description$</description>
-        <tags>kentico, aspnet, mvc, aspnetmvc</tags>
+	      <tags>kentico, aspnet, mvc, aspnetmvc</tags>
         <copyright>© 2015 Kentico Software.</copyright>
         <language>en-US</language>
-        <releaseNotes>https://github.com/Kentico/Mvc/blob/master/CHANGELOG.md</releaseNotes>
+        <releaseNotes></releaseNotes>
         <dependencies>
+          <group targetFramework=".NETFramework4.5">
+            <dependency id="Kentico.LanguagePack.English" version="[10.0.0-B,11)" />
+            <dependency id="Kentico.Libraries" version="[10.0.0-B,11)" />
             <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
-            <dependency id="Kentico.Libraries" version="[9,10)" />
-            <dependency id="Kentico.LanguagePack.English" version="[9,10)" />
+          </group>
         </dependencies>
     </metadata>
     <files>
@@ -23,5 +25,7 @@
         <file src="NugetResources\mimetypes.txt" target="content\App_Data\mimetypes.txt" />
         <file src="NugetResources\web.config.install.xdt" target="content\web.config.install.xdt" />
         <file src="NugetResources\web.config.uninstall.xdt" target="content\web.config.uninstall.xdt" />
+        <file src="NugetResources\Views\web.config.install.xdt" target="content\Views\web.config.install.xdt" />
+        <file src="NugetResources\Views\web.config.uninstall.xdt" target="content\Views\web.config.uninstall.xdt" />
     </files>
 </package>

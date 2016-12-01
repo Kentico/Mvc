@@ -1,0 +1,14 @@
+﻿@model DancingGoat.Models.Checkout.ThankYouViewModel
+
+@{ 
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Checkout.ThankYou");
+}
+
+<div class="col-md-6 col-lg-5">
+    <div class="thank-you-content">
+        <h2>@ResHelper.GetString("DancingGoatMvc.Checkout.ThankYou")</h2>
+
+        <p>@ResHelper.GetString("DancingGoatMvc.Order.Success")</p>
+        <p>@Html.Raw(ResHelper.GetStringFormat("DancingGoatMvc.Order.Questions", Model.Phone))</p>
+    </div>
+</div>

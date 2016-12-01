@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Web.Mvc;
 
 using CMS.Base;
@@ -16,8 +17,14 @@ namespace Kentico.Web.Mvc
         /// <param name="instance">The object that provides methods to render HTML fragments.</param>
         /// <param name="html">An HTML fragment with potential relative URLs.</param>
         /// <returns>An HTML fragment where relative URLs are replaced with URLs that can be used by the browser.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="instance"/> is null.</exception>
         public static MvcHtmlString ResolveUrls(this ExtensionPoint<HtmlHelper> instance, string html)
         {
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
+
             var urlHelper = new UrlHelper(instance.Target.ViewContext.RequestContext);
             var applicationPath = urlHelper.Content("~/").TrimEnd('/');
 

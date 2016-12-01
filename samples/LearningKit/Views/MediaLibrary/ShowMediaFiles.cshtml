@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Media library files listing";
+}
+
+@*DocSection:ShowMediaFiles*@
+@using Kentico.MediaLibrary
+@using CMS.MediaLibrary
+@model IEnumerable<MediaFileInfo>
+
+<h2>Media library files listing</h2>
+
+@foreach (MediaFileInfo mediaFile in Model)
+{
+    @* Gets a direct URL for the media file and limits the file's maximum side size to 400 px *@
+    string url = Url.Kentico().ImageUrl(mediaFile.GetPermanentUrl(), SizeConstraint.MaxWidthOrHeight(400));
+
+    <img src="@url" alt="@mediaFile.FileTitle" />
+}
+@*EndDocSection:ShowMediaFiles*@
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

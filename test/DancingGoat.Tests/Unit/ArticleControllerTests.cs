@@ -2,29 +2,31 @@
 
 using CMS.DataEngine;
 using CMS.DocumentEngine;
-using CMS.DocumentEngine.Tests;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.Tests;
 
+using DancingGoat.Models.Articles;
 using DancingGoat.Controllers;
 using DancingGoat.Infrastructure;
-using DancingGoat.Models.Articles;
 using DancingGoat.Repositories;
 using DancingGoat.Tests.Extensions;
 
 using NSubstitute;
 using NUnit.Framework;
+using Tests.DocumentEngine;
 using TestStack.FluentMVCTesting;
 
 namespace DancingGoat.Tests.Unit
 {
     [TestFixture]
+    [Category("Unit")]
     public class ArticlesControllerTests : UnitTests
     {
         private ArticlesController mController;
         private Article mArticle;
         private IOutputCacheDependencies mDependencies;
         private const string ARTICLE_TITLE = "Article1";
+
 
         [SetUp]
         public void SetUp()

@@ -1,0 +1,7 @@
+﻿@model DancingGoat.Models.Orders.OrderAddressViewModel
+
+<div>@Model.AddressLine1</div>
+<div>@Model.AddressLine2</div>
+<div>@Model.AddressCity</div>
+<div>@Model.AddressPostalCode@(string.IsNullOrEmpty(Model.AddressState) ? string.Empty : ", " + Model.AddressState)</div>
+<div>@Model.AddressCountry</div>

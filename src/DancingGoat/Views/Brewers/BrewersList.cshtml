@@ -1,0 +1,17 @@
+﻿@using DancingGoat.Models.Products
+@model IEnumerable<ProductListItemViewModel>
+    
+@if (Model.Any())
+{
+    foreach (var brewer in Model)
+    {
+        <!-- 3 products on row for large screen -->
+        <div class="col-md-6 col-lg-4">
+            @Html.DisplayFor(m => brewer, "ProductListItem")
+        </div>
+    }
+}
+else
+{
+    <span class="ContentLabel">@ResHelper.GetString("DancingGoatMvc.Brewers.NoMatchingProducts")</span>
+}

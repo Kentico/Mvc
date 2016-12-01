@@ -47,7 +47,7 @@ namespace DancingGoat.Repositories
         {
             if (compositeName == null)
             {
-                throw new ArgumentNullException("compositeName");
+                throw new ArgumentNullException(nameof(compositeName));
             }
 
             var tokens = compositeName.Split(mSeparators, StringSplitOptions.RemoveEmptyEntries);

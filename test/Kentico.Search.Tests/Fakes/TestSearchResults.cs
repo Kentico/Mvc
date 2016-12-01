@@ -13,15 +13,7 @@ namespace Kentico.Search.Tests
             set;
         }
 
-
-        public IEnumerable<SearchResultItem> Results
-        {
-            get;
-            set;
-        }
-
-
-        public int NumberOfResults
+        public SearchResult Result
         {
             get;
             set;

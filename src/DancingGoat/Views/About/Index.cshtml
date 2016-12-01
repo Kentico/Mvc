@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CMS.DocumentEngine.Types.AboutUsSection>
+﻿@model IEnumerable<CMS.DocumentEngine.Types.DancingGoatMvc.AboutUsSection>
 
 @{
     ViewBag.Title = ResHelper.GetString("DancingGoatMvc.AboutUs");
@@ -33,3 +33,5 @@
         }
     </section>
 }
+
+@{ Html.RenderAction("MediaGallery", "About"); }

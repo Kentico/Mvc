@@ -1,0 +1,28 @@
+﻿@model DancingGoat.Models.Account.PersonalDetailsViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.YourAccount.PersonalDetails");
+}
+
+<div class="row col-md-6 form-horizontal">
+    <a href="@Url.Action("YourAccount", "Account")">&larr; @ResHelper.GetString("DancingGoatMvc.YourAccount.Back")</a>
+    <h2>@ResHelper.GetString("DancingGoatMvc.YourAccount.PersonalDetails")</h2>
+    @using (Html.BeginForm("Edit", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="FormPanel">
+            <div class="form-group">
+                <div class="form-group-label">
+                    @Html.LabelFor(model => model.UserName)
+                </div>
+                <div class="form-group-input">
+                    @Html.TextBoxFor(model => model.UserName, new { @disabled = "disabled" })
+                </div>
+            </div>
+            @Html.ValidatedEditorFor(model => model.FirstName)
+            @Html.ValidatedEditorFor(model => model.LastName)
+            <input type="submit" value="@ResHelper.GetString("DancingGoatMvc.YourAccount.Update")" class="btn btn-primary"/>
+        </div>
+    }
+</div>

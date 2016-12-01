@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="KenticoMvc" ToolsVersion="14.0">
+  <Include Path="managedminimumrules.ruleset" Action="Default" />
+</RuleSet>

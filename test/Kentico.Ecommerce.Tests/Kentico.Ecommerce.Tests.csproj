@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9FAB0F5F-31E6-4C91-B97D-E45D24B35E3C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kentico.Ecommerce.Tests</RootNamespace>
+    <AssemblyName>Kentico.Ecommerce.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\IEnumerableExtensionMethods.cs" />
+    <Compile Include="Validators\CustomerAddressValidatorTests.cs" />
+    <Compile Include="Validators\CustomerValidatorTests.cs" />
+    <Compile Include="EcommerceTestsBase.cs" />
+    <Compile Include="Fakes\ActivityLogServiceFake.cs" />
+    <Compile Include="Fakes\EcommerceActivitiesLoggerFake.cs" />
+    <Compile Include="Fakes\EcommerceActivityFake.cs" />
+    <Compile Include="Fakes\EcommerceFakeFactory.cs" />
+    <Compile Include="Fakes\LocalizationServiceFake.cs" />
+    <Compile Include="OrderTests.cs" />
+    <Compile Include="PricingServiceTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartTests.cs" />
+    <Compile Include="ShoppingServiceTests.cs" />
+    <Compile Include="Unit\KenticoCustomerAddressRepositoryTests.cs" />
+    <Compile Include="Unit\KenticoOrderRepositoryTests.cs" />
+    <Compile Include="Unit\KenticoPaymentMethodRepositoryTests.cs" />
+    <Compile Include="Unit\KenticoShippingOptionRepositoryTests.cs" />
+    <Compile Include="Unit\KenticoVariantRepositoryTests.cs" />
+    <Compile Include="Validators\ShoppingCartValidatorTests.cs" />
+    <Compile Include="VariantTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Kentico.Activities\Kentico.Activities.csproj">
+      <Project>{3FF2D397-D4BD-4A97-AA2B-6014BF32D70C}</Project>
+      <Name>Kentico.Activities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Kentico.ContactManagement\Kentico.ContactManagement.csproj">
+      <Project>{ACB6A9AA-30F7-40E5-8617-0E6438C78B8D}</Project>
+      <Name>Kentico.ContactManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Kentico.Core\Kentico.Core.csproj">
+      <Project>{13B34040-A1CC-49F9-ABFD-38F39664CF9F}</Project>
+      <Name>Kentico.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Kentico.Ecommerce\Kentico.Ecommerce.csproj">
+      <Project>{7e159db2-65f2-4713-8289-22f0a34bcb0b}</Project>
+      <Name>Kentico.Ecommerce</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

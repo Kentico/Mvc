@@ -1,0 +1,20 @@
+﻿@model DancingGoat.Models.Checkout.CountryStateViewModel
+
+<div class="js-country-state-selector" data-statelistaction='@Url.Action("CountryStates", "Checkout")' data-countryselectedid='@Model.CountryID' data-stateselectedid='@Model.StateID' data-countryfield='CountryID' data-statefield='StateID'>
+
+    @Html.LabelFor(m => m.CountryID)
+    @Html.DropDownListFor(m => m.CountryID, Model.Countries, ResHelper.GetString("DancingGoatMvc.Address.SelectCountry"), new { @class = "js-country-selector" })
+
+    <div class="message message-error">
+        @Html.ValidationMessageFor(m => m.CountryID)
+    </div>
+
+    <div class="js-state-selector-container">
+        @Html.LabelFor(m => m.StateID)
+        @Html.DropDownListFor(m => m.StateID, Enumerable.Empty<SelectListItem>(), ResHelper.GetString("DancingGoatMvc.Address.SelectState"), new { @class = "js-state-selector" })
+
+        <div class="message message-error">
+            @Html.ValidationMessageFor(m => m.StateID)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿.media-gallery {
+    margin-top: 2.5rem;
+    
+    .media-item {
+        span {
+            visibility: hidden;
+        }
+        &:hover {
+            span {
+                visibility: visible;
+            }
+        }
+    }
+
+    .ratio-4-3 {
+        width:100%;
+        position:relative;
+        background:url() 50% 50% no-repeat;
+        background-size:cover;
+        background-clip:content-box;
+        &:before {
+            display:block;
+            content:"";
+            padding-top:75%;
+        }
+    }
+}
+
+

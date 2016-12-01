@@ -3,78 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 
 using CMS.DocumentEngine;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 
 namespace DancingGoat.Models.Articles
 {
     public class ArticleViewModel
     {
-        #region "Properties"
-
-        public Attachment Teaser
-        {
-            get;
-            set;
-        }
+        public Attachment Teaser { get; set; }
 
 
-        public string Title
-        {
-            get;
-            set;
-        }
+        public string Title { get; set; }
 
 
-        public DateTime PublicationDate
-        {
-            get;
-            set;
-        }
+        public DateTime PublicationDate { get; set; }
 
 
-        public string Summary
-        {
-            get; set;
-        }
+        public string Summary { get; set; }
 
 
-        public string Text
-        {
-            get;
-            set;
-        }
+        public string Text { get; set; }
 
 
-        public IEnumerable<ArticleViewModel> RelatedArticles
-        {
-            get;
-            set;
-        }
+        public IEnumerable<ArticleViewModel> RelatedArticles { get; set; }
 
 
-        public int NodeID
-        {
-            get;
-            set;
-        }
+        public int NodeID { get; set; }
 
 
-        public string NodeAlias
-        {
-            get;
-            set;
-        }
-
-        #endregion
+        public string NodeAlias { get; set; }
 
 
-        #region "Methods"
-
-        /// <summary>
-        /// Gets ArticleViewModel from Article object.
-        /// </summary>
-        /// <param name="article">Document type representing <see cref="Article"/>Article  object.</param>
-        /// <returns>ArticleViewModel object.</returns>
         public static ArticleViewModel GetViewModel(Article article)
         {
             return new ArticleViewModel
@@ -89,7 +47,5 @@ namespace DancingGoat.Models.Articles
                 Title = article.Fields.Title
             };
         }
-
-        #endregion
     }
 }

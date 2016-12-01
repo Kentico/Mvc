@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
+using CMS.SiteProvider;
 
 namespace DancingGoat.Repositories.Implementation
 {
@@ -11,21 +12,18 @@ namespace DancingGoat.Repositories.Implementation
     /// </summary>
     public class KenticoCafeRepository : ICafeRepository
     {
-        private readonly string mSiteName;
         private readonly string mCultureName;
         private readonly bool mLatestVersionEnabled;
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="KenticoCafeRepository"/> class that returns cafes from the specified site using the specified language.
+        /// Initializes a new instance of the <see cref="KenticoCafeRepository"/> class that returns cafes using the specified language.
         /// If the requested cafe doesn't exist in specified language then its default culture version is returned.
         /// </summary>
-        /// <param name="siteName">The code name of a site.</param>
         /// <param name="cultureName">The name of a culture.</param>
         /// <param name="latestVersionEnabled">Indicates whether the repository will provide the most recent version of pages.</param>
-        public KenticoCafeRepository(string siteName, string cultureName, bool latestVersionEnabled)
+        public KenticoCafeRepository(string cultureName, bool latestVersionEnabled)
         {
-            mSiteName = siteName;
             mCultureName = cultureName;
             mLatestVersionEnabled = latestVersionEnabled;
         }
@@ -34,14 +32,14 @@ namespace DancingGoat.Repositories.Implementation
         /// <summary>
         /// Returns an enumerable collection of company cafes ordered by a position in the content tree.
         /// </summary>
-        /// <param name="count">The number of cafes to return.</param>
+        /// <param name="count">The number of cafes to return. Use 0 as value to return all records.</param>
         /// <returns>An enumerable collection that contains the specified number of cafes ordered by a position in the content tree.</returns>
         public IEnumerable<Cafe> GetCompanyCafes(int count = 0)
         {
             return CafeProvider.GetCafes()
                 .LatestVersion(mLatestVersionEnabled)
                 .Published(!mLatestVersionEnabled)
-                .OnSite(mSiteName)
+                .OnSite(SiteContext.CurrentSiteName)
                 .Culture(mCultureName)
                 .CombineWithDefaultCulture()
                 .WhereTrue("CafeIsCompanyCafe")
@@ -60,7 +58,7 @@ namespace DancingGoat.Repositories.Implementation
             return CafeProvider.GetCafes()
                 .LatestVersion(mLatestVersionEnabled)
                 .Published(!mLatestVersionEnabled)
-                .OnSite(mSiteName)
+                .OnSite(SiteContext.CurrentSiteName)
                 .Culture(mCultureName)
                 .CombineWithDefaultCulture()
                 .WhereFalse("CafeIsCompanyCafe")

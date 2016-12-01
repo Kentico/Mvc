@@ -25,17 +25,26 @@
                  requestValidationMode="2.0"
                  maxUrlLength="512"
                  xdt:Transform="SetAttributes"/>
+    
   </system.web>
   
+  <!-- Register CMSApplicationModule -->
   <system.webServer xdt:Transform="InsertIfMissing">
-
-	  <modules xdt:Transform="InsertIfMissing">
-      <!-- Register CMSApplicationModule -->
+    <modules xdt:Transform="InsertIfMissing">
       <add name="CMSApplicationModule" type="CMS.Base.ApplicationModule, CMS.Base" 
            xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
     </modules>
   </system.webServer>
 
+  <!-- Remove CMSApplicationModule first. This should prevent registering CMSApplicationModule twice. 
+       It may happen when a customer registers MVC application within Kentico CMS application. -->  
+  <system.webServer>
+    <modules>
+      <remove name="CMSApplicationModule"
+                xdt:Transform="InsertBefore(/configuration/system.webServer/modules/add)" />
+    </modules>
+  </system.webServer>
+  
   <system.webServer>
     <modules runAllManagedModulesForAllRequests="true" xdt:Transform="SetAttributes" />
   </system.webServer>

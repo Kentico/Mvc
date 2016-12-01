@@ -17,55 +17,55 @@ using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.Helpers;
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
-	/// <summary>
-	/// Provides methods for retrieving pages of type CafeSection.
-	/// </summary>
-	public partial class CafeSectionProvider
-	{
-		/// <summary>
-		/// Returns a query that selects published pages of type CafeSection.
-		/// </summary>
-		public static DocumentQuery<CafeSection> GetCafeSections()
-		{
-			return DocumentHelper.GetDocuments<CafeSection>().PublishedVersion().Published();
-		}
+    /// <summary>
+    /// Provides methods for retrieving pages of type CafeSection.
+    /// </summary>
+    public partial class CafeSectionProvider
+    {
+        /// <summary>
+        /// Returns a query that selects published pages of type CafeSection.
+        /// </summary>
+        public static DocumentQuery<CafeSection> GetCafeSections()
+        {
+            return DocumentHelper.GetDocuments<CafeSection>().PublishedVersion().Published();
+        }
 
 
-		/// <summary>
-		/// Returns a published page of type CafeSection that matches the specified criteria.
-		/// </summary>
-		/// <param name="nodeId">The identifier of the content tree node that represents the page.</param>
-		/// <param name="siteName">The name of the site where the page belongs.</param>
-		/// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
-		public static DocumentQuery<CafeSection> GetCafeSection(int nodeId, string cultureName, string siteName)
-		{
-			return GetCafeSections().OnSite(siteName).Culture(cultureName).WhereEquals("NodeID", nodeId);
-		}
+        /// <summary>
+        /// Returns a published page of type CafeSection that matches the specified criteria.
+        /// </summary>
+        /// <param name="nodeId">The identifier of the content tree node that represents the page.</param>
+        /// <param name="siteName">The name of the site where the page belongs.</param>
+        /// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
+        public static DocumentQuery<CafeSection> GetCafeSection(int nodeId, string cultureName, string siteName)
+        {
+            return GetCafeSections().OnSite(siteName).Culture(cultureName).WhereEquals("NodeID", nodeId);
+        }
 
 
-		/// <summary>
-		/// Returns a published page of type CafeSection that matches the specified criteria.
-		/// </summary>
-		/// <param name="nodeGuid">The globally unique identifier of the content tree node that represents the page.</param>
-		/// <param name="siteName">The name of the site where the page belongs.</param>
-		/// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
-		public static DocumentQuery<CafeSection> GetCafeSection(Guid nodeGuid, string cultureName, string siteName)
-		{
-			return GetCafeSections().OnSite(siteName).Culture(cultureName).WhereEquals("NodeGUID", nodeGuid);
-		}
+        /// <summary>
+        /// Returns a published page of type CafeSection that matches the specified criteria.
+        /// </summary>
+        /// <param name="nodeGuid">The globally unique identifier of the content tree node that represents the page.</param>
+        /// <param name="siteName">The name of the site where the page belongs.</param>
+        /// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
+        public static DocumentQuery<CafeSection> GetCafeSection(Guid nodeGuid, string cultureName, string siteName)
+        {
+            return GetCafeSections().OnSite(siteName).Culture(cultureName).WhereEquals("NodeGUID", nodeGuid);
+        }
 
 
-		/// <summary>
-		/// Returns a published page of type CafeSection that matches the specified criteria.
-		/// </summary>
-		/// <param name="nodeAliasPath">The alias path to the content tree node that represents the page.</param>
-		/// <param name="siteName">The name of the site where the page belongs.</param>
-		/// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
-		public static DocumentQuery<CafeSection> GetCafeSection(string nodeAliasPath, string cultureName, string siteName)
-		{
-			return GetCafeSections().OnSite(siteName).Culture(cultureName).Path(nodeAliasPath);
-		}
-	}
+        /// <summary>
+        /// Returns a published page of type CafeSection that matches the specified criteria.
+        /// </summary>
+        /// <param name="nodeAliasPath">The alias path to the content tree node that represents the page.</param>
+        /// <param name="siteName">The name of the site where the page belongs.</param>
+        /// <param name="cultureName">The name of the language, e.g. en-US, that determines which localized version should be retrieved.</param>
+        public static DocumentQuery<CafeSection> GetCafeSection(string nodeAliasPath, string cultureName, string siteName)
+        {
+            return GetCafeSections().OnSite(siteName).Culture(cultureName).Path(nodeAliasPath);
+        }
+    }
 }

@@ -1,0 +1,75 @@
+﻿@model RegisterViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Register with email confirmation";
+}
+
+<h2>Register with email confirmation</h2>
+
+@using (Html.BeginForm("RegisterWithEmailConfirmation", "EmailRegister", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div role="form">
+        @if (!Html.ViewData.ModelState.IsValid)
+        {
+            @Html.ValidationSummary(true, "")
+        }
+        <div>
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName, "")
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName, "")
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div>
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password, "")
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.PasswordConfirmation)
+        </div>
+        <div>
+            @Html.PasswordFor(model => model.PasswordConfirmation)
+            @Html.ValidationMessageFor(model => model.PasswordConfirmation)
+        </div>
+
+        <input type="submit" value="Register" />
+        <p>
+            <strong>Note</strong>: To send confirmation emails, the connected Kentico application must have a valid SMTP server configured.
+        </p>
+    </div>
+}
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

@@ -1,6 +1,6 @@
 ﻿using DancingGoat.Models.Contacts;
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
     /// <summary>
     /// Specification of Contact members and IContact interface relationship.

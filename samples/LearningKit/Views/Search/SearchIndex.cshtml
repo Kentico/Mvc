@@ -1,0 +1,47 @@
+﻿@using LearningKit.Models.Search
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Smart search";
+}
+
+<h2>Smart search</h2>
+
+@*DocSection:SearchForm*@
+@using (Html.BeginForm("SearchIndex", "Search", FormMethod.Get))
+{
+    <input type="text" name="searchtext" placeholder="Search..." maxlength="1000">
+    <input type="submit" value="Search">
+}
+@*EndDocSection:SearchForm*@
+
+@*DocSection:SearchResultItemList*@
+@model SearchResultModel
+
+@if (!Model.Items.Any())
+{
+    if (!String.IsNullOrWhiteSpace(Model.Query))
+    {
+        <h3>No results found for "@Model.Query"</h3>
+    }
+}
+else
+{
+    <h3>Results for "@Model.Query"</h3>
+    foreach (SearchResultItemModel item in Model.Items)
+    {
+        <div>
+            @item.Title
+            @item.Date.ToLongDateString()
+        </div>
+    }
+}
+@*EndDocSection:SearchResultItemList*@
+
+<p>
+    <strong>Note</strong>: This smart search uses the "MVCSite.Index" index. Add the index to your site to search.
+</p>
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

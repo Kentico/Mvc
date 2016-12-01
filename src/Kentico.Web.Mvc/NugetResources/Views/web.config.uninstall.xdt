@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.web.webPages.razor>
+    <pages>
+      <namespaces>
+        <add xdt:Transform="Remove" 
+             xdt:Locator="Condition(@namespace='Kentico.Web.Mvc')" />
+      </namespaces>
+    </pages>
+  </system.web.webPages.razor>
+</configuration>

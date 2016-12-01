@@ -11,7 +11,10 @@ namespace Kentico.Web.Mvc
         private readonly T mTarget;
 
 
-        internal T Target
+        /// <summary>
+        /// Instance of class that is a target of extension methods.
+        /// </summary>
+        public T Target
         {
             get
             {
@@ -24,7 +27,7 @@ namespace Kentico.Web.Mvc
         {
             if (target == null)
             {
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException(nameof(target));
             }
 
             mTarget = target;

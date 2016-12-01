@@ -1,0 +1,66 @@
+﻿@model LearningKit.Models.ProductFilter.ProductFilterViewModel
+@using Kentico.Ecommerce
+@using LearningKit.Models.Products
+
+@{
+    ViewBag.Title = "Product filter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product listing of the LearningProductType with filtering</h2>
+
+<p>
+    @Html.ActionLink("> Filter based on a page property (LPTWithFeature)", "FilterPageProperty")<br />
+    @Html.ActionLink("> Filter based on a foreign SKU property (manufacturers)", "FilterForeignProperty")
+</p>
+
+<p>
+    <strong>Note</strong>: This listing does not contain links to products. See the basic listing instead.
+</p>
+
+@using (Html.BeginForm())
+{
+    <h3>SKU property &ndash; Price range (decimal)</h3>
+    @Html.TextBoxFor(m => Model.PriceFrom)
+    @Html.TextBoxFor(m => Model.PriceTo)
+    <input type="submit" value="Filter" />
+}
+
+<hr />
+
+@foreach (ProductListItemViewModel product in Model.FilteredProducts)
+{
+    <h4>@product.Name</h4>
+
+    if (!string.IsNullOrEmpty(product.PublicStatusName))
+    {
+        <span>@product.PublicStatusName</span>
+    }
+
+    if (!string.IsNullOrEmpty(product.ImagePath))
+    {
+        <img src="@Url.Kentico().ImageUrl(product.ImagePath, SizeConstraint.Size(300, 300))" alt="@product.Name">
+    }
+
+
+    ProductPrice price = product.PriceDetail;
+    Currency currency = price.Currency;
+
+    <div>
+        @if (!product.Available)
+        {
+            <span>Out of stock</span>
+        }
+
+        <span>@currency.FormatPrice(price.Price)</span>
+
+        @if (price.ListPrice > price.Price)
+        {
+            <s>@currency.FormatPrice(price.ListPrice)</s>
+        }
+    </div>
+}
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

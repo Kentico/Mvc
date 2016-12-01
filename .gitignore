@@ -4,12 +4,6 @@
 ConnectionStrings.config
 AppSettings.config
 
-# Ignore application data
-**/App_Data/*
-# But keep localization and a list of MIME types
-!**/App_Data/DancingGoatMVC/
-!**/App_Data/mimetypes.txt
-
 ### Kentico ###
 
 # Internal dependencies
@@ -112,6 +106,7 @@ $tf/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
+*.DotSettings
 
 # JustCode is a .NET coding add-in
 .JustCode
@@ -162,6 +157,13 @@ publish/
 **/packages/*
 # except build/, which is used as an MSBuild target.
 !**/packages/build/
+# exclude project.json specific files
+*.lock.json
+*.nuget.props
+*.nuget.targets
+
+# But include package target files which may be required for MSBuild
+!packages/*.targets
 
 # Windows Azure Build Output
 csx/
@@ -227,3 +229,17 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+
+#Kentico files
+**/App_Data/CMSModules/WebFarm/webfarm.sync
+**/App_Data/CIRepository
+**/App_Data/Persistent
+**/App_Data/CMSModules/SmartSearch
+**/App_Data/CMSModules/WebAnalytics
+**/App_Data/CMSTemp
+**/App_Data/AzureTemp
+**/App_Data/AzureCache
+
+#nCrunch files
+*.ncrunchsolution
+*.ncrunchproject

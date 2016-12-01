@@ -1,0 +1,38 @@
+﻿@model NewsletterSubscribeViewModel
+
+@{
+    ViewBag.Title = "Subscribe to a newsletter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Subscribe to a newsletter</h2>
+@using (Html.BeginForm("Subscribe", "NewsletterSubscription", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div role="form">
+        
+        <div>
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email, "")
+        </div>
+
+        <input type="submit" value="Subscribe" />
+    </div>
+}
+
+@if (!Html.ViewData.ModelState.IsValid)
+{
+    @Html.ValidationSummary(true, "")
+}
+
+<p>
+    <strong>Note</strong>: This form attempts to subscribe to a newsletter with the "SampleNewsletter" code name. An error will occur if the newsletter does not exist in the connected Kentico database.
+</p>
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

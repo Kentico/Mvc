@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E159DB2-65F2-4713-8289-22F0A34BCB0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kentico.Ecommerce</RootNamespace>
+    <AssemblyName>Kentico.Ecommerce</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
+    <DocumentationFile>bin\Debug\Kentico.Ecommerce.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\..\KenticoMvc.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Kentico.Ecommerce.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\CustomerAddress.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderAddress.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\PriceBase.cs" />
+    <Compile Include="Models\ProductPrice.cs" />
+    <Compile Include="Models\ProductOptionCategory.cs" />
+    <Compile Include="Models\ShippingPrice.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\ShoppingCartItem.cs" />
+    <Compile Include="Models\Validation\CustomerAddressValidator.cs" />
+    <Compile Include="Models\Validation\CustomerValidator.cs" />
+    <Compile Include="Models\Validation\ShoppingCartValidator.cs" />
+    <Compile Include="Models\Variant.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ICustomerAddressRepository.cs" />
+    <Compile Include="Repositories\Implementation\KenticoCustomerAddressRepository.cs" />
+    <Compile Include="Repositories\Implementation\KenticoOrderRepository.cs" />
+    <Compile Include="Repositories\Implementation\KenticoPaymentMethodRepository.cs" />
+    <Compile Include="Repositories\Implementation\KenticoShippingOptionRepository.cs" />
+    <Compile Include="Repositories\Implementation\KenticoVariantRepository.cs" />
+    <Compile Include="Repositories\IOrderRepository.cs" />
+    <Compile Include="Repositories\IPaymentMethodRepository.cs" />
+    <Compile Include="Repositories\IShippingOptionRepository.cs" />
+    <Compile Include="Repositories\IVariantRepository.cs" />
+    <Compile Include="Services\IPricingService.cs" />
+    <Compile Include="Services\IShoppingService.cs" />
+    <Compile Include="Services\PricingService.cs" />
+    <Compile Include="Services\ShoppingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kentico.Ecommerce.nuspec" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kentico.Activities\Kentico.Activities.csproj">
+      <Project>{3ff2d397-d4bd-4a97-aa2b-6014bf32d70c}</Project>
+      <Name>Kentico.Activities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kentico.Core\Kentico.Core.csproj">
+      <Project>{13b34040-a1cc-49f9-abfd-38f39664cf9f}</Project>
+      <Name>Kentico.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

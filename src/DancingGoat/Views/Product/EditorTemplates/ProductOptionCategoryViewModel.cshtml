@@ -1,0 +1,28 @@
+﻿@using CMS.Ecommerce
+
+@model DancingGoat.Models.Products.ProductOptionCategoryViewModel
+
+<div class="form-group">
+    <div class="editing-form-label-cell option-category-name control-label">
+        @Html.LabelFor(m => m.SelectedOptionId, Model.Name)
+    </div>
+
+    @if (Model.SelectionType == OptionCategorySelectionTypeEnum.Dropdownlist)
+    {
+        @Html.DropDownListFor(m => m.SelectedOptionId, new SelectList(Model.Options, "SKUID", "SKUName", Model.SelectedOptionId), new { @class = "js-variant-selector" })
+    }
+    @if (Model.SelectionType == OptionCategorySelectionTypeEnum.RadioButtonsVertical)
+    {
+        <div class="js-variant-selector">
+            @foreach (var option in Model.Options)
+                {
+                <div class="radio">
+                    @Html.RadioButtonFor(m => m.SelectedOptionId, option.SKUID, new { id = option.SKUID})
+                    @Html.Label(option.SKUName, new { @for = option.SKUID })
+                </div>
+            }
+        </div>
+    }
+</div>
+
+

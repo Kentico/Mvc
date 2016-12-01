@@ -1,0 +1,35 @@
+﻿@model Kentico.Membership.User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manage your roles";
+}
+
+<h2>Manage your roles</h2>
+<div>
+    Current user: @Model.UserName
+</div>
+<div>
+    <h3>Current roles:</h3>
+    <ul>
+        @foreach (var role in Model.Roles)
+        {
+            <li>@role</li>
+        }
+    </ul>
+</div>
+<div>
+    @using (Html.BeginForm("ManageRoles", "Roles", FormMethod.Post, null))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" name="action" value="add">Add roles</button>
+        <button type="submit" name="action" value="remove">Remove roles</button>
+    }
+</div>
+@if (!Html.ViewData.ModelState.IsValid)
+{
+    @Html.ValidationSummary(true, "")
+}
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

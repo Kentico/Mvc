@@ -8,7 +8,7 @@ namespace DancingGoat.Infrastructure
 {
     /// <summary>
     /// Creates an object that implements the <see cref="IHttpHandler"/> interface and passes the request context to it.
-    /// Configures current thread to use culture specified by 'culture' URL parameter.
+    /// Configures the current thread to use the culture specified by the 'culture' URL parameter.
     /// </summary>
     public class MultiCultureMvcRouteHandler : MvcRouteHandler
     {
@@ -16,9 +16,9 @@ namespace DancingGoat.Infrastructure
 
 
         /// <summary>
-        /// Creates a new instance of <see cref="MultiCultureMvcRouteHandler"/> class.
+        /// Creates a new instance of the <see cref="MultiCultureMvcRouteHandler"/> class.
         /// </summary>
-        /// <param name="defaultCulture">Culture used when requested culture does not exist.</param>
+        /// <param name="defaultCulture">Culture used when the requested culture does not exist.</param>
         public MultiCultureMvcRouteHandler(CultureInfo defaultCulture)
         {
             this.defaultCulture = defaultCulture;
@@ -27,13 +27,13 @@ namespace DancingGoat.Infrastructure
 
         /// <summary>
         /// Returns the HTTP handler by using the specified HTTP context. 
-        /// <see cref="Thread.CurrentCulture"/> and <see cref="Thread.CurrentUICulture"/> of current thread are set to culture specified by 'culture' URL parameter.
+        /// <see cref="Thread.CurrentCulture"/> and <see cref="Thread.CurrentUICulture"/> of the current thread are set to the culture specified by the 'culture' URL parameter.
         /// </summary>
-        /// <param name="requestContext">The request context.</param>
-        /// <returns>The HTTP handler.</returns>
+        /// <param name="requestContext">Request context.</param>
+        /// <returns>HTTP handler.</returns>
         protected override IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            // Get requested culture from route
+            // Get the requested culture from the route
             var cultureName = requestContext.RouteData.Values["culture"].ToString();
 
             CultureInfo culture;
@@ -46,7 +46,7 @@ namespace DancingGoat.Infrastructure
                 culture = defaultCulture;
             }
 
-            // Set culture
+            // Set the culture
             Thread.CurrentThread.CurrentUICulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
 
