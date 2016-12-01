@@ -1,9 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using CMS;
 
-[assembly: AssemblyDiscoverable]
 [assembly: AssemblyTitle("Kentico.MediaLibrary")]
 [assembly: AssemblyDescription("Improved API for Kentico Media Libraries.")]
 [assembly: AssemblyConfiguration("")]
@@ -16,6 +14,6 @@ using CMS;
 [assembly: Guid("dcaa1096-aa1d-4a70-9b14-77ee7714e12a")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0-unstable")]
+[assembly: AssemblyInformationalVersion("1.0.0")]
 
 [assembly: InternalsVisibleTo("Kentico.MediaLibrary.Tests")]

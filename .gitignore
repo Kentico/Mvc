@@ -4,6 +4,12 @@
 ConnectionStrings.config
 AppSettings.config
 
+# Ignore application data
+**/App_Data/*
+# But keep localization and a list of MIME types
+!**/App_Data/DancingGoatMVC/
+!**/App_Data/mimetypes.txt
+
 ### Kentico ###
 
 # Internal dependencies
@@ -230,16 +236,6 @@ FakesAssemblies/
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 
-#Kentico files
-**/App_Data/CMSModules/WebFarm/webfarm.sync
-**/App_Data/CIRepository
-**/App_Data/Persistent
-**/App_Data/CMSModules/SmartSearch
-**/App_Data/CMSModules/WebAnalytics
-**/App_Data/CMSTemp
-**/App_Data/AzureTemp
-**/App_Data/AzureCache
-
-#nCrunch files
+# nCrunch files
 *.ncrunchsolution
 *.ncrunchproject

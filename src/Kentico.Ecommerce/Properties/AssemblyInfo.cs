@@ -14,5 +14,6 @@ using System.Runtime.InteropServices;
 [assembly: Guid("5047a2a8-707c-49f0-995b-15bd5456ab2f")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0-unstable")]
+[assembly: AssemblyInformationalVersion("1.0.0")]
+
 [assembly: InternalsVisibleTo("Kentico.Ecommerce.Tests")]

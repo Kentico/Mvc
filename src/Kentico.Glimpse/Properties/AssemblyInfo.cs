@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: Guid("ca85e3c6-f8f5-4cc7-bf8e-b109a6969145")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-unstable")]
+[assembly: AssemblyInformationalVersion("2.0.0")]
 
 [assembly: InternalsVisibleTo("Kentico.Glimpse.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

@@ -16,3 +16,4 @@ using CMS;
 [assembly: Guid("3561e1b0-8bf6-4187-a581-1b0801168cdd")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0")]

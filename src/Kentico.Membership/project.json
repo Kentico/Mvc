@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "Kentico.Libraries": "10.0.0-*",
+    "Kentico.Libraries": "10.0.0",
     "Microsoft.AspNet.Identity.Owin": "2.2.1",
     "Microsoft.Owin.Security.OAuth": "3.0.1"
   },

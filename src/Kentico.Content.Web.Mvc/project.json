@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "Kentico.Libraries": "10.0.0-*",
-    "Kentico.LanguagePack.English": "10.0.0-*",
+    "Kentico.Libraries": "10.0.0",
+    "Kentico.LanguagePack.English": "10.0.0",
     "Microsoft.AspNet.Mvc": "5.2.3"
   },
   "frameworks": {
