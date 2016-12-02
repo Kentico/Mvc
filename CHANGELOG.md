@@ -1,6 +1,6 @@
 ## Overall
 
-### 2.0.0
+### 2.0.0 (2016-12-02)
 
 #### New features
 
@@ -14,17 +14,19 @@
 * Improved the API for creating content personalization conditions within MVC code. See [Content personalization on MVC sites](https://docs.kentico.com/x/86HlAw).
 * New `Kentico.Ecommerce` integration package that provides API for developing and running on-line stores. See [Developing on-line stores in MVC](https://docs.kentico.com/x/-RyzAw).
 
+
 ## Kentico.Web.Mvc
 
-### 2.0.0
+### 2.0.0 (2016-12-02)
 
 #### Breaking changes
 
 * The `Kentico.Web.Mvc` integration package's logic for generating preview URLs, working with attachments, and managing media library files was transferred to a new `Kentico.Content.Web.Mvc` integration package. To continue using this functionality, you have to install the `Kentico.Content.Web.Mvc` integration package into your MVC solution.
 
+
 ## Kentico.Search
 
-### 2.0.0
+### 2.0.0 (2016-12-02)
 
 #### Breaking changes
 
@@ -34,9 +36,17 @@
 `SearchResult Search(SearchOptions options)`
 	* Note: The `SearchOptions.PageNumber` property accepts one-based page numbers (i.e., numbers starting from 1 instead of 0).
 
+### 1.0.1 (2016-02-23)
+
+#### Fixed
+
+- Fix searching in non-page search indexes. Search service no longer causes an exception for non-page search indexes.
+[#11](https://github.com/Kentico/Mvc/pull/11)
+
+    
 ## Kentico.Newsletter
 
-### 2.0.0
+### 2.0.0 (2016-12-02)
 
 #### Breaking changes
 
@@ -45,3 +55,13 @@
 	* The return value of the `Subscribe` method now indicates whether a new subscription was created, or had already existed.
 	* The `ConfirmSubscription` method was added to ease the use of the double opt-in feature.
 	* The return type of the `Unsubscribe` and `UnsubscribeFromAll` methods is void.
+
+
+## Kentico.Web.Mvc
+
+### 1.0.1 (2015-12-14)
+
+#### Fixed
+
+- Fix an exception when invoking an asynchronous action if using global handling of the "Not found" status.
+[#1](https://github.com/Kentico/Mvc/pull/1)    
