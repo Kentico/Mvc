@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kentico.CampaignLogging.nuspec">
+    <None Include="Kentico.CampaignLogging.Web.Mvc.nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="project.json" />
