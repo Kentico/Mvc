@@ -141,4 +141,7 @@
   <data name="DancingGoatMvc.News.SubscriberEmail" xml:space="preserve">
     <value>¿Quieres estar al día? Por favor, déjenos su e-mail.</value>
   </data>
+  <data name="DancingGoatMvc.ShoppingCart" xml:space="preserve">
+    <value>Carrito</value>
+  </data>
 </root>

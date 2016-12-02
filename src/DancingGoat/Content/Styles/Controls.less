@@ -1,0 +1,175 @@
+﻿// Checkboxes and radios
+// Uses font-icon for the checkboxes and radio buttons
+//
+// Common radio and checkbox styles
+.radio,
+.checkbox {
+    display: block;
+
+    label {
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        padding-left: @base-unit * 1.5;
+        line-height: @line-height-100;
+        font-weight: normal;
+        // Common styles for border and inner icon
+        &:before,
+        &:after {
+            content: "";
+            width: @base-unit - 1px; // remove white bg around
+            height: @base-unit - 1px; // remove white bg around
+            line-height: @base-unit;
+            display: inline-block;
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            top: @base-unit * 0.125; // special alignment
+            background-color: @color-white;
+        }
+        // Inner icon specific
+        &:after {
+            background-color: transparent;
+        }
+    }
+
+    input {
+        // Disabled styling
+        &[disabled], &:active[disabled] {
+            & + label {
+                cursor: not-allowed;
+
+                &:before, &:focus:before, &:active:before {
+                    color: @input-bg-disabled;
+                }
+
+                &:after {
+                    color: @input-color-disabled;
+                }
+            }
+        }
+        // Hide default inputs
+        .sr-only;
+        // Icons
+        + label:before,
+        + label:after {
+            font-family: @icon-font-name;
+            font-size: @icon-size-80;
+            text-align: center;
+        }
+
+        + label:before {
+            color: @color-gray-130;
+        }
+
+        + label:after {
+            color: @color-green-100;
+        }
+        // Focus
+        &:focus + label:before,
+        &:active + label:before {
+            color: @color-blue-100;
+        }
+    }
+}
+// Checkbox correction for Safari
+&.Safari {
+    .checkbox {
+        label {
+            &:after {
+                height: @base-unit;
+            }
+        }
+    }
+}
+// Checkbox correction for Chrome
+&.Chrome {
+    .checkbox {
+        label {
+            &:before,
+            &:after {
+                height: @base-unit;
+            }
+        }
+    }
+}
+
+// Radio specific styles
+.radio {
+    input {
+        // Border - shown for both selected and unselected
+        ~ label:before {
+            content: @icon-rb-uncheck;
+        }
+
+        &:disabled ~ label:before {
+            content: @icon-circle;
+        }
+        // Inner icon
+        &:checked ~ label:after {
+            content: @icon-rb-check-sign;
+        }
+    }
+    // Radio button border radius fix - because of background issue on table hover
+    label:before {
+        border-radius: 50%;
+    }
+}
+
+// Checkbox specific styles
+.checkbox {
+    input {
+        // Border - shown for both checked and unchecked
+        ~ label:before {
+            content: @icon-cb-uncheck;
+        }
+
+        &:disabled ~ label:before {
+            content: @icon-cb-check-disabled;
+        }
+        // Inner icon
+        &:checked ~ label:after {
+            content: @icon-cb-check-sign;
+        }
+    }
+
+    &:not(.checkbox-no-label) {
+        label {
+            margin-right: @base-unit * 0.5;
+        }
+    }
+}
+
+
+
+// Vertical radio and checkbox lists
+.radio-list-vertical,
+.checkbox-list-vertical {
+    margin-top: (@base-unit * 0.25 + @input-border-width);
+    margin-right: @base-unit * 0.5;
+
+    label:not(:first-of-type),
+    // When disabled, radio list item gets wrapped with a span
+    span:not(:first-of-type) label,
+    .radio + .radio,
+    .checkbox + .checkbox {
+        margin-top: @base-unit * 0.25;
+    }
+    // Use this class when the list is the first thing on the page
+    &.first-on-page {
+        margin-top: 0px;
+    }
+}
+
+// Horizontal radio and checkbox lists
+.radio-list-horizontal,
+.checkbox-list-horizontal {
+    .radio,
+    .checkbox {
+        display: inline-block;
+    }
+
+    label {
+        margin-right: @base-unit;
+    }
+}

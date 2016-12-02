@@ -1,0 +1,15 @@
+﻿@model DancingGoat.Models.Checkout.AddressSelectorViewModel
+
+@if (Model.HasSomeAddress)
+{
+    <div class="js-address-selector-div" data-statelistaction='@Url.Action("CustomerAddress", "Checkout")'>
+
+        @Html.LabelFor(m => m.AddressID)
+        @Html.DropDownListFor(m => m.AddressID, Model.Addresses, ResHelper.GetString("DancingGoatMvc.Address.NewAddress"), new { @class = "js-address-selector" })
+
+        <div class="message message-error">
+            @Html.ValidationMessageFor(m => m.AddressID)
+        </div>
+    </div>
+}
+

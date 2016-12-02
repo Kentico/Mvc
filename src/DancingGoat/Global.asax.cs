@@ -6,32 +6,41 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+using Kentico.Activities;
+using Kentico.ContactManagement;
+using Kentico.Core.DependencyInjection;
 using Kentico.Web.Mvc;
 using Kentico.Newsletters;
 using Kentico.Search;
-using DancingGoat.Infrastructure;
+using Kentico.Ecommerce;
 
 using Autofac;
 using Autofac.Extras.DynamicProxy2;
 using Autofac.Integration.Mvc;
 
+using CMS.Personas;
+
+using DancingGoat.Infrastructure;
+using Kentico.Content.Web.Mvc;
+
 namespace DancingGoat
 {
     public class DancingGoatApplication : HttpApplication
     {
-        public const string INDEX_NAME = "DancingGoatMvc.Index";
-        public const string SITE_NAME = "DancingGoatMvc";
+        public const string CACHE_VARY_BY_PERSONA = "Persona";
+
+        private const string MEDIA_LIBRARY_NAME = "CoffeeGallery";
 
 
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-
+            
             // Enable and configure selected Kentico ASP.NET MVC integration features
             ApplicationConfig.RegisterFeatures(ApplicationBuilder.Current);
+
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             // Provide custom ASP.NET MVC dependency resolver using Autofac
             ConfigureDependencyResolver();
@@ -42,6 +51,17 @@ namespace DancingGoat
         {
             var builder = new ContainerBuilder();
 
+            ConfigureDependencyResolverForMvcApplication(builder);
+
+            ConfigureDependencyResolverForLibraries(builder);
+
+            // Set the ASP.NET MVC dependency resolver
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
+        }
+
+
+        private void ConfigureDependencyResolverForMvcApplication(ContainerBuilder builder)
+        {
             // Enable property injection in view pages
             builder.RegisterSource(new ViewRegistrationSource());
 
@@ -52,21 +72,19 @@ namespace DancingGoat
             builder.RegisterControllers(typeof(DancingGoatApplication).Assembly);
 
             // Register repositories
-            builder.RegisterAssemblyTypes(typeof(DancingGoatApplication).Assembly).Where(x => x.IsClass && !x.IsAbstract && x.Name.EndsWith("Repository"))
+            builder.RegisterAssemblyTypes(typeof(DancingGoatApplication).Assembly)
+                .Where(x => x.IsClass && !x.IsAbstract && typeof(IRepository).IsAssignableFrom(x))
                 .AsImplementedInterfaces()
-                .WithParameter("siteName", SITE_NAME)
+                .WithParameter("mediaLibraryName", MEDIA_LIBRARY_NAME)
                 .WithParameter((parameter, context) => parameter.Name == "cultureName", (parameter, context) => CultureInfo.CurrentUICulture.Name)
                 .WithParameter((parameter, context) => parameter.Name == "latestVersionEnabled", (parameter, context) => IsPreviewEnabled())
                 .EnableInterfaceInterceptors().InterceptedBy(typeof(CachingRepositoryDecorator))
                 .InstancePerRequest();
 
             // Register services
-            builder.RegisterAssemblyTypes(typeof(DancingGoatApplication).Assembly, typeof(SearchService).Assembly, typeof(NewsletterSubscriptionService).Assembly).Where(x => x.IsClass && !x.IsAbstract && x.Name.EndsWith("Service"))
-                .WithParameter("siteName", SITE_NAME)
-				.WithParameter("subscriptionSettings", new NewsletterSubscriptionSettings { RemoveAlsoUnsubscriptionFromAllNewsletters = true, SendConfirmationEmail = true })
-                .WithParameter("searchIndexNames", new string[] { INDEX_NAME })
-                .WithParameter((parameter, context) => parameter.Name == "cultureName", (parameter, context) => CultureInfo.CurrentUICulture.Name)
-                .WithParameter("combineWithDefaultCulture", true)
+            builder.RegisterAssemblyTypes(typeof(DancingGoatApplication).Assembly)
+                .Where(x => x.IsClass && !x.IsAbstract && typeof(IService).IsAssignableFrom(x))
+                .AsImplementedInterfaces()
                 .InstancePerRequest();
 
             // Register providers of additional information about content items
@@ -74,17 +92,64 @@ namespace DancingGoat
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
+            // Register factory for product view models
+            builder.RegisterType<TypedProductViewModelFactory>()
+                .SingleInstance();
+
+            // Register factory for full-text search product view models
+            builder.RegisterType<TypedSearchItemViewModelFactory>()
+                .InstancePerRequest();
+
             // Register caching decorator for repositories
-            builder.Register(context => new CachingRepositoryDecorator(SITE_NAME, GetCacheItemDuration(), context.Resolve<IContentItemMetadataProvider>(), IsCacheEnabled()))
+            builder.Register(context => new CachingRepositoryDecorator(GetCacheItemDuration(), context.Resolve<IContentItemMetadataProvider>(), IsCacheEnabled()))
                 .InstancePerRequest();
 
             // Enable declaration of output cache dependencies in controllers
-            builder.Register(context => new OutputCacheDependencies(SITE_NAME, context.Resolve<HttpResponseBase>(), context.Resolve<IContentItemMetadataProvider>(), IsCacheEnabled()))
+            builder.Register(context => new OutputCacheDependencies(context.Resolve<HttpResponseBase>(), context.Resolve<IContentItemMetadataProvider>(), IsCacheEnabled()))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
+        }
 
-            // Set the ASP.NET MVC dependency resolver
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
+
+        private void ConfigureDependencyResolverForLibraries(ContainerBuilder builder)
+        {
+            // Register repositories
+            builder.RegisterAssemblyTypes(typeof(KenticoCustomerAddressRepository).Assembly)
+                .Where(x => x.IsClass && !x.IsAbstract && typeof(IRepository).IsAssignableFrom(x))
+                .AsImplementedInterfaces()
+                .EnableInterfaceInterceptors().InterceptedBy(typeof(CachingRepositoryDecorator))
+                .InstancePerRequest();
+
+            // Register services
+            builder.RegisterAssemblyTypes(
+                typeof(ShoppingService).Assembly,
+                typeof(ContactTrackingService).Assembly,
+                typeof(SearchService).Assembly,
+                typeof(NewsletterSubscriptionService).Assembly,
+                typeof(MembershipActivitiesLogger).Assembly)
+                .Where(x => x.IsClass && !x.IsAbstract && typeof(IService).IsAssignableFrom(x))
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+        }
+
+
+        public override string GetVaryByCustomString(HttpContext context, string custom)
+        {
+            var contactTrackingService = DependencyResolver.Current.GetService<IContactTrackingService>();
+
+            if (custom == "User")
+            {
+                return $"User={context.User.Identity.Name}";
+            }
+
+            if (custom == CACHE_VARY_BY_PERSONA)
+            {
+                var existingContact = contactTrackingService.GetExistingContactAsync().Result;
+                var contactPersonaID = existingContact?.ContactPersonaID;
+                return $"{CACHE_VARY_BY_PERSONA}={contactPersonaID}|{context.User.Identity.Name}";
+            }
+
+            return base.GetVaryByCustomString(context, custom);
         }
 
 

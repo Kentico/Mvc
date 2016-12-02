@@ -4,16 +4,23 @@
     ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Home");
 }
 
-@helper MoreButton(string text, string actionName, string controllerName)
+@helper MoreButton(string text, string url)
 {
     <div class="row">
         <div class="clear center-text">
-            <a href="@Url.Action(actionName, controllerName)" class="btn btn-more">
+            <a href="@url" class="btn btn-more">
                 @text
             </a>
         </div>
     </div>
 }
+
+<section class="banner-section" style="background-image: url('@Model.Banner.BackgroundImagePath');">
+    <h2 class="banner-heading">@Model.Banner.Heading</h2>
+    <p class="banner-text">
+        @Model.Banner.Text
+    </p>
+</section>
 
 <div class="row">
     <h1 class="title-tab">@ResHelper.GetString("DancingGoatMvc.Articles.LatestOne")</h1>
@@ -68,20 +75,20 @@
     }
 </div>
 
-@MoreButton(ResHelper.GetString("DancingGoatMvc.Articles.More"), "Index", "Articles")
+@MoreButton(ResHelper.GetString("DancingGoatMvc.Articles.More"), Url.Action("Index", "Articles"))
 
-@if (!String.IsNullOrEmpty(Model.OurStory))
+@foreach (var homeSection in Model.HomeSections)
 {
     <div class="row">
-        <h1 class="title-tab">@ResHelper.GetString("DancingGoatMvc.Story.Title")</h1>
+        <h1 class="title-tab">@homeSection.Heading</h1>
         <div class="col-sm-12">
-            <div class="ourstory-background-image center-text">
-                @Html.Raw(Model.OurStory)
+            <div class="ourstory-section center-text" style="background-image: url('@Url.Kentico().ImageUrl(homeSection.BackgroundImagePath, SizeConstraint.Empty)');">
+                @Html.Raw(homeSection.Text)
             </div>
         </div>
     </div>
 
-    @MoreButton(ResHelper.GetString("DancingGoatMvc.Story.WholeStory"), "Index", "About")
+    @MoreButton(ResHelper.GetString("DancingGoatMvc.Story.WholeStory"), Url.Content(homeSection.MoreButtonUrl))
 }
 
 <div class="row">
@@ -102,4 +109,4 @@
     }
 </div>
 
-@MoreButton(ResHelper.GetString("DancingGoatMvc.Cafes.More"), "Index", "Cafes")
+@MoreButton(ResHelper.GetString("DancingGoatMvc.Cafes.More"), Url.Action("Index", "Cafes"))

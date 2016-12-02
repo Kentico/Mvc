@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 
 using CMS.Base;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.Globalization;
 using CMS.Helpers;
 

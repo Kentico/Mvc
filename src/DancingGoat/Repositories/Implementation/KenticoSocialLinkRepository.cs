@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
+using CMS.SiteProvider;
 
 namespace DancingGoat.Repositories.Implementation
 {
@@ -11,21 +12,18 @@ namespace DancingGoat.Repositories.Implementation
     /// </summary>
     public class KenticoSocialLinkRepository : ISocialLinkRepository
     {
-        private readonly string mSiteName;
         private readonly string mCultureName;
         private readonly bool mLatestVersionEnabled;
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="KenticoSocialLinkRepository"/> class that returns links from the specified site in the specified language.
+        /// Initializes a new instance of the <see cref="KenticoSocialLinkRepository"/> class that returns links in the specified language.
         /// If the requested link doesn't exist in specified language then its default culture version is returned.
         /// </summary>
-        /// <param name="siteName">The code name of a site.</param>
         /// <param name="cultureName">The name of a culture.</param>
         /// <param name="latestVersionEnabled">Indicates whether the repository will provide the most recent version of pages.</param>
-        public KenticoSocialLinkRepository(string siteName, string cultureName, bool latestVersionEnabled)
+        public KenticoSocialLinkRepository(string cultureName, bool latestVersionEnabled)
         {
-            mSiteName = siteName;
             mCultureName = cultureName;
             mLatestVersionEnabled = latestVersionEnabled;
         }
@@ -40,7 +38,7 @@ namespace DancingGoat.Repositories.Implementation
             return SocialLinkProvider.GetSocialLinks()
                 .LatestVersion(mLatestVersionEnabled)
                 .Published(!mLatestVersionEnabled)
-                .OnSite(mSiteName)
+                .OnSite(SiteContext.CurrentSiteName)
                 .Culture(mCultureName)
                 .CombineWithDefaultCulture()
                 .OrderByAscending("NodeOrder")

@@ -10,7 +10,7 @@ using StatePrinter;
 namespace Kentico.Glimpse.Tests.Unit.Database
 {
     [TestFixture]
-    [Category("Kentico.Glimpse.Database")]
+    [Category("Unit")]
     public class CommandEntryProviderTests
     {
         [TestCase(null, null, false)]

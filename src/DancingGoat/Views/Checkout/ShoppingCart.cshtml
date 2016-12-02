@@ -1,0 +1,70 @@
+﻿@model DancingGoat.Models.Checkout.CartViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.ShoppingCart");
+}
+
+<div class="checkout-container">
+    <div class="cart">
+        <div class="continue-shopping-link">
+            <a href="@Url.Action("Index", "Coffees")">&larr; @ResHelper.GetString("DancingGoatMvc.Checkout.ContinueShopping")</a>
+        </div>
+
+        @Html.ValidationMessage("shipping", new { @class = "red" })
+
+        <h2>@ResHelper.GetString("DancingGoatMvc.Checkout.YourShoppingCart")</h2>
+        <div class="col-md-8 cart-content">
+            <hr class="first-separator" />
+            @if (Model.Cart.IsEmpty)
+            {
+                <span>@ResHelper.GetString("DancingGoatMvc.Checkout.ShoppingCartIsEmpty")</span>
+                <hr class="last-separator" />
+            }
+            else
+            {
+                @Html.Partial("_ShoppingCartContentEdit", Model)
+            }
+
+            @if (Model.RemainingAmountForFreeShipping > 0)
+            {
+                <section class="free-shipping-promotion">
+                    <div>
+                        <span>
+                            @ResHelper.GetStringFormat("DancingGoatMvc.ShoppingCart.FreeDelivery", Model.Cart.Currency.FormatPrice(Model.RemainingAmountForFreeShipping))
+                        </span>
+                    </div>
+                </section>
+            }
+        </div>
+        <div class="col-md-4">
+            <div class="cart-right-panel floating-box">
+
+                @using (Html.BeginForm("ShoppingCart", "Checkout", FormMethod.Post))
+                {
+                    <div class="cart-coupon-input">
+                        @Html.LabelFor(m => m.CouponCode)
+                        <div>
+                            <input type="text" name="CouponCode" value="@Model.CouponCode" autocomplete="on" class="form-control" />
+                            <input type="submit" name="ApplyCouponCode" value="@ResHelper.GetString("DancingGoatMvc.Apply")" class="btn btn-primary" />
+                        </div>
+                        <div class="message message-error">
+                            @Html.ValidationMessage("CouponCode", new { @class = "red" })
+                        </div>
+                        @if (Model.Cart.HasUsableCoupon)
+                        {
+                            <div class="message green">
+                                <span>@ResHelper.GetString("DancingGoatMvc.Checkout.CouponCodeApplied")</span>
+                            </div>
+                        }
+                    </div>
+                    <hr>
+                    @Html.Partial("_ShoppingCartTotals", Model.Cart)
+
+                    <p>@ResHelper.GetString("DancingGoatMvc.Checkout.ReviewAndCheckout")</p>
+
+                    <input type="submit" name="ShoppingCartCheckout" value="@ResHelper.GetString("DancingGoatMvc.Checkout")" class="btn-primary checkout-button btn btn-default" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

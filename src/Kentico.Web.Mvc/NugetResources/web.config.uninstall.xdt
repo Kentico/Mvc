@@ -27,6 +27,8 @@
     <!-- Disable runAllManagedModulesForAllRequests -->
     <modules runAllManagedModulesForAllRequests="false" xdt:Transform="SetAttributes">
       <!-- Unregister CMSApplicationModule -->
+      <remove name="CMSApplicationModule"
+                xdt:Transform="Remove" xdt:Locator="Match(name)" />
       <add name="CMSApplicationModule" xdt:Transform="Remove" xdt:Locator="Match(name)"/>
     </modules>
 

@@ -1,4 +1,6 @@
 ﻿using Kentico.Web.Mvc;
+using Kentico.CampaignLogging.Web.Mvc;
+using Kentico.Content.Web.Mvc;
 
 namespace DancingGoat
 {
@@ -9,6 +11,8 @@ namespace DancingGoat
             builder.UsePreview();
             builder.UseDataAnnotationsLocalization();
             builder.UseNotFoundHandler();
+            builder.UseResourceSharingWithAdministration();
+            builder.UseCampaignLogger();
         }
     }
 }

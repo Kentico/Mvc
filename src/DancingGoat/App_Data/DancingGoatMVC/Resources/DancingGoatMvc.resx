@@ -246,4 +246,497 @@
   <data name="DancingGoatMvc.Story.WholeStory" xml:space="preserve">
     <value>Read the whole story</value>
   </data>
+  <data name="DancingGoatMvc.ShoppingCart" xml:space="preserve">
+    <value>Shopping cart</value>
+  </data>
+  <data name="DancingGoatMvc.Shipping.NotApplicable" xml:space="preserve">
+    <value>Selected delivery method is not applicable.</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.CustomerDetails" xml:space="preserve">
+    <value>Customer details</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn.EmailUserName" xml:space="preserve">
+    <value>Email / User name</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn.Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn.ForgottenPassword" xml:space="preserve">
+    <value>Forgotten password</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn.ItOnlyTakesAMoment" xml:space="preserve">
+    <value>It only takes a moment to get started.</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn.NewToDancingGoat" xml:space="preserve">
+    <value>New to Dancing Goat?</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn.StaySignedIn" xml:space="preserve">
+    <value>Stay signed in</value>
+  </data>
+  <data name="DancingGoatMvc.Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="DancingGoatMvc.Register.AlreadyHaveAnAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="DancingGoatMvc.Register.EmailUserName" xml:space="preserve">
+    <value>Email (User name)</value>
+  </data>
+  <data name="DancingGoatMvc.Register.FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="DancingGoatMvc.Register.LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="DancingGoatMvc.Register.Password" xml:space="preserve">
+    <value>Create your password</value>
+  </data>
+  <data name="DancingGoatMvc.Register.PasswordConfirmation" xml:space="preserve">
+    <value>Confirm your password</value>
+  </data>
+  <data name="DancingGoatMvc.Register.Subheading" xml:space="preserve">
+    <value>Create your own account and enjoy smooth shopping experience at Dancing Goat.</value>
+  </data>
+  <data name="DancingGoatMvc.General.InvalidEmail" xml:space="preserve">
+    <value>Please enter a valid email address</value>
+  </data>
+  <data name="DancingGoatMvc.General.MaximumInputLengthExceeded" xml:space="preserve">
+    <value>Maximum allowed length of the input text is {1}</value>
+  </data>
+  <data name="DancingGoatMvc.Register.EmailUserName.Empty" xml:space="preserve">
+    <value>Please enter your email</value>
+  </data>
+  <data name="DancingGoatMvc.Register.FirstName.Empty" xml:space="preserve">
+    <value>Please enter your first name</value>
+  </data>
+  <data name="DancingGoatMvc.Register.LastName.Empty" xml:space="preserve">
+    <value>Please enter your last name</value>
+  </data>
+  <data name="DancingGoatMvc.Register.Password.Empty" xml:space="preserve">
+    <value>Please enter your password</value>
+  </data>
+  <data name="DancingGoatMvc.Register.PasswordConfirmation.Empty" xml:space="preserve">
+    <value>Please confirm your password</value>
+  </data>
+  <data name="DancingGoatMvc.Register.PasswordConfirmation.Invalid" xml:space="preserve">
+    <value>Password does not match the confirmation password</value>
+  </data>
+  <data name="DancingGoatMvc.SignIn.EmailUserName.Empty" xml:space="preserve">
+    <value>Please enter your email / user name</value>
+  </data>
+  <data name="DancingGoatMvc.SignOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="DancingGoatMvc.Address.City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="DancingGoatMvc.Address.Line1" xml:space="preserve">
+    <value>Address line</value>
+  </data>
+  <data name="DancingGoatMvc.Address.Line2" xml:space="preserve">
+    <value>Address line 2</value>
+  </data>
+  <data name="DancingGoatMvc.Address.Zip" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.BillingAddress" xml:space="preserve">
+    <value>Billing address</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.DeliveryOptions" xml:space="preserve">
+    <value>Delivery options</value>
+  </data>
+  <data name="DancingGoatMvc.Address.Line1Explanation" xml:space="preserve">
+    <value>e.g. street address, P.O.box, c/o</value>
+  </data>
+  <data name="DancingGoatMvc.Address.Line2Explanation" xml:space="preserve">
+    <value>e.g. apartment, suite, unit, building</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.BackToShoppingCart" xml:space="preserve">
+    <value>back to shopping cart</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ContinueShopping" xml:space="preserve">
+    <value>continue shopping</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.FillDetailsAndProceed" xml:space="preserve">
+    <value>Fill in your billing details and delivery preferences and proceed to review your order.</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ReviewOrder" xml:space="preserve">
+    <value>review order</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ReviewShoppingCart" xml:space="preserve">
+    <value>Review your shopping cart and checkout</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.UnitsGreaterThanZero" xml:space="preserve">
+    <value>Type a number greater than 0 to the Units field.</value>
+  </data>
+  <data name="DancingGoatMvc.Address.Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="DancingGoatMvc.Address.SelectCountry" xml:space="preserve">
+    <value>Select country</value>
+  </data>
+  <data name="DancingGoatMvc.Address.SelectState" xml:space="preserve">
+    <value>Select state</value>
+  </data>
+  <data name="DancingGoatMvc.Address.State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.BackToCustomerDetails" xml:space="preserve">
+    <value>back to Billing &amp; Delivery</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ShoppingCartPreview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.BillingDetails" xml:space="preserve">
+    <value>Billing details</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.OrderedItems" xml:space="preserve">
+    <value>Ordered items</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ShippingDetails" xml:space="preserve">
+    <value>Shipping details</value>
+  </data>
+  <data name="DancingGoatMvc.YourAccount.Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="DancingGoatMvc.YourAccount" xml:space="preserve">
+    <value>Your account</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ConfirmAndPayButton" xml:space="preserve">
+    <value>Confirm and pay</value>
+  </data>
+  <data name="DancingGoatMvc.Address.StateIsRequired" xml:space="preserve">
+    <value>The State field is required</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ThankYou" xml:space="preserve">
+    <value>Thank You!</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.OrderFailed" xml:space="preserve">
+    <value>Your order cannot be completed</value>
+  </data>
+  <data name="DancingGoatMvc.Order.Questions" xml:space="preserve">
+    <value>If you have any questions or suggestions regarding the order process, call us at {0}.</value>
+  </data>
+  <data name="DancingGoatMvc.Order.Success" xml:space="preserve">
+    <value>Your order was successfully processed. We will pack your items carefully and ship them to you right away.</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout" xml:space="preserve">
+    <value>checkout</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ReviewAndCheckout" xml:space="preserve">
+    <value>Review your shopping cart and checkout</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.ShoppingCartIsEmpty" xml:space="preserve">
+    <value>Shopping cart is empty</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.YourShoppingCart" xml:space="preserve">
+    <value>Your shopping cart</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.Remove" xml:space="preserve">
+    <value>remove</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.Total" xml:space="preserve">
+    <value>Total (incl. tax estimate)</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.TotalTax" xml:space="preserve">
+    <value>Total tax</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.Update" xml:space="preserve">
+    <value>update</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.YourCart" xml:space="preserve">
+    <value>Your cart</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.Shipping" xml:space="preserve">
+    <value>Shipping</value>
+  </data>
+  <data name="DancingGoatMvc.Shipping.ShippingOption" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="DancingGoatMvc.Shipping.ShippingOptionRequired" xml:space="preserve">
+    <value>Please select a delivery method</value>
+  </data>
+  <data name="DancingGoatMvc.Shipping.SelectShipping" xml:space="preserve">
+    <value>Select delivery method</value>
+  </data>
+  <data name="DancingGoatMvc.Address.CountryIsRequired" xml:space="preserve">
+    <value>The Country field is required</value>
+  </data>
+  <data name="DancingGoatMvc.DeliveryDetails.AccessDetails" xml:space="preserve">
+    <value>Sign in to access your billing and delivery details</value>
+  </data>
+  <data name="DancingGoatMvc.DeliveryDetails.AlreadyCustomer" xml:space="preserve">
+    <value>Already a customer?</value>
+  </data>
+  <data name="DancingGoatMvc.DeliveryDetails.SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="DancingGoatMvc.Payment.PaymentMethodRequired" xml:space="preserve">
+    <value>Select payment method</value>
+  </data>
+  <data name="DancingGoatMvc.Payment.SelectPayment" xml:space="preserve">
+    <value>How would you like to pay?</value>
+  </data>
+  <data name="DancingGoatMvc.Payment.SelectPaymentMethod" xml:space="preserve">
+    <value>(Please select)</value>
+  </data>
+  <data name="DancingGoatMvc.Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.CouponCodeApplied" xml:space="preserve">
+    <value>Discount coupon has been applied.</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.InvalidCouponCode" xml:space="preserve">
+    <value>Coupon code is not valid.</value>
+  </data>
+  <data name="DancingGoatMvc.Address.NewAddress" xml:space="preserve">
+    <value>(new)</value>
+  </data>
+  <data name="DancingGoatMvc.Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.EmptyCartError" xml:space="preserve">
+    <value>Please add some item to your shopping cart.</value>
+  </data>
+  <data name="DancingGoatMvc.ShoppingCart.FreeDelivery" xml:space="preserve">
+    <value>Spend {0} more and get free delivery today!</value>
+  </data>
+  <data name="DancingGoatMvc.Checkout.CouponCode" xml:space="preserve">
+    <value>Discount coupon</value>
+  </data>
+  <data name="DancingGoatMvc.Product.InStock" xml:space="preserve">
+    <value>In stock</value>
+  </data>
+  <data name="DancingGoatMvc.Product.TotalPrice" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmationSent" xml:space="preserve">
+    <value>A confirmation link has been sent to your email.</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionAlreadyConfirmed" xml:space="preserve">
+    <value>You are already subscribed.</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionError" xml:space="preserve">
+    <value>Subscription confirmation error</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionFailed" xml:space="preserve">
+    <value>The subscription confirmation has failed. Please try again later.</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionInvalidDateTime" xml:space="preserve">
+    <value>The confirmation link is not valid.</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionInvalidLink" xml:space="preserve">
+    <value>The confirmation link is not valid.</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionOK" xml:space="preserve">
+    <value>Subscription confirmed</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionSucceeded" xml:space="preserve">
+    <value>Your subscription has been confirmed.</value>
+  </data>
+  <data name="DancingGoatMvc.News.ConfirmSubscriptionTimeExceeded" xml:space="preserve">
+    <value>Your subscription confirmation link has expired. Please subscribe again.</value>
+  </data>
+  <data name="DancingGoatMvc.News.Subscription" xml:space="preserve">
+    <value>Newsletter subscription</value>
+  </data>
+  <data name="DancingGoatMvc.News.AlreadySubscribed" xml:space="preserve">
+    <value>Subscriber has been already subscribed.</value>
+  </data>
+  <data name="DancingGoatMvc.Coffee.Altitude" xml:space="preserve">
+    <value>Altitude</value>
+  </data>
+  <data name="DancingGoatMvc.Coffee.Farm" xml:space="preserve">
+    <value>Farm</value>
+  </data>
+  <data name="DancingGoatMvc.Product.Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="DancingGoatMvc.Coffee.Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="DancingGoatMvc.Coffee.Variety" xml:space="preserve">
+    <value>Variety</value>
+  </data>
+  <data name="DancingGoatMvc.Brewer.IsDishwasherSafe" xml:space="preserve">
+    <value>Dishwasher safe</value>
+  </data>
+  <data name="DancingGoatMvc.PublicStatus.Bestseller" xml:space="preserve">
+    <value>Bestseller</value>
+  </data>
+  <data name="DancingGoatMvc.PublicStatus.OnSale" xml:space="preserve">
+    <value>On sale</value>
+  </data>
+  <data name="DancingGoatMvc.Coffee.IsDecaf" xml:space="preserve">
+    <value>Decaf</value>
+  </data>
+  <data name="DancingGoatMvc.Brewers" xml:space="preserve">
+    <value>Brewers</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees" xml:space="preserve">
+    <value>Coffees</value>
+  </data>
+  <data name="DancingGoatMvc.Store" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="DancingGoatMvc.Product.OutOfStock" xml:space="preserve">
+    <value>Out of stock</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees.Natural" xml:space="preserve">
+    <value>Natural</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees.OnlyDecaf" xml:space="preserve">
+    <value>Decaf</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees.Semiwashed" xml:space="preserve">
+    <value>Semi-washed</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees.Washed" xml:space="preserve">
+    <value>Washed</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees.NoMatchingProducts" xml:space="preserve">
+    <value>No matching products.</value>
+  </data>
+  <data name="DancingGoatMvc.Product.NotAvailable" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+  <data name="DancingGoatMvc.General.Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="DancingGoatMvc.General.No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.Orders" xml:space="preserve">
+    <value>Your orders</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.Date" xml:space="preserve">
+    <value>Order date</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.OrderId" xml:space="preserve">
+    <value>Order ID</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.OrderDetail" xml:space="preserve">
+    <value>Order Detail</value>
+  </data>
+  <data name="DancingGoatMvc.YourAccount.Back" xml:space="preserve">
+    <value>back to Your Account</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.OrderDetail.Total" xml:space="preserve">
+    <value>TOTAL (incl. tax):</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.OrderDetail.Back" xml:space="preserve">
+    <value>back to Your Orders</value>
+  </data>
+  <data name="DancingGoatMvc.YourOrders.OrderDetail.Items" xml:space="preserve">
+    <value>Order Items</value>
+  </data>
+  <data name="DancingGoatMvc.Product.Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="DancingGoatMvc.Product.YouSave" xml:space="preserve">
+    <value>You save</value>
+  </data>
+  <data name="DancingGoatMvc.Brewers.OnlyInStock" xml:space="preserve">
+    <value>Only in stock</value>
+  </data>
+  <data name="DancingGoatMvc.Brewers.NoMatchingProducts" xml:space="preserve">
+    <value>No matching products.</value>
+  </data>
+  <data name="DancingGoatMvc.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="DancingGoatMvc.Brewers.Manufacturers" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="DancingGoatMvc.Brewers.Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="DancingGoatMvc.Brewers.PublicStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="DancingGoatMvc.Brewers.Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees.Caffeine" xml:space="preserve">
+    <value>Caffeine</value>
+  </data>
+  <data name="DancingGoatMvc.Coffees.CoffeeProcessing" xml:space="preserve">
+    <value>Coffee processing</value>
+  </data>
+  <data name="DancingGoatMvc.Banner.Default.Heading" xml:space="preserve">
+    <value>Roasting premium coffee</value>
+  </data>
+  <data name="DancingGoatMvc.Banner.Default.Text" xml:space="preserve">
+    <value>Discover the fascinating world of Dancing Goat high-quality coffee and you will never miss a single coffee break again.</value>
+  </data>
+  <data name="DancingGoatMvc.Banner.Martina.Heading" xml:space="preserve">
+    <value>Colombia in store</value>
+  </data>
+  <data name="DancingGoatMvc.Banner.Martina.Text" xml:space="preserve">
+    <value>Sweet and full bodied thanks to hard work, family traditions and favorable climate conditions. Perfect as is, that's Colombian coffee.</value>
+  </data>
+  <data name="DancingGoatMvc.Banner.Tony.Heading" xml:space="preserve">
+    <value>Coffee machine rental</value>
+  </data>
+  <data name="DancingGoatMvc.Banner.Tony.Text" xml:space="preserve">
+    <value>Premium coffee deserves premium process. Take advantage of your partnership and rent one of our professional coffee machines.</value>
+  </data>
+  <data name="DanicngGoatMvc.UserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="DancingGoatMvc.YourAccount.Update" xml:space="preserve">
+    <value>Update personal details</value>
+  </data>
+  <data name="DancingGoatMvc.YourAccount.SaveError" xml:space="preserve">
+    <value>Personal details save failed</value>
+  </data>
+  <data name="DancingGoatMvc.YourAccount.PersonalDetails" xml:space="preserve">
+    <value>Personal details</value>
+  </data>
+  <data name="DancingGoatMvc.ForgottenPassword" xml:space="preserve">
+    <value>Forgotten password</value>
+  </data>
+  <data name="DancingGoatMvc.General.Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.Heading" xml:space="preserve">
+    <value>Reset your password</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.Description" xml:space="preserve">
+    <value>Enter the email address associated with your account to reset your password</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.EmailSent" xml:space="preserve">
+    <value>If the email address is known to us, we'll send a password recovery link in a few minutes.</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.Email.Empty" xml:space="preserve">
+    <value>Please enter your email</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.InvalidToken" xml:space="preserve">
+    <value>The password reset link has expired or is not valid</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.Succeeded" xml:space="preserve">
+    <value>Your password was successfully changed</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.Email.Body" xml:space="preserve">
+    <value>You have submitted a request to change your password. Please click &lt;a href="{0}"&gt;this link&lt;/a&gt; to set a new password.&lt;br/&gt;&lt;br/&gt; 
+If you did not submit the request please let us know.</value>
+  </data>
+  <data name="DancingGoatMvc.PasswordReset.Email.Subject" xml:space="preserve">
+    <value>Request for changing your password</value>
+  </data>
 </root>

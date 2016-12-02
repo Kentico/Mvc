@@ -1,0 +1,10 @@
+﻿@model DancingGoat.Models.Coffees.CoffeeFilterViewModel
+
+<h4>@ResHelper.GetString("DancingGoatMvc.Coffees.CoffeeProcessing")</h4>
+@Html.EditorFor(model => Model.ProcessingTypes)
+
+<h4>@ResHelper.GetString("DancingGoatMvc.Coffees.Caffeine")</h4>
+<span class="checkbox js-postback">
+    @Html.CheckBoxFor(model => model.OnlyDecaf)
+    @Html.LabelFor(model => model.OnlyDecaf, ResHelper.GetString("DancingGoatMvc.Coffees.OnlyDecaf"))
+</span>

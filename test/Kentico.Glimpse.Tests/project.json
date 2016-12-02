@@ -1,0 +1,13 @@
+{
+    "dependencies": {
+		"NSubstitute": "1.10.0",
+		"NUnit": "3.2.0",
+		"StatePrinter": "2.1.220"
+    },
+    "frameworks": {
+        "net45": { }
+    },
+    "runtimes": {
+        "win": { }
+    }
+}

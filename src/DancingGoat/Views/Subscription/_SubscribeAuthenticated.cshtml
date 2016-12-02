@@ -1,0 +1,15 @@
+﻿@using (Ajax.BeginForm("SubscribeAuthenticated", "Subscription", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "SubscribeForm"
+}, new { id = "SubscribeForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationMessage(String.Empty)
+
+    <p>@ResHelper.GetString("DancingGoatMvc.News.SubscriberEmail")</p>
+
+    <input type="submit" value="@ResHelper.GetString("DancingGoatMvc.News.Subscribe")" class="btn btn-primary" />
+}

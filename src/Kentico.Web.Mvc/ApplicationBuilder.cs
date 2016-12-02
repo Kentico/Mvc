@@ -47,11 +47,11 @@ namespace Kentico.Web.Mvc
         /// </summary>
         /// <param name="module">The module to register.</param>
         /// <exception cref="ArgumentNullException"><paramref name="module"/> is null.</exception>
-        internal void RegisterModule(IModule module)
+        public void RegisterModule(IModule module)
         {
             if (module == null)
             {
-                throw new ArgumentNullException("module");
+                throw new ArgumentNullException(nameof(module));
             }
 
             mModules.Add(module);
@@ -67,7 +67,7 @@ namespace Kentico.Web.Mvc
         {
             if (application == null)
             {
-                throw new ArgumentNullException("application");
+                throw new ArgumentNullException(nameof(application));
             }
 
             foreach (var module in mModules)

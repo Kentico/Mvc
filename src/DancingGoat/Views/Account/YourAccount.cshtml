@@ -1,0 +1,36 @@
+﻿@model Kentico.Membership.User
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.YourAccount");
+}
+
+<div class="container">
+    <h2>@ResHelper.GetString("DancingGoatMvc.YourAccount")</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>@ResHelper.GetString("DancingGoatMvc.YourAccount.PersonalDetails")</h3>
+            <div>@Model.FirstName @Model.LastName</div>
+            <div>@Model.Email</div>
+            <div>
+                <a href="@Url.Action("Edit", "Account")">@ResHelper.GetString("DancingGoatMvc.Edit")</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>@ResHelper.GetString("DancingGoatMvc.YourAccount.Roles")</h3>
+            <ul>
+                @foreach (var role in Model.Roles)
+                {
+                    <li>@role</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="clear">
+            <a href="@Url.Action("Index", "Orders")" class="btn btn-more">
+                @ResHelper.GetString("DancingGoatMvc.YourOrders.Orders")
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customer details";
+}
+
+@model LearningKit.Models.Checkout.DeliveryDetailsViewModel
+
+@*DocSection:DeliveryDetails*@
+<h2>Customer details step</h2>
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div id="customerDetails">
+        <h3>Customer details</h3>
+        @Html.EditorFor(m => m.Customer)
+    </div>
+
+    <div id="billingAddress">
+        <h3>Billing address</h3>
+        <div>
+            @Html.LabelFor(m => m.BillingAddress.Line1)
+            @Html.EditorFor(m => m.BillingAddress.Line1)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.BillingAddress.Line2)
+            @Html.EditorFor(m => m.BillingAddress.Line2)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.BillingAddress.City)
+            @Html.EditorFor(m =>m.BillingAddress.City)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.BillingAddress.PostalCode)
+            @Html.EditorFor(m => m.BillingAddress.PostalCode)
+        </div>
+
+        <div class="js-country-state-selector" data-statelistaction='@Url.Action("CountryStates", "Checkout")' data-countryselectedid='@Model.BillingAddress.CountryID' data-stateselectedid='@Model.BillingAddress.StateID' data-countryfield='CountryID' data-statefield='StateID'>
+            @Html.LabelFor(m => m.BillingAddress.CountryID)
+            @Html.DropDownListFor(m => m.BillingAddress.CountryID, Model.BillingAddress.Countries, new { @class = "js-country-selector" })
+            <div class="js-state-selector-container">
+                @Html.LabelFor(m => m.BillingAddress.StateID)
+                @Html.DropDownListFor(m => m.BillingAddress.StateID, Enumerable.Empty<SelectListItem>(), new { @class = "js-state-selector" })
+            </div>
+        </div>
+    </div>
+
+    <div id="shippingOption">
+        <h3>Shipping option</h3>
+        @Html.LabelFor(m => m.ShippingOption.ShippingOptionID)
+        @Html.DropDownListFor(m => m.ShippingOption.ShippingOptionID, Model.ShippingOption.ShippingOptions)
+    </div>
+
+    <input type="submit" value="Continue" />
+}
+@Scripts.Render("~/Scripts/jquery-2.1.4.min.js")
+@Scripts.Render("~/Scripts/countryStateSelector.js")
+@*EndDocSection:DeliveryDetails*@
+
+<p>
+    @Html.ActionLink("> Back to the shopping cart", "ShoppingCart")<br />
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

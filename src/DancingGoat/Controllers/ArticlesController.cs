@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 
 using DancingGoat.Infrastructure;
 using DancingGoat.Models.Articles;

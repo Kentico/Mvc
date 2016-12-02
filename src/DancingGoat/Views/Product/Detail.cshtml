@@ -1,0 +1,71 @@
+﻿@model DancingGoat.Models.Products.ProductViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<article class="product-detail">
+    <div class="row">
+        <div class="col-md-12">
+            <header>
+                <h2>@Model.Name</h2>
+            </header>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="col-lg-7 col-md-6">
+            <figure class="image">
+                @Html.Image(@Model.ImagePath, @Model.Name, null, SizeConstraint.MaxWidthOrHeight(400))
+            </figure>
+            <div class="description">
+                @Html.Raw(Model.Description)
+
+                @if (Model.TypedProduct != null)
+                {
+                    @Html.DisplayFor(m => m.TypedProduct)
+                }
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 product-detail-right col-md-offset-1 col-lg-offset-1">
+            <div class="product-price">
+                <div class="cart-item-selector-container">
+                    <div class="stock-container">
+                        @if (Model.IsInStock)
+                        {
+                            <span id="stockMessage" class="stock available">@ResHelper.GetString("DancingGoatMvc.Product.InStock")</span>
+                        }
+                        else
+                        {
+                            <span id="stockMessage" class="stock unavailable">@ResHelper.GetString("DancingGoatMvc.Product.OutOfStock")</span>
+                        }
+                    </div>
+                </div>
+
+                @Html.Partial("_PriceDetails")
+
+                @Html.Partial("_VariantSelector")
+
+                <div class="total-price-container">
+                    <span class="total-price-label">@ResHelper.GetString("DancingGoatMvc.Product.TotalPrice")</span>
+                    <span id="totalPrice" class="total-price">@(Model.PriceDetail.Currency.FormatPrice(Model.PriceDetail.Price))</span>
+                </div>
+
+                <div class="add-to-cart-container">
+                    @using (Html.BeginForm(null, "Checkout", FormMethod.Post))
+                    {
+                        <input type="hidden" id="selectedVariantID" name="SKUID" value="@(Model.SelectedVariantID > 0 ? Model.SelectedVariantID : Model.SKUID)" />
+                        <input type="hidden" id="js-parent-product-id" name="ParentSKUID" value="@(Model.SKUID)" />
+                        <label class="units-label">Qty</label>
+                        <input type="text" name="Units" value="1" class="add-to-cart-textbox" />
+                        <input type="submit" id="js-submit-add-to-cart" name="AddItem" value="Add to cart" class="btn btn-primary add-to-cart-button" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/variantSelector.js")
+}

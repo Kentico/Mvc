@@ -1,0 +1,49 @@
+﻿@model DancingGoat.Models.Checkout.DeliveryDetailsViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Checkout.CustomerDetails");
+}
+
+<div class="checkout-container">
+    <div class="container cart">
+        <div class="checkout-back-link">
+            <a href="@Url.Action("ShoppingCart")">&larr; @ResHelper.GetString("DancingGoatMvc.Checkout.BackToShoppingCart")</a>
+        </div>
+
+        @using (Html.BeginForm("DeliveryDetails", "Checkout", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="customer-details">
+                        <div class="form-horizontal">
+                            @Html.EditorFor(m => m.Customer)
+                            @Html.EditorFor(m => m.BillingAddress)
+                            @Html.EditorFor(m => m.ShippingOption)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-4">
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <h2>@ResHelper.GetString("DancingGoatMvc.DeliveryDetails.AlreadyCustomer")</h2>
+                        <p>@ResHelper.GetString("DancingGoatMvc.DeliveryDetails.AccessDetails")</p>
+                        @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.DeliveryDetails.SignIn"), "Login", "Account", new { returnUrl = Server.UrlEncode(Request.RawUrl) }, new { @class = "btn btn-secondary btn-default" })
+                    }
+
+                    <div class="gray-box floating-box">
+                        <p>@ResHelper.GetString("DancingGoatMvc.Checkout.FillDetailsAndProceed")</p>
+                        <input type="submit" class="btn btn-primary btn-default checkout-button" value="@ResHelper.GetString("DancingGoatMvc.Checkout.ReviewOrder")" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/countryStateSelector.js")
+    @Scripts.Render("~/Scripts/addressSelector.js")
+}

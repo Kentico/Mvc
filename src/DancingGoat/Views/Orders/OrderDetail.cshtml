@@ -1,0 +1,70 @@
+﻿@model DancingGoat.Models.Orders.OrderDetailViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.YourOrders.OrderDetail");
+
+    var currency = Model.OrderCurrency;
+}
+
+<a href="@Url.Action("Index", "Orders")">&larr; @ResHelper.GetString("DancingGoatMvc.YourOrders.OrderDetail.Back")</a>
+<h2>
+    @ResHelper.GetString("DancingGoatMvc.YourOrders.OrderDetail")
+    @Model.InvoiceNumber - @ResHelper.LocalizeString(Model.StatusName)
+</h2>
+<hr />
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>@ResHelper.GetString("DancingGoatMvc.Checkout.BillingDetails")</h3>
+            @Html.DisplayFor(m => m.OrderAddress)
+        </div>
+        <div class="col-md-6">
+            <h3>@ResHelper.GetString("DancingGoatMvc.Checkout.ShippingDetails")</h3>
+            @Html.DisplayFor(m => m.OrderAddress)
+        </div>
+    </div>
+    <div>
+        <h4>@ResHelper.GetString("DancingGoatMvc.YourOrders.OrderDetail.Items")</h4>
+        <hr />
+        @foreach (var orderItem in Model.OrderItems)
+        {
+            <div class="row order-item">
+                <div class="col-md-10">
+                    <div class="order-item-image">
+                        <a href="@Url.Action("ItemDetail", "Checkout", new {skuId = orderItem.SKUID})">
+                            @Html.Image(@orderItem.ImagePath, @orderItem.Name, null, SizeConstraint.MaxWidthOrHeight(70))
+                        </a>
+                    </div>
+                    <div class="order-item-info">
+                        @Html.ActionLink(orderItem.Name, "ItemDetail", "Checkout", new {skuId = orderItem.SKUID}, null)
+                    </div>
+                    <div class="order-item-amount">
+                        <div>
+                            <span class="strong">Qty: </span>
+                            <span>@orderItem.Units</span>
+                        </div>
+                        <div>
+                            <span class="strong">Unit price: </span>
+                            <span>@currency.FormatPrice(orderItem.UnitPrice)</span>
+                        </div>
+
+                    </div>
+
+                    @Html.ValidationMessage(orderItem.UnitPrice.ToString(), new {@class = "red"})
+
+                </div>
+                <div class="col-md-2 order-item-subtotal">
+                    <span>@currency.FormatPrice(orderItem.Subtotal)</span>
+                </div>
+            </div>
+            <hr />
+        }
+        <div class="order-total-price">
+            <div>
+                <span class="strong">@ResHelper.GetString("DancingGoatMvc.YourOrders.OrderDetail.Total")</span>
+                <span class="total-price">@currency.FormatPrice(Model.TotalPrice)</span>
+            </div>
+        </div>
+
+    </div>
+</div>

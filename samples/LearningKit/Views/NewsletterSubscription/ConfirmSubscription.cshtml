@@ -1,0 +1,21 @@
+﻿@model NewsletterConfirmSubscriptionViewModel
+
+@{
+    ViewBag.Title = "Subscription Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Subscription confirmation</h2>
+
+@if (Html.ViewData.ModelState.IsValid)
+{
+    <p>You have successfully confirmed your newsletter subscription.</p>
+}
+else
+{
+    @Html.ValidationSummary(true, "")
+}
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

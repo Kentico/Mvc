@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<h1>Kentico MVC Learning Kit</h1>
+<p>
+    This is an ASP.NET MVC 5 site that provides basic examples suitable for learning purposes. The project's code is displayed within the examples in the Kentico MVC documentation.
+</p>
+<p>
+    For an example of a real-world website, see the MVC Dancing Goat sample site.
+</p>
+<h2>Users and roles</h2>
+<ul>
+    <li>@Html.ActionLink("Sign in", "SignIn", "Account")
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ul>
+                <li>@Html.ActionLink("Change your user details", "EditUser", "Account")</li>
+                <li>@Html.ActionLink("Manage your roles", "ManageRoles", "Roles")</li>
+                <li>@Html.ActionLink("Restricted page", "RestrictedPage", "Roles") (only available for users with the 'KenticoRole' role)</li>
+                <li>@Html.ActionLink("Sign out", "SignOut", "Account") (@User.Identity.Name)</li>
+            </ul>
+        }
+    </li>
+    <li>@Html.ActionLink("Register", "Register", "Register")</li>
+    <li>@Html.ActionLink("Register with email confirmation", "RegisterWithEmailConfirmation", "EmailRegister")</li>
+</ul>
+<h2>Content management</h2>
+<ul>
+    <li>
+        @Html.ActionLink("Media library files listing", "ShowMediaFiles", "MediaLibrary") <br />
+    <strong>Note</strong>: The media library files listing displays files from the "SampleMediaLibrary". An error will occur if the media library does not exist in the connected Kentico database.
+</li>
+</ul>
+
+<h2>Forms</h2>
+<ul>
+    <li>@Html.ActionLink("Sample feedback form", "Fill", "FeedbackForm")</li>
+</ul>
+
+<h2>E-commerce</h2>
+<ul>
+    <li>@Html.ActionLink("Product listing with links to product details", "LearningProductType", "Store")<br />
+        <strong>Note</strong>: The product listing displays products from the "DancingGoatMvc.LearningProductType" <strong>product</strong> page type. An error will occur if the page type does not exist in the connected Kentico database. The page type's required properties:<br/>
+        Display name: LearningProductType; Namespace: LearningKit; Name: LearningProductType; Content only page type: Yes (selected)<br/>
+        2 standard fields: 1) Field name: LPTCountry; Data type: Text; 2) Field name: LPTWithFeature; Data type: Boolean (Yes/No)
+    </li>
+    <li>@Html.ActionLink("Product listing with a product filter", "FilterForeignProperty", "ProductFilter")<br />
+        <strong>Note:</strong> The product listing has the same prerequisites as the product listing above. Additionaly, products should have assigned manufacturers.
+    </li>
+    <li>Checkout process
+        <ul>
+            <li>Step 1: @Html.ActionLink("Display shopping cart with coupon redemption", "ShoppingCart", "Checkout")</li>
+            <li>Step 2: @Html.ActionLink("Customer details checkout process step", "DeliveryDetails", "Checkout")</li>
+            <li>Step 3: @Html.ActionLink("Preview checkout process step", "PreviewAndPay", "Checkout")</li>
+            <li>Helper actions:
+                <ul>
+                    <li>@Html.ActionLink("Create sample SKUs", "CreateSampleSKUs", "ECUtilities")</li>
+                    <li>@Html.ActionLink("Delete sample SKUs", "DeleteSampleSKUs", "ECUtilities")</li>
+                    <li>@Html.ActionLink("Fill cart", "FillShoppingCart", "ECUtilities")</li>
+                    <li>@Html.ActionLink("Remove all items from the shopping cart", "RemoveAllItemsFromShoppingCart", "ECUtilities")</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>@Html.ActionLink("Display and edit order details", "OrderDetail", "Order")</li>
+    <li>@Html.ActionLink("Order listing with reorder option", "MyOrders", "Order")</li>
+</ul>
+<h2>On-line marketing</h2>
+<ul>
+    <li>@Html.ActionLink("Personalized content", "PersonalizedGreeting", "Personalization")</li>
+</ul>
+<h2>Email marketing</h2>
+<ul>
+    <li>@Html.ActionLink("Subscribe to a newsletter", "Subscribe", "NewsletterSubscription")</li>
+</ul>
+<h2>Search</h2>
+<ul>
+    <li>@Html.ActionLink("Smart search", "SearchIndex", "Search")</li>
+</ul>
+

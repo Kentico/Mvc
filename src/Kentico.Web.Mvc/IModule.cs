@@ -5,7 +5,7 @@ namespace Kentico.Web.Mvc
     /// <summary>
     /// Represents a contract for request pipeline modules that provide Kentico ASP.NET MVC integration features.
     /// </summary>
-    internal interface IModule
+    public interface IModule
     {
         /// <summary>
         /// Initializes a module and prepares it to handle requests.

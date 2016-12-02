@@ -24,7 +24,7 @@ namespace Kentico.Web.Mvc
         {
             if (actionInvoker == null)
             {
-                throw new ArgumentNullException("actionInvoker");
+                throw new ArgumentNullException(nameof(actionInvoker));
             }
 
             this.mActionInvoker = actionInvoker;

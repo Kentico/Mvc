@@ -13,150 +13,153 @@ using System;
 using System.Collections.Generic;
 
 using CMS;
+using CMS.Base;
 using CMS.Helpers;
 using CMS.DataEngine;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.DocumentEngine;
 
 [assembly: RegisterDocumentType(ArticleSection.CLASS_NAME, typeof(ArticleSection))]
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
-	/// <summary>
-	/// Represents a content item of type ArticleSection.
-	/// </summary>
-	public partial class ArticleSection : TreeNode
-	{
-		#region "Constants and variables"
+    /// <summary>
+    /// Represents a content item of type ArticleSection.
+    /// </summary>
+    public partial class ArticleSection : TreeNode
+    {
+        #region "Constants and variables"
 
-		/// <summary>
-		/// The name of the data class.
-		/// </summary>
-		public const string CLASS_NAME = "DancingGoatMvc.ArticleSection";
-
-
-		/// <summary>
-		/// The instance of the class that provides extended API for working with ArticleSection fields.
-		/// </summary>
-		private readonly ArticleSectionFields mFields;
-
-		#endregion
+        /// <summary>
+        /// The name of the data class.
+        /// </summary>
+        public const string CLASS_NAME = "DancingGoatMvc.ArticleSection";
 
 
-		#region "Properties"
+        /// <summary>
+        /// The instance of the class that provides extended API for working with ArticleSection fields.
+        /// </summary>
+        private readonly ArticleSectionFields mFields;
 
-		/// <summary>
-		/// ArticleSectionID.
-		/// </summary>
-		[DatabaseIDField]
-		public int ArticleSectionID
-		{
-			get
-			{
-				return ValidationHelper.GetInteger(GetValue("ArticleSectionID"), 0);
-			}
-			set
-			{
-				SetValue("ArticleSectionID", value);
-			}
-		}
+        #endregion
 
 
-		/// <summary>
-		/// Name.
-		/// </summary>
-		[DatabaseField]
-		public string ArticleSectionName
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("ArticleSectionName"), "Articles");
-			}
-			set
-			{
-				SetValue("ArticleSectionName", value);
-			}
-		}
+        #region "Properties"
+
+        /// <summary>
+        /// ArticleSectionID.
+        /// </summary>
+        [DatabaseIDField]
+        public int ArticleSectionID
+        {
+            get
+            {
+                return ValidationHelper.GetInteger(GetValue("ArticleSectionID"), 0);
+            }
+            set
+            {
+                SetValue("ArticleSectionID", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Gets an object that provides extended API for working with ArticleSection fields.
-		/// </summary>
-		public ArticleSectionFields Fields
-		{
-			get
-			{
-				return mFields;
-			}
-		}
+        /// <summary>
+        /// Name.
+        /// </summary>
+        [DatabaseField]
+        public string ArticleSectionName
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("ArticleSectionName"), "Articles");
+            }
+            set
+            {
+                SetValue("ArticleSectionName", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Provides extended API for working with ArticleSection fields.
-		/// </summary>
-		public partial class ArticleSectionFields
-		{
-			/// <summary>
-			/// The content item of type ArticleSection that is a target of the extended API.
-			/// </summary>
-			private readonly ArticleSection mInstance;
+        /// <summary>
+        /// Gets an object that provides extended API for working with ArticleSection fields.
+        /// </summary>
+        [RegisterProperty]
+        public ArticleSectionFields Fields
+        {
+            get
+            {
+                return mFields;
+            }
+        }
 
 
-			/// <summary>
-			/// Initializes a new instance of the <see cref="ArticleSectionFields" /> class with the specified content item of type ArticleSection.
-			/// </summary>
-			/// <param name="instance">The content item of type ArticleSection that is a target of the extended API.</param>
-			public ArticleSectionFields(ArticleSection instance)
-			{
-				mInstance = instance;
-			}
+        /// <summary>
+        /// Provides extended API for working with ArticleSection fields.
+        /// </summary>
+        [RegisterAllProperties]
+        public partial class ArticleSectionFields : AbstractHierarchicalObject<ArticleSectionFields>
+        {
+            /// <summary>
+            /// The content item of type ArticleSection that is a target of the extended API.
+            /// </summary>
+            private readonly ArticleSection mInstance;
 
 
-			/// <summary>
-			/// ArticleSectionID.
-			/// </summary>
-			public int ID
-			{
-				get
-				{
-					return mInstance.ArticleSectionID;
-				}
-				set
-				{
-					mInstance.ArticleSectionID = value;
-				}
-			}
+            /// <summary>
+            /// Initializes a new instance of the <see cref="ArticleSectionFields" /> class with the specified content item of type ArticleSection.
+            /// </summary>
+            /// <param name="instance">The content item of type ArticleSection that is a target of the extended API.</param>
+            public ArticleSectionFields(ArticleSection instance)
+            {
+                mInstance = instance;
+            }
 
 
-			/// <summary>
-			/// Name.
-			/// </summary>
-			public string Name
-			{
-				get
-				{
-					return mInstance.ArticleSectionName;
-				}
-				set
-				{
-					mInstance.ArticleSectionName = value;
-				}
-			}
-		}
-
-		#endregion
+            /// <summary>
+            /// ArticleSectionID.
+            /// </summary>
+            public int ID
+            {
+                get
+                {
+                    return mInstance.ArticleSectionID;
+                }
+                set
+                {
+                    mInstance.ArticleSectionID = value;
+                }
+            }
 
 
-		#region "Constructors"
+            /// <summary>
+            /// Name.
+            /// </summary>
+            public string Name
+            {
+                get
+                {
+                    return mInstance.ArticleSectionName;
+                }
+                set
+                {
+                    mInstance.ArticleSectionName = value;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ArticleSection" /> class.
-		/// </summary>
-		public ArticleSection() : base(CLASS_NAME)
-		{
-			mFields = new ArticleSectionFields(this);
-		}
+        #endregion
 
-		#endregion
-	}
+
+        #region "Constructors"
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArticleSection" /> class.
+        /// </summary>
+        public ArticleSection() : base(CLASS_NAME)
+        {
+            mFields = new ArticleSectionFields(this);
+        }
+
+        #endregion
+    }
 }

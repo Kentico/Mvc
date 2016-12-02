@@ -1,0 +1,9 @@
+﻿@model DancingGoat.Models.Brewers.BrewerViewModel
+
+<div class="product-detail-properties">
+    <h4>@ResHelper.GetString("DancingGoatMvc.Product.Parameters")</h4>
+    <dl class="row">
+        <dt class="col-xs-12 col-sm-4">@ResHelper.GetString("DancingGoatMvc.Brewer.IsDishwasherSafe")</dt>
+        <dd class="col-xs-12 col-sm-8">@ResHelper.GetString(Model.IsDishwasherSafe ? "DancingGoatMvc.General.Yes" : "DancingGoatMvc.General.No")</dd>
+    </dl>
+</div>

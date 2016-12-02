@@ -1,0 +1,66 @@
+﻿@model SignInViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Sign in";
+}
+
+<h2>Sign in</h2>
+                
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div role="form">
+        @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+        {
+            @Html.ValidationSummary(true, "")
+        }
+
+        <div>
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName, "")
+        </div>                                    
+
+        <div>
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div>
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password, "")
+        </div>                                    
+    </div>
+    @Html.EditorFor(model => model.SignInIsPersistent) @Html.LabelFor(model => model.SignInIsPersistent)
+    <input type="submit" value="Sign in" />
+}
+<div>
+    @Html.ActionLink("Forgotten password?", "RequestPasswordReset", "PasswordReset")
+</div>
+<h3>Sign in using an external authentication service:</h3>
+
+@*DocSection:ExternalAuthView*@
+@using Microsoft.Owin.Security
+
+@{
+    @* Gets a collection of the authentication services registered in your application's startup class *@
+    var authServices = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+    @* Generates a form with buttons targeting the RequestSignIn action. Optionally pass a redirect URL as a parameter. *@
+    using (Html.BeginForm("RequestSignIn", "ExternalAuthentication"))
+    {
+        @Html.AntiForgeryToken()
+        <p>
+            @foreach (AuthenticationDescription p in authServices)
+            {
+                <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Sign in using your @p.Caption account">@p.AuthenticationType</button>
+            }
+        </p>
+    }
+}
+@*EndDocSection:ExternalAuthView*@
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

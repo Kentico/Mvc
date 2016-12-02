@@ -1,6 +1,6 @@
 ﻿using DancingGoat.Models.Contacts;
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
     /// <summary>
     /// Specification of Cafe members and IContact interface relationship.

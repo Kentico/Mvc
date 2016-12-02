@@ -1,0 +1,36 @@
+﻿@model DancingGoat.Models.Products.ProductListItemViewModel
+
+@{
+    var price = Model.PriceDetail;
+    var currency = price.Currency;
+}
+
+<article class="product-tile">
+    <a href="@Url.RouteUrl("Product", new {id = Model.ProductPageID, productAlias = Model.ProductPageAlias})">
+        <h1 class="product-heading">@Model.Name</h1>
+        @if (!string.IsNullOrEmpty(Model.PublicStatusName))
+        {
+            <span class="product-tile-status">
+                @ResHelper.LocalizeString(Model.PublicStatusName)
+            </span>
+        }
+        <figure class="product-tile-image">
+            @Html.Image(@Model.ImagePath, @Model.Name, null, SizeConstraint.Size(452, 452))
+            @if (!Model.Available)
+            {
+                <span class="product-tile-stock notavailable"> @ResHelper.GetString("DancingGoatMvc.Product.OutOfStock")</span>
+            }
+        </figure>
+        <div class="product-tile-info">
+            <span class="product-tile-price">
+                @currency.FormatPrice(price.Price)
+            </span>
+            @if (price.ListPrice > price.Price)
+            {
+                <span class="product-tile-list-price">
+                    @currency.FormatPrice(price.ListPrice)
+                </span>
+            }
+        </div>
+    </a>
+</article>

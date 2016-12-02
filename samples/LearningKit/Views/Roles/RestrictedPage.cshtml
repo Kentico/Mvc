@@ -1,0 +1,13 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Restricted page";
+}
+
+<h1>Restricted page</h1>
+<p>
+    This page is only available for users who are assigned to a role with the 'KenticoRole' code name within the connected Kentico application.
+</p>
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

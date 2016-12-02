@@ -13,410 +13,413 @@ using System;
 using System.Collections.Generic;
 
 using CMS;
+using CMS.Base;
 using CMS.Helpers;
 using CMS.DataEngine;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.DocumentEngine;
 
 [assembly: RegisterDocumentType(Cafe.CLASS_NAME, typeof(Cafe))]
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
-	/// <summary>
-	/// Represents a content item of type Cafe.
-	/// </summary>
-	public partial class Cafe : TreeNode
-	{
-		#region "Constants and variables"
+    /// <summary>
+    /// Represents a content item of type Cafe.
+    /// </summary>
+    public partial class Cafe : TreeNode
+    {
+        #region "Constants and variables"
 
-		/// <summary>
-		/// The name of the data class.
-		/// </summary>
-		public const string CLASS_NAME = "DancingGoatMvc.Cafe";
-
-
-		/// <summary>
-		/// The instance of the class that provides extended API for working with Cafe fields.
-		/// </summary>
-		private readonly CafeFields mFields;
-
-		#endregion
+        /// <summary>
+        /// The name of the data class.
+        /// </summary>
+        public const string CLASS_NAME = "DancingGoatMvc.Cafe";
 
 
-		#region "Properties"
+        /// <summary>
+        /// The instance of the class that provides extended API for working with Cafe fields.
+        /// </summary>
+        private readonly CafeFields mFields;
 
-		/// <summary>
-		/// CafeID.
-		/// </summary>
-		[DatabaseIDField]
-		public int CafeID
-		{
-			get
-			{
-				return ValidationHelper.GetInteger(GetValue("CafeID"), 0);
-			}
-			set
-			{
-				SetValue("CafeID", value);
-			}
-		}
+        #endregion
 
 
-		/// <summary>
-		/// Name.
-		/// </summary>
-		[DatabaseField]
-		public string CafeName
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafeName"), "");
-			}
-			set
-			{
-				SetValue("CafeName", value);
-			}
-		}
+        #region "Properties"
+
+        /// <summary>
+        /// CafeID.
+        /// </summary>
+        [DatabaseIDField]
+        public int CafeID
+        {
+            get
+            {
+                return ValidationHelper.GetInteger(GetValue("CafeID"), 0);
+            }
+            set
+            {
+                SetValue("CafeID", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Our cafe.
-		/// </summary>
-		[DatabaseField]
-		public bool CafeIsCompanyCafe
-		{
-			get
-			{
-				return ValidationHelper.GetBoolean(GetValue("CafeIsCompanyCafe"), false);
-			}
-			set
-			{
-				SetValue("CafeIsCompanyCafe", value);
-			}
-		}
+        /// <summary>
+        /// Name.
+        /// </summary>
+        [DatabaseField]
+        public string CafeName
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafeName"), "");
+            }
+            set
+            {
+                SetValue("CafeName", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Street.
-		/// </summary>
-		[DatabaseField]
-		public string CafeStreet
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafeStreet"), "");
-			}
-			set
-			{
-				SetValue("CafeStreet", value);
-			}
-		}
+        /// <summary>
+        /// Our cafe.
+        /// </summary>
+        [DatabaseField]
+        public bool CafeIsCompanyCafe
+        {
+            get
+            {
+                return ValidationHelper.GetBoolean(GetValue("CafeIsCompanyCafe"), false);
+            }
+            set
+            {
+                SetValue("CafeIsCompanyCafe", value);
+            }
+        }
 
 
-		/// <summary>
-		/// City.
-		/// </summary>
-		[DatabaseField]
-		public string CafeCity
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafeCity"), "");
-			}
-			set
-			{
-				SetValue("CafeCity", value);
-			}
-		}
+        /// <summary>
+        /// Street.
+        /// </summary>
+        [DatabaseField]
+        public string CafeStreet
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafeStreet"), "");
+            }
+            set
+            {
+                SetValue("CafeStreet", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Country.
-		/// </summary>
-		[DatabaseField]
-		public string CafeCountry
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafeCountry"), "USA");
-			}
-			set
-			{
-				SetValue("CafeCountry", value);
-			}
-		}
+        /// <summary>
+        /// City.
+        /// </summary>
+        [DatabaseField]
+        public string CafeCity
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafeCity"), "");
+            }
+            set
+            {
+                SetValue("CafeCity", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Zip code.
-		/// </summary>
-		[DatabaseField]
-		public string CafeZipCode
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafeZipCode"), "");
-			}
-			set
-			{
-				SetValue("CafeZipCode", value);
-			}
-		}
+        /// <summary>
+        /// Country.
+        /// </summary>
+        [DatabaseField]
+        public string CafeCountry
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafeCountry"), "USA");
+            }
+            set
+            {
+                SetValue("CafeCountry", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Phone.
-		/// </summary>
-		[DatabaseField]
-		public string CafePhone
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafePhone"), "");
-			}
-			set
-			{
-				SetValue("CafePhone", value);
-			}
-		}
+        /// <summary>
+        /// Zip code.
+        /// </summary>
+        [DatabaseField]
+        public string CafeZipCode
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafeZipCode"), "");
+            }
+            set
+            {
+                SetValue("CafeZipCode", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Photo.
-		/// </summary>
-		[DatabaseField]
-		public Guid CafePhoto
-		{
-			get
-			{
-				return ValidationHelper.GetGuid(GetValue("CafePhoto"), Guid.Empty);
-			}
-			set
-			{
-				SetValue("CafePhoto", value);
-			}
-		}
+        /// <summary>
+        /// Phone.
+        /// </summary>
+        [DatabaseField]
+        public string CafePhone
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafePhone"), "");
+            }
+            set
+            {
+                SetValue("CafePhone", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Additional notes.
-		/// </summary>
-		[DatabaseField]
-		public string CafeAdditionalNotes
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafeAdditionalNotes"), "");
-			}
-			set
-			{
-				SetValue("CafeAdditionalNotes", value);
-			}
-		}
+        /// <summary>
+        /// Photo.
+        /// </summary>
+        [DatabaseField]
+        public Guid CafePhoto
+        {
+            get
+            {
+                return ValidationHelper.GetGuid(GetValue("CafePhoto"), Guid.Empty);
+            }
+            set
+            {
+                SetValue("CafePhoto", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Gets an object that provides extended API for working with Cafe fields.
-		/// </summary>
-		public CafeFields Fields
-		{
-			get
-			{
-				return mFields;
-			}
-		}
+        /// <summary>
+        /// Additional notes.
+        /// </summary>
+        [DatabaseField]
+        public string CafeAdditionalNotes
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafeAdditionalNotes"), "");
+            }
+            set
+            {
+                SetValue("CafeAdditionalNotes", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Provides extended API for working with Cafe fields.
-		/// </summary>
-		public partial class CafeFields
-		{
-			/// <summary>
-			/// The content item of type Cafe that is a target of the extended API.
-			/// </summary>
-			private readonly Cafe mInstance;
+        /// <summary>
+        /// Gets an object that provides extended API for working with Cafe fields.
+        /// </summary>
+        [RegisterProperty]
+        public CafeFields Fields
+        {
+            get
+            {
+                return mFields;
+            }
+        }
 
 
-			/// <summary>
-			/// Initializes a new instance of the <see cref="CMS.DocumentEngine.Types.Cafe+CafeFields" /> class with the specified content item of type Cafe.
-			/// </summary>
-			/// <param name="instance">The content item of type Cafe that is a target of the extended API.</param>
-			public CafeFields(Cafe instance)
-			{
-				mInstance = instance;
-			}
+        /// <summary>
+        /// Provides extended API for working with Cafe fields.
+        /// </summary>
+        [RegisterAllProperties]
+        public partial class CafeFields : AbstractHierarchicalObject<CafeFields>
+        {
+            /// <summary>
+            /// The content item of type Cafe that is a target of the extended API.
+            /// </summary>
+            private readonly Cafe mInstance;
 
 
-			/// <summary>
-			/// CafeID.
-			/// </summary>
-			public int ID
-			{
-				get
-				{
-					return mInstance.CafeID;
-				}
-				set
-				{
-					mInstance.CafeID = value;
-				}
-			}
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CafeFields" /> class with the specified content item of type Cafe.
+            /// </summary>
+            /// <param name="instance">The content item of type Cafe that is a target of the extended API.</param>
+            public CafeFields(Cafe instance)
+            {
+                mInstance = instance;
+            }
 
 
-			/// <summary>
-			/// Name.
-			/// </summary>
-			public string Name
-			{
-				get
-				{
-					return mInstance.CafeName;
-				}
-				set
-				{
-					mInstance.CafeName = value;
-				}
-			}
+            /// <summary>
+            /// CafeID.
+            /// </summary>
+            public int ID
+            {
+                get
+                {
+                    return mInstance.CafeID;
+                }
+                set
+                {
+                    mInstance.CafeID = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Our cafe.
-			/// </summary>
-			public bool IsCompanyCafe
-			{
-				get
-				{
-					return mInstance.CafeIsCompanyCafe;
-				}
-				set
-				{
-					mInstance.CafeIsCompanyCafe = value;
-				}
-			}
+            /// <summary>
+            /// Name.
+            /// </summary>
+            public string Name
+            {
+                get
+                {
+                    return mInstance.CafeName;
+                }
+                set
+                {
+                    mInstance.CafeName = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Street.
-			/// </summary>
-			public string Street
-			{
-				get
-				{
-					return mInstance.CafeStreet;
-				}
-				set
-				{
-					mInstance.CafeStreet = value;
-				}
-			}
+            /// <summary>
+            /// Our cafe.
+            /// </summary>
+            public bool IsCompanyCafe
+            {
+                get
+                {
+                    return mInstance.CafeIsCompanyCafe;
+                }
+                set
+                {
+                    mInstance.CafeIsCompanyCafe = value;
+                }
+            }
 
 
-			/// <summary>
-			/// City.
-			/// </summary>
-			public string City
-			{
-				get
-				{
-					return mInstance.CafeCity;
-				}
-				set
-				{
-					mInstance.CafeCity = value;
-				}
-			}
+            /// <summary>
+            /// Street.
+            /// </summary>
+            public string Street
+            {
+                get
+                {
+                    return mInstance.CafeStreet;
+                }
+                set
+                {
+                    mInstance.CafeStreet = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Country.
-			/// </summary>
-			public string Country
-			{
-				get
-				{
-					return mInstance.CafeCountry;
-				}
-				set
-				{
-					mInstance.CafeCountry = value;
-				}
-			}
+            /// <summary>
+            /// City.
+            /// </summary>
+            public string City
+            {
+                get
+                {
+                    return mInstance.CafeCity;
+                }
+                set
+                {
+                    mInstance.CafeCity = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Zip code.
-			/// </summary>
-			public string ZipCode
-			{
-				get
-				{
-					return mInstance.CafeZipCode;
-				}
-				set
-				{
-					mInstance.CafeZipCode = value;
-				}
-			}
+            /// <summary>
+            /// Country.
+            /// </summary>
+            public string Country
+            {
+                get
+                {
+                    return mInstance.CafeCountry;
+                }
+                set
+                {
+                    mInstance.CafeCountry = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Phone.
-			/// </summary>
-			public string Phone
-			{
-				get
-				{
-					return mInstance.CafePhone;
-				}
-				set
-				{
-					mInstance.CafePhone = value;
-				}
-			}
+            /// <summary>
+            /// Zip code.
+            /// </summary>
+            public string ZipCode
+            {
+                get
+                {
+                    return mInstance.CafeZipCode;
+                }
+                set
+                {
+                    mInstance.CafeZipCode = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Photo.
-			/// </summary>
-			public Attachment Photo
-			{
-				get
-				{
-					return mInstance.GetFieldAttachment("CafePhoto");
-				}
-			}
+            /// <summary>
+            /// Phone.
+            /// </summary>
+            public string Phone
+            {
+                get
+                {
+                    return mInstance.CafePhone;
+                }
+                set
+                {
+                    mInstance.CafePhone = value;
+                }
+            }
 
 
-			/// <summary>
-			/// Additional notes.
-			/// </summary>
-			public string AdditionalNotes
-			{
-				get
-				{
-					return mInstance.CafeAdditionalNotes;
-				}
-				set
-				{
-					mInstance.CafeAdditionalNotes = value;
-				}
-			}
-		}
-
-		#endregion
+            /// <summary>
+            /// Photo.
+            /// </summary>
+            public Attachment Photo
+            {
+                get
+                {
+                    return mInstance.GetFieldAttachment("CafePhoto");
+                }
+            }
 
 
-		#region "Constructors"
+            /// <summary>
+            /// Additional notes.
+            /// </summary>
+            public string AdditionalNotes
+            {
+                get
+                {
+                    return mInstance.CafeAdditionalNotes;
+                }
+                set
+                {
+                    mInstance.CafeAdditionalNotes = value;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CMS.DocumentEngine.Types.Cafe" /> class.
-		/// </summary>
-		public Cafe() : base(CLASS_NAME)
-		{
-			mFields = new CafeFields(this);
-		}
+        #endregion
 
-		#endregion
-	}
+
+        #region "Constructors"
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cafe" /> class.
+        /// </summary>
+        public Cafe() : base(CLASS_NAME)
+        {
+            mFields = new CafeFields(this);
+        }
+
+        #endregion
+    }
 }

@@ -6,24 +6,12 @@ namespace DancingGoat.Models.Cafes
 {
     public class CafeModel
     {
-        public Attachment Photo
-        {
-            get; 
-            set; 
-        }
+        public Attachment Photo { get; set; }
 
 
-        public string Note
-        {
-            get;
-            set;
-        }
+        public string Note { get; set; }
 
 
-        public ContactModel Contact
-        {
-            get; 
-            set;
-        }
+        public ContactModel Contact { get; set; }
     }
 }

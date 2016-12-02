@@ -18,6 +18,9 @@
                                 @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Home"), "Index", "Home")
                             </li>
                             <li>
+                                @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Store"), "Index", "Coffees")
+                            </li>
+                            <li>
                                 @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Articles"), "Index", "Articles")
                             </li>
                             <li>
@@ -34,6 +37,30 @@
                     <div class="additional-menu-buttons user-menu">
                         <nav role="navigation">
                             <ul class="dropdown-items-list dropdown-desktop-visible">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li>
+                                        @Html.ActionLink(@User.Identity.Name, "YourAccount", "Account")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.SignOut"), "Logout", "Account")
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Register"), "Register", "Account")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.SignIn"), "Login", "Account")
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="additional-menu-buttons user-menu">
+                        <nav role="navigation">
+                            <ul class="dropdown-items-list dropdown-desktop-visible">
                                 <li>
                                     @Html.CultureLink("English", "en-US")
                                 </li>
@@ -47,17 +74,26 @@
             </div>
             <div class="header-row">
                 <div class="container">
-                    <div class="col-xs-8 col-md-5 col-lg-4 logo">
+                    <div class="col-xs-8 col-md-8 col-lg-4 logo">
                         <h1 class="logo">
                             @Html.ActionLink("Dancing Goat", "Index", new { controller = "Home" }, new { @class = "logo-link" })
                         </h1>
                     </div>
-                    <div class="col-xs-12 col-md-7 col-lg-8">
+                    <div class="col-xs-12 col-md-7 col-lg-4">
                         @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @Id = "searchForm", @Class = "searchBox" }))
                         {
                             <input type="text" id="searchtext" name="searchtext" placeholder="@ResHelper.GetString("General.Search")" maxlength="1000" class="search-box-watermark" autocomplete="off">
                             <input type="submit" value="" class="search-box-btn">
                         }
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-4">
+                        <div class="shopping-cart-mini-preview">
+                            <a href="@Url.Action("ShoppingCart", "Checkout")">
+                                <div class="shopping-cart-mini-preview-label">
+                                    Your cart
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,18 +119,24 @@
                         </div>
                         <div class="col-md-4 col-lg-4 footer-col">
                             <h3>@ResHelper.GetString("DancingGoatMvc.News.Title")</h3>
-                            @Html.Action("Show", "Subscription")
+                            <div id="footerNewsletterSubscription">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="container copyright">
-                Copyright &copy; 2014 Dancing Goat. All rights reserved.
+                Copyright &copy; @DateTime.Now.Year Dancing Goat. All rights reserved.
             </div>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
+    @Scripts.Render(Url.RouteUrl("KenticoLogActivityScript"))
+
+    <script>
+        $('#footerNewsletterSubscription').load('@Url.Action("Show", "Subscription")');
+    </script>
 </body>
 </html>

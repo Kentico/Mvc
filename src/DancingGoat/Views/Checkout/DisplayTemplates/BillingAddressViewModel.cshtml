@@ -1,0 +1,17 @@
+﻿@model DancingGoat.Models.Checkout.BillingAddressViewModel
+
+
+<div>@Model.BillingAddressLine1</div>
+<div>@Model.BillingAddressLine2</div>
+<div>@Model.BillingAddressCity</div>
+
+@if (Model.BillingAddressState != null)
+{
+    <div>@Model.BillingAddressPostalCode, @Model.BillingAddressState</div>
+}
+else
+{
+    <div>@Model.BillingAddressPostalCode</div>
+
+}
+<div>@Model.BillingAddressCountry</div>

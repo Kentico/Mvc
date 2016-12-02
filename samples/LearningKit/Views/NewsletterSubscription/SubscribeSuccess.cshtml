@@ -1,0 +1,21 @@
+﻿@model NewsletterSubscribeViewModel
+
+@{
+    ViewBag.Title = "Subscription Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Newsletter subscription successful</h2>
+
+@if (Model.RequireDoubleOptIn)
+{
+    <p>You have subscribed to the newsletter. You need to confirm your subscription via email before it becomes active.</p>
+}
+else
+{
+    <p>You have successfully subscribed to the newsletter.</p>
+}
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

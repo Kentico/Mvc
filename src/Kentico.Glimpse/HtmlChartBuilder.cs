@@ -33,12 +33,12 @@ namespace Kentico.Glimpse
         {
             if (maxValue < 0)
             {
-                throw new ArgumentOutOfRangeException("maxValue");
+                throw new ArgumentOutOfRangeException(nameof(maxValue));
             }
 
             if (value < 0 || value > maxValue)
             {
-                throw new ArgumentOutOfRangeException("value");
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
 
             mValue = value;
@@ -56,7 +56,7 @@ namespace Kentico.Glimpse
         {
             if (thresholdValue < 0)
             {
-                throw new ArgumentOutOfRangeException("thresholdValue");
+                throw new ArgumentOutOfRangeException(nameof(thresholdValue));
             }
 
             mThresholdValue = thresholdValue;

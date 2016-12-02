@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CMS.DocumentEngine.Types 
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
     /// <summary>
     /// Custom Article members.

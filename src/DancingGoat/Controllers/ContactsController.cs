@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.Globalization;
 using CMS.Helpers;
 
@@ -19,33 +19,25 @@ namespace DancingGoat.Controllers
         private readonly ICountryRepository mCountryRepository;
         private readonly IFormItemRepository mFormItemRepository;
         private readonly ISocialLinkRepository mSocialLinkRepository;
-        private readonly IOutputCacheDependencies mOutputCacheDependencies;
 
 
         public ContactsController(ICafeRepository cafeRepository, ISocialLinkRepository socialLinkRepository,
             IContactRepository contactRepository, IFormItemRepository formItemRepository,
-            ICountryRepository countryRepository, IOutputCacheDependencies outputCacheDependencies)
+            ICountryRepository countryRepository)
         {
             mCountryRepository = countryRepository;
             mFormItemRepository = formItemRepository;
             mCafeRepository = cafeRepository;
             mSocialLinkRepository = socialLinkRepository;
             mContactRepository = contactRepository;
-            mOutputCacheDependencies = outputCacheDependencies;
         }
 
 
         // GET: Contacts
-        [OutputCache(CacheProfile = "Default", VaryByParam = "none")]
         public ActionResult Index()
         {
             var model = GetIndexViewModel();
             model.Message = new MessageModel();
-
-            mOutputCacheDependencies.AddDependencyOnPages<Cafe>();
-            mOutputCacheDependencies.AddDependencyOnPages<Contact>();
-            mOutputCacheDependencies.AddDependencyOnInfoObjects<CountryInfo>();
-            mOutputCacheDependencies.AddDependencyOnInfoObjects<StateInfo>();
 
             return View(model);
         }
@@ -102,11 +94,6 @@ namespace DancingGoat.Controllers
         {
             var address = GetCompanyContactModel();
 
-            mOutputCacheDependencies.AddDependencyOnPages<Cafe>();
-            mOutputCacheDependencies.AddDependencyOnPages<Contact>();
-            mOutputCacheDependencies.AddDependencyOnInfoObjects<CountryInfo>();
-            mOutputCacheDependencies.AddDependencyOnInfoObjects<StateInfo>();
-
             return PartialView("_Address", address);
         }
 
@@ -116,8 +103,6 @@ namespace DancingGoat.Controllers
         public ActionResult CompanySocialLinks()
         {
             var socialLinks = mSocialLinkRepository.GetSocialLinks();
-
-            mOutputCacheDependencies.AddDependencyOnPages<SocialLink>();
 
             return PartialView("_SocialLinks", socialLinks);
         }

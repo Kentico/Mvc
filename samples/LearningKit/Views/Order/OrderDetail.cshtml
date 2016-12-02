@@ -1,0 +1,48 @@
+﻿@model Kentico.Ecommerce.Order
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Order detail";
+}
+
+<h2>Display an order detail</h2>
+
+<p>
+    If you type an order's ID to the text box and click the button, the order information will be displayed.
+</p>
+
+@using (Html.BeginForm())
+{
+    <input type="text" name="TextBoxValue" />
+    <input type="submit" name="DisplayOrder" value="Display order" />
+}
+
+@if (Model != null)
+{
+    <h2>Order details</h2>
+
+    <ul>
+        <li>Order number: @Model.OrderID</li>
+        <li>Status ID: @Model.StatusID</li>
+        <li>Is paid: @Model.IsPaid</li>
+        @if (Model.PaymentResult != null)
+        {
+            <li>Payment method name: @Model.PaymentResult.PaymentMethodName</li>
+            <li>Was payment successful: @Model.PaymentResult.PaymentIsCompleted</li>
+        }
+        <li>Total price: @Model.Currency.FormatPrice(Model.TotalPrice)</li>
+    </ul>
+
+    if (!Model.IsPaid)
+    {
+        using (Html.BeginForm("MarkOrderAsPaid", "Order"))
+        {
+            <input type="text" hidden="hidden" name="TextBoxValue" value="@Model.OrderID" />
+            <input type="submit" name="MarkOrderAsPaid" value="Mark order as paid" />
+        }
+    }
+}
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
 using CMS.Base;
-using CMS.DocumentEngine;
+using CMS.DataEngine;
 using CMS.Search;
+using CMS.WebAnalytics;
 
 namespace Kentico.Search.Tests
 {
     public class FakeSearchService : SearchService
     {
-        private string mDataSetFilePath = null;
+        private readonly string mDataSetFilePath;
 
 
-        public DataSet RawResults
-        {
-            get
-            {
-                return mRawResults;
-            }
-        }
+        public DataSet RawResults => rawResults;
 
 
         public SearchParameters Parameters
@@ -30,50 +24,43 @@ namespace Kentico.Search.Tests
         }
 
 
-        public FakeSearchService(string[] indexes, string culture, string sitename, bool combineWithDefaultCulture, string dataSetFilePath)
-            : base(indexes, culture, sitename, combineWithDefaultCulture)
+        public FakeSearchService(string dataSetFilePath, PagesActivityLogger pagesActivityLogger)
         {
             mDataSetFilePath = dataSetFilePath;
+            mPagesActivityLogger = pagesActivityLogger;
         }
 
 
         /// <summary>
         /// Mocks Kentico Smart search results.
         /// </summary>
-        internal override DataSet Search(SearchParameters parameters)
+        internal override DataSet SearchInternal(SearchParameters parameters)
         {
             Parameters = parameters;
-            mRawResults = GetFakeSearchResults();
+            rawResults = GetFakeSearchResults();
 
-            if (mRawResults != null)
+            if (rawResults != null)
             {
-                SearchContext.CurrentSearchResults = new SafeDictionary<string, DataRow>(mRawResults.Tables[0].AsEnumerable().ToDictionary(x => x["id"]));
+                SearchContext.CurrentSearchResults = new SafeDictionary<string, DataRow>(rawResults.Tables[0].AsEnumerable().ToDictionary(x => x["id"]));
                 parameters.NumberOfResults = SearchContext.CurrentSearchResults.Count;
             }
 
-            return mRawResults;
+            return rawResults;
         }
 
 
-        /// <summary>
-        /// Gets mock collection of attachments.
-        /// </summary>
-        internal override Dictionary<Guid, AttachmentInfo> GetPageAttachments(ICollection<Guid> attachmentGuids)
+        internal override string GetImagePath(string objectType, string id, string image)
         {
-            var attachments = new List<AttachmentInfo>();
-
-            foreach (Guid guid in attachmentGuids)
-            {
-                attachments.Add(new AttachmentInfo() { AttachmentGUID = guid });
-            }
-
-            return attachments.ToDictionary(x => x.AttachmentGUID);
+            return image;
         }
 
 
-        /// <summary>
-        /// Gets the fake search results dataset from the specified XML file.
-        /// </summary>
+        internal override BaseInfo GetDataObject(string id, string objectType)
+        {
+            return null;
+        }
+
+
         private DataSet GetFakeSearchResults()
         {
             if (String.IsNullOrEmpty(mDataSetFilePath))

@@ -13,150 +13,153 @@ using System;
 using System.Collections.Generic;
 
 using CMS;
+using CMS.Base;
 using CMS.Helpers;
 using CMS.DataEngine;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.DocumentEngine;
 
 [assembly: RegisterDocumentType(CafeSection.CLASS_NAME, typeof(CafeSection))]
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
-	/// <summary>
-	/// Represents a content item of type CafeSection.
-	/// </summary>
-	public partial class CafeSection : TreeNode
-	{
-		#region "Constants and variables"
+    /// <summary>
+    /// Represents a content item of type CafeSection.
+    /// </summary>
+    public partial class CafeSection : TreeNode
+    {
+        #region "Constants and variables"
 
-		/// <summary>
-		/// The name of the data class.
-		/// </summary>
-		public const string CLASS_NAME = "DancingGoatMvc.CafeSection";
-
-
-		/// <summary>
-		/// The instance of the class that provides extended API for working with CafeSection fields.
-		/// </summary>
-		private readonly CafeSectionFields mFields;
-
-		#endregion
+        /// <summary>
+        /// The name of the data class.
+        /// </summary>
+        public const string CLASS_NAME = "DancingGoatMvc.CafeSection";
 
 
-		#region "Properties"
+        /// <summary>
+        /// The instance of the class that provides extended API for working with CafeSection fields.
+        /// </summary>
+        private readonly CafeSectionFields mFields;
 
-		/// <summary>
-		/// CafeSectionID.
-		/// </summary>
-		[DatabaseIDField]
-		public int CafeSectionID
-		{
-			get
-			{
-				return ValidationHelper.GetInteger(GetValue("CafeSectionID"), 0);
-			}
-			set
-			{
-				SetValue("CafeSectionID", value);
-			}
-		}
+        #endregion
 
 
-		/// <summary>
-		/// Name.
-		/// </summary>
-		[DatabaseField]
-		public string CafeSectionName
-		{
-			get
-			{
-				return ValidationHelper.GetString(GetValue("CafeSectionName"), "Cafes");
-			}
-			set
-			{
-				SetValue("CafeSectionName", value);
-			}
-		}
+        #region "Properties"
+
+        /// <summary>
+        /// CafeSectionID.
+        /// </summary>
+        [DatabaseIDField]
+        public int CafeSectionID
+        {
+            get
+            {
+                return ValidationHelper.GetInteger(GetValue("CafeSectionID"), 0);
+            }
+            set
+            {
+                SetValue("CafeSectionID", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Gets an object that provides extended API for working with CafeSection fields.
-		/// </summary>
-		public CafeSectionFields Fields
-		{
-			get
-			{
-				return mFields;
-			}
-		}
+        /// <summary>
+        /// Name.
+        /// </summary>
+        [DatabaseField]
+        public string CafeSectionName
+        {
+            get
+            {
+                return ValidationHelper.GetString(GetValue("CafeSectionName"), "Cafes");
+            }
+            set
+            {
+                SetValue("CafeSectionName", value);
+            }
+        }
 
 
-		/// <summary>
-		/// Provides extended API for working with CafeSection fields.
-		/// </summary>
-		public partial class CafeSectionFields
-		{
-			/// <summary>
-			/// The content item of type CafeSection that is a target of the extended API.
-			/// </summary>
-			private readonly CafeSection mInstance;
+        /// <summary>
+        /// Gets an object that provides extended API for working with CafeSection fields.
+        /// </summary>
+        [RegisterProperty]
+        public CafeSectionFields Fields
+        {
+            get
+            {
+                return mFields;
+            }
+        }
 
 
-			/// <summary>
-			/// Initializes a new instance of the <see cref="CafeSectionFields" /> class with the specified content item of type CafeSection.
-			/// </summary>
-			/// <param name="instance">The content item of type CafeSection that is a target of the extended API.</param>
-			public CafeSectionFields(CafeSection instance)
-			{
-				mInstance = instance;
-			}
+        /// <summary>
+        /// Provides extended API for working with CafeSection fields.
+        /// </summary>
+        [RegisterAllProperties]
+        public partial class CafeSectionFields : AbstractHierarchicalObject<CafeSectionFields>
+        {
+            /// <summary>
+            /// The content item of type CafeSection that is a target of the extended API.
+            /// </summary>
+            private readonly CafeSection mInstance;
 
 
-			/// <summary>
-			/// CafeSectionID.
-			/// </summary>
-			public int ID
-			{
-				get
-				{
-					return mInstance.CafeSectionID;
-				}
-				set
-				{
-					mInstance.CafeSectionID = value;
-				}
-			}
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CafeSectionFields" /> class with the specified content item of type CafeSection.
+            /// </summary>
+            /// <param name="instance">The content item of type CafeSection that is a target of the extended API.</param>
+            public CafeSectionFields(CafeSection instance)
+            {
+                mInstance = instance;
+            }
 
 
-			/// <summary>
-			/// Name.
-			/// </summary>
-			public string Name
-			{
-				get
-				{
-					return mInstance.CafeSectionName;
-				}
-				set
-				{
-					mInstance.CafeSectionName = value;
-				}
-			}
-		}
-
-		#endregion
+            /// <summary>
+            /// CafeSectionID.
+            /// </summary>
+            public int ID
+            {
+                get
+                {
+                    return mInstance.CafeSectionID;
+                }
+                set
+                {
+                    mInstance.CafeSectionID = value;
+                }
+            }
 
 
-		#region "Constructors"
+            /// <summary>
+            /// Name.
+            /// </summary>
+            public string Name
+            {
+                get
+                {
+                    return mInstance.CafeSectionName;
+                }
+                set
+                {
+                    mInstance.CafeSectionName = value;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CafeSection" /> class.
-		/// </summary>
-		public CafeSection() : base(CLASS_NAME)
-		{
-			mFields = new CafeSectionFields(this);
-		}
+        #endregion
 
-		#endregion
-	}
+
+        #region "Constructors"
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CafeSection" /> class.
+        /// </summary>
+        public CafeSection() : base(CLASS_NAME)
+        {
+            mFields = new CafeSectionFields(this);
+        }
+
+        #endregion
+    }
 }

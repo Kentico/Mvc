@@ -1,0 +1,40 @@
+﻿@using CMS.ContactManagement
+
+@model ContactInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Personalized Greeting";
+}
+
+<h2>Personalized greeting</h2>
+@{
+    if (Model != null)
+    {
+        // Displays a personalized greeting for contacts belonging to the "YoungCustomers" contact group
+        if (Model.IsInContactGroup("YoungCustomers"))
+        {
+            <p>
+                <strong>Hiya</strong>
+                (a personalized greeting for contacts who belong to the "YoungCustomers" contact group)                    
+            </p>
+        }
+        else
+        {
+            <p>
+                <strong>Hello</strong>
+                (a generic greeting for contacts who do not belong to the "YoungCustomers" contact group)
+            </p>
+        }
+    }
+    else
+    {
+        <p>
+            Contact tracking is currently disabled. 
+            To use personalized content, you need to enable the 'Settings -> On-line marketing -> Enable on-line marketing' setting in the connected Kentico instance.
+        </p>
+    }
+}
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

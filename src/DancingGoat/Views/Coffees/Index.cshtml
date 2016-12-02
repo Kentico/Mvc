@@ -1,0 +1,31 @@
+﻿@using DancingGoat.Models.Products
+@model ProductListViewModel
+
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.Coffees");
+}
+
+<div class="product-page row">
+    <div class="flex">
+        <aside class="col-md-4 col-lg-3 product-filter">
+            @using (Html.BeginForm("Filter", "Coffees"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Partial("CoffeeFilter", Model.Filter)
+            }
+        </aside>
+
+        <div id="product-list" class="col-md-8 col-lg-9 product-list">
+            @Html.Partial("CoffeeList", Model.Items)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/formAutoPost.js")
+
+    <script>
+        $(".js-postback input:checkbox").formAutoPost({ targetContainerSelector: "#product-list" });
+    </script>
+}

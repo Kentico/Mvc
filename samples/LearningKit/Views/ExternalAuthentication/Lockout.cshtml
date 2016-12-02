@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Account disabled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User account disabled</h2>
+<p>
+    Authentication via the external service was successful, but the corresponding Kentico user account is currently disabled. You cannot sign in.
+</p>
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

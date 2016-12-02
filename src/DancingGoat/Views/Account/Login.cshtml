@@ -1,0 +1,65 @@
+﻿@model DancingGoat.Models.Account.LoginViewModel
+
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.SignIn");
+}
+
+<div class="signin-register">
+    <div class="row">
+        <div class="col-md-6 zone-dark">
+            <h2>@ResHelper.GetString("DancingGoatMvc.SignIn")</h2>
+            <div class="separator"></div>
+            <div class="form-group-input">
+                <div class="logon-page-background">
+                    <div class="logon-panel">
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal" role="form">
+                                @if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+                                {
+                                    @Html.Raw(HttpUtility.HtmlDecode(@Html.ValidationSummary(true, "", new { @class = "text-danger" }).ToHtmlString()))
+                                }
+                                <div class="form-group">
+                                    <div class="editing-form-label-cell">
+                                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="editing-form-value-cell">
+                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="editing-form-label-cell">
+                                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="editing-form-value-cell">
+                                        @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="logon-remember-me-checkbox checkbox">@Html.EditorFor(model => model.StaySignedIn) @Html.LabelFor(model => model.StaySignedIn)</span>
+                            <input type="submit" value="@ResHelper.GetString("DancingGoatMvc.SignIn")" class="btn btn-primary" />
+                        }
+
+                    </div>
+
+                    @Ajax.ActionLink(ResHelper.GetString("DancingGoatMvc.ForgottenPassword"), "RetrievePassword", null,
+                                     new AjaxOptions { UpdateTargetId = "retrievePasswordWrap" }, new { @class = "logon-password-retrieval-link" })
+
+                    <div id="retrievePasswordWrap">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 zone-light">
+            <h2>@ResHelper.GetString("DancingGoatMvc.SignIn.NewToDancingGoat")</h2>
+            <p>@ResHelper.GetString("DancingGoatMvc.SignIn.ItOnlyTakesAMoment")</p>
+            @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.Register"), "Register", null, new { @class = "btn btn-secondary btn-default" })
+        </div>
+    </div>
+</div>

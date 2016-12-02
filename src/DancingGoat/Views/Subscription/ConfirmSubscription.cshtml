@@ -1,0 +1,28 @@
+﻿@model DancingGoat.Models.Subscription.ConfirmSubscriptionModel
+@{
+    ViewBag.Title = ResHelper.GetString("DancingGoatMvc.News.Subscription");
+}
+
+<section class="row text-and-image">
+    <div class="col-md-6">
+        <div class="text-and-image-text">
+            <img class="img-responsive" src="@Url.Content(ViewData.ModelState.IsValid ? "~/Content/Images/default-image-cafe.jpg" : "~/Content/Images/empty_cup.jpg")" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>@ResHelper.GetString(ViewData.ModelState.IsValid ? "DancingGoatMvc.News.ConfirmSubscriptionOK" : "DancingGoatMvc.News.ConfirmSubscriptionError")</h2>
+        <p>
+            <span class="InfoLabel">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    @Html.ValidationMessage(String.Empty)
+                }
+                else
+                {
+                    @Model.ConfirmationResult
+                }
+            </span>
+        </p>
+    </div>
+</section>
+

@@ -1,0 +1,75 @@
+﻿@* This is a dummy view file with code snippets used in the Kentico documentation. *@
+@* These code snippets do NOT take any part in the runnable LearningKit project. *@
+
+@using Kentico.Web.Mvc
+@using Kentico.Ecommerce
+
+@{
+    string productImagePath = "";
+    int width = 0;
+    int height = 0;
+    ShoppingCartItem cartItem = new ShoppingCartItem(null);
+}
+
+@* E-commerce *@
+    @*DocSection:ImageUrl*@
+    @Url.Kentico().ImageUrl(productImagePath, SizeConstraint.Size(width, height))
+    @*EndDocSection:ImageUrl*@
+
+    @*DocSection:ImageUrlExample*@
+    <img src="@Url.Kentico().ImageUrl("~/image.jpg", SizeConstraint.Size(300, 300))" alt="Product image" />
+    @*EndDocSection:ImageUrlExample*@
+
+    @*DocSection:ItemDetailActionLink*@
+    @Html.ActionLink(cartItem.Name, "ItemDetail", new { skuId = cartItem.SKUID })
+    @*EndDocSection:ItemDetailActionLink*@
+
+    @*DocSection:ItemDetailUrlLink*@
+    <a href="@Url.Action("ItemDetail", new { skuId = cartItem.SKUID })">link text</a>
+    @*EndDocSection:ItemDetailUrlLink*@
+
+    @*DocSection:VariantDisplayImg*@
+    <img id="js-product-image" ... />
+    @*EndDocSection:VariantDisplayImg*@
+
+@* Content personalization *@
+    @*DocSection:ContactGroupPersonalization*@
+    @using CMS.ContactManagement
+    @using Kentico.ContactManagement
+    
+    @{
+        // Gets the current contact
+        IContactTrackingService contactService = new ContactTrackingService();
+        ContactInfo currentContact = contactService.GetCurrentContactAsync(User.Identity.Name).Result;
+    }
+    
+    @if (currentContact != null)
+    {
+        // Displays personalized content for contacts belonging to the "YoungCustomers" contact group
+        if (currentContact.IsInContactGroup("YoungCustomers"))
+        {
+            <text>Hiya @currentContact.ContactFirstName</text>
+        }
+        else
+        {
+            <text>Hello</text>
+        }
+    }
+    @*EndDocSection:ContactGroupPersonalization*@
+
+@* Media library files *@
+@{
+    @*DocSection:MediaFileUsing*@
+    @using CMS.MediaLibrary
+    @using Kentico.Web.Mvc
+    @using Kentico.MediaLibrary
+    @using Kentico.Content.Web.Mvc
+    @*EndDocSection:MediaFileUsing*@
+
+    var mediaFile = new MediaFileInfo();
+
+    @*DocSection:MediaFileUrl*@
+    // Gets a direct URL for the media file and forces download
+    Url.Kentico().FileUrl(mediaFile.GetUrl(), new FileUrlOptions() { AttachmentContentDisposition = true })
+    @*EndDocSection:MediaFileUrl*@
+}

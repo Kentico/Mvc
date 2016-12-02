@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Product detail";
+}
+
+@*DocSection:Detail*@
+@model LearningKit.Models.Products.ProductViewModel
+
+<h2>@Model.Name</h2>
+
+<img src="@Url.Kentico().ImageUrl(Model.ImagePath, SizeConstraint.MaxWidthOrHeight(500))" alt="@Model.Name">
+
+@* Product details *@
+<ul>
+    <li>
+        @Html.Raw(@Model.Description)
+    </li>
+    <li>
+        In stock: 
+        @if(!Model.IsInStock)
+        {
+            <span id="stockMessage">Yes</span>
+        }
+        else
+        {
+            <span id="stockMessage">No</span>
+        }
+    </li>
+    <li>
+        Total price: <span id="totalPrice">@Model.PriceDetail.Currency.FormatPrice(Model.PriceDetail.Price)</span>
+    </li>
+</ul>
+@*EndDocSection:Detail*@
+
+@* Example of the 'add to cart' button for a basic checkout process without product variants
+    and for a complete checkout process including product variants *@
+@if (!Model.ProductVariants.Any())
+{
+    @*DocSection:BasicAddToCartButton*@
+    @* Add to cart button *@
+    using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
+    {
+        <input type="hidden" name="itemSkuId" value="@Model.SKUID" />
+        <label>Qty</label>
+        <input type="text" name="itemUnits" value="1" />
+        <input type="submit" name="AddItem" value="Add to cart" />
+    }
+    @*EndDocSection:BasicAddToCartButton*@
+}
+else
+{
+    @*DocSection:AddToCartButtonWithVariants*@
+    @* Add to cart button *@
+    using (Html.BeginForm("AddItem", "Checkout", FormMethod.Post))
+    {
+        <input type="hidden" name="itemSkuId" id="selectedVariantID" value="@Model.SelectedVariantID" />
+        <label>Qty</label>
+        <input type="text" name="itemUnits" value="1" />
+        <input type="submit" name="AddItem" value="Add to cart" />
+    }
+    @*EndDocSection:AddToCartButtonWithVariants*@
+}
+
+@*DocSection:VariantSelection*@
+@if (Model.ProductVariants.Any())
+{
+    <div class="cart-item-selector" data-variant-action="@Url.Action("Variant")">
+        <p>
+            Choose your desired variant:
+            @Html.DropDownListFor(m => m.SelectedVariantID, Model.VariantSelectList, new { @class = "js-variant-selector" })
+        </p>
+    </div>
+}
+
+@Scripts.Render("~/Scripts/jquery-2.1.4.min.js")
+@Scripts.Render("~/Scripts/variantSelector.js")
+@*EndDocSection:VariantSelection*@
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

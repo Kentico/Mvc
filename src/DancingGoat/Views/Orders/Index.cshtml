@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DancingGoat.Models.Orders.OrdersListViewModel>
+
+@{
+    ViewBag.Title = @ResHelper.GetString("DancingGoatMvc.YourOrders.Orders");
+}
+
+<a href="@Url.Action("YourAccount", "Account")">&larr; @ResHelper.GetString("DancingGoatMvc.YourAccount.Back")</a>
+
+
+<h2>@ResHelper.GetString("DancingGoatMvc.YourOrders.Orders")</h2>
+
+<div id="no-more-tables">
+    <table class="orders-table">
+        <thead>
+            <tr>
+                <th class="column-id">@ResHelper.GetString("DancingGoatMvc.YourOrders.OrderId")</th>
+                <th class="column-date">@ResHelper.GetString("DancingGoatMvc.YourOrders.Date")</th>
+                <th class="column-status">@ResHelper.GetString("DancingGoatMvc.YourOrders.Status")</th>
+                <th class="column-total">@ResHelper.GetString("DancingGoatMvc.YourOrders.Total")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td class="column-id">
+                        <span class="strong">@order.OrderInvoiceNumber</span>
+                        @Html.ActionLink(ResHelper.GetString("DancingGoatMvc.YourOrders.OrderDetail"), "OrderDetail", new { orderID = order.OrderID }, new { @class = "btn btn-terciary" })
+                    </td>
+                    <td class="column-date">@order.OrderDate</td>
+                    <td class="column-status">
+                        <span class="status">
+                            @ResHelper.LocalizeString(order.StatusName)
+                        </span>
+                    </td>
+                    <td class="column-total">@order.FormattedTotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

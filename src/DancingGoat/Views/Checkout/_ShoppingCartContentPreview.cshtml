@@ -1,0 +1,28 @@
+﻿@model DancingGoat.Models.Checkout.CartViewModel
+
+@foreach (var cartItem in Model.Cart.Items)
+{
+    <div class="row">
+        <div class="col-md-10">
+            <div class="cart-item-image">
+                <a href="@Url.Action("ItemDetail", new { skuId = cartItem.SKUID })">
+                    @Html.Image(@cartItem.ImagePath, @cartItem.Name, null, SizeConstraint.MaxWidthOrHeight(70))
+                </a>
+            </div>
+            <div class="cart-item-info">
+                @Html.ActionLink(cartItem.Name, "ItemDetail", new { skuId = cartItem.SKUID })
+            </div>
+            <div class="cart-item-amount">
+                <span>Qty</span>
+                <input type="text" name="Units" value="@cartItem.Units" class="form-control" disabled />
+            </div>
+
+            @Html.ValidationMessage(cartItem.ID.ToString(), new { @class = "red" })
+
+        </div>
+        <div class="col-md-2 cart-item-subtotal">
+            <span>@Model.Cart.Currency.FormatPrice(cartItem.Subtotal)</span>
+        </div>
+    </div>
+    <hr />
+}

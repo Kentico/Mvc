@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 using CMS.Routing.Web;
@@ -19,7 +20,7 @@ namespace Kentico.Web.Mvc
         {
             if (instance == null)
             {
-                throw new ArgumentNullException("instance");
+                throw new ArgumentNullException(nameof(instance));
             }
 
             var routes = instance.Target;

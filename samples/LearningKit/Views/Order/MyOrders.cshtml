@@ -1,0 +1,46 @@
+﻿@model LearningKit.Models.Checkout.OrdersViewModel
+
+@if (Model.Orders.Any())
+{
+    <h3>Your orders:</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @order.OrderID
+                </td>
+                <td>
+                    @order.OrderDate
+                </td>
+                <td>
+                    @order.StatusName
+                </td>
+                <td>
+                    @order.Currency.FormatPrice(order.TotalPrice)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Reorder", "Order", FormMethod.Post))
+                    {
+                        @Html.Hidden("OrderId", order.OrderID)
+                        <input type="submit" value="Reorder" />
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

@@ -1,0 +1,32 @@
+﻿{
+  "dependencies": {
+    "Antlr": "3.5.0.2",
+    "Autofac": "3.5.2",
+    "Autofac.Extras.DynamicProxy2": "3.0.7",
+    "Autofac.Mvc5": "3.3.4",
+    "Castle.Core": "3.3.3",
+    "Glimpse.Mvc5": "1.5.3",
+    "jQuery.Validation": "1.14.0",
+    "Kentico.LanguagePack.English": "10.0.0",
+    "Kentico.Libraries": "10.0.0",
+    "Microsoft.AspNet.Identity.Owin": "2.2.1",
+    "Microsoft.AspNet.Mvc": "5.2.3",
+    "Microsoft.AspNet.Web.Optimization": "1.1.3",
+    "Microsoft.Bcl.Async": "1.0.168",
+    "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": "1.0.1",
+    "Microsoft.jQuery.Unobtrusive.Validation": "3.2.3",
+    "Microsoft.Owin.Host.SystemWeb": "3.0.1",
+    "Microsoft.Owin.Security.Cookies": "3.0.1",
+    "Microsoft.Owin.Security.OAuth": "3.0.1",
+    "Microsoft.Web.Infrastructure": "1.0.0.0",
+    "Newtonsoft.Json": "8.0.3",
+    "WebGrease": "1.6.0",
+    "X.PagedList.Mvc": "4.9.1.310"
+  },
+  "frameworks": {
+    "net45": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

@@ -1,0 +1,48 @@
+﻿@model Kentico.Ecommerce.ShoppingCart
+
+@{
+    var tax = Model.TotalTax;
+    var shipping = Model.Shipping;
+    var currency = Model.Currency;
+}
+
+@if (tax > 0)
+{
+    <div class="cart-total-viewer">
+        <div class="label">
+            @ResHelper.GetString("DancingGoatMvc.ShoppingCart.TotalTax")
+        </div>
+        <div class="value">
+            @currency.FormatPrice(tax)
+        </div>
+    </div>
+}
+
+@if (shipping > 0)
+{
+    <div class="cart-total-viewer">
+        <div class="label">
+            @ResHelper.GetString("DancingGoatMvc.ShoppingCart.Shipping")
+        </div>
+        <div class="value">
+            @currency.FormatPrice(shipping)
+        </div>
+    </div>
+}
+
+
+@if ((tax > 0) || (shipping > 0))
+{
+    <hr />
+}
+
+<div class="cart-total">
+    <div class="cart-total-viewer">
+        <div class="label">
+            <span>@ResHelper.GetString("DancingGoatMvc.ShoppingCart.Total")</span>
+        </div>
+        <div class="value">
+            <span>@currency.FormatPrice(Model.TotalPrice)</span>
+        </div>
+    </div>
+</div>

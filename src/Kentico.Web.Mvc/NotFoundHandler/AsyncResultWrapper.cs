@@ -31,12 +31,12 @@ namespace Kentico.Web.Mvc
         {
             if (innerAsyncResult == null)
             {
-                throw new ArgumentNullException("innerAsyncResult");
+                throw new ArgumentNullException(nameof(innerAsyncResult));
             }
 
             if (controllerContext == null)
             {
-                throw new ArgumentNullException("controllerContext");
+                throw new ArgumentNullException(nameof(controllerContext));
             }
 
             mInnerAsyncResult = innerAsyncResult;

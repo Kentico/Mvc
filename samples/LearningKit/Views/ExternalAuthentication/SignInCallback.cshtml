@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Unable to create external account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Unable to create the external user account</h2>
+<p>
+    Authentication via the external service was successful, but a problem occurred when attempting to create a corresponding user account in Kentico. For example, a conflict with an existing username may have occurred.
+</p>
+<div>    
+    @if (!Html.ViewData.ModelState.IsValid)
+    {
+        @Html.ValidationSummary(true, "")
+    }
+</div>
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>
+

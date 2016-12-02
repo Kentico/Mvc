@@ -17,7 +17,7 @@ using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.Helpers;
 
-namespace CMS.DocumentEngine.Types
+namespace CMS.DocumentEngine.Types.DancingGoatMvc
 {
     /// <summary>
     /// Provides methods for retrieving pages of type Article.

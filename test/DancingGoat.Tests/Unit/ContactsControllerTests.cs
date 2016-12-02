@@ -2,8 +2,7 @@
 
 using CMS.DataEngine;
 using CMS.DocumentEngine;
-using CMS.DocumentEngine.Tests;
-using CMS.DocumentEngine.Types;
+using CMS.DocumentEngine.Types.DancingGoatMvc;
 using CMS.Globalization;
 using CMS.Tests;
 
@@ -14,6 +13,7 @@ using DancingGoat.Repositories;
 
 using NSubstitute;
 using NUnit.Framework;
+using Tests.DocumentEngine;
 using TestStack.FluentMVCTesting;
 
 namespace DancingGoat.Tests.Unit
@@ -41,14 +41,13 @@ namespace DancingGoat.Tests.Unit
             var cafeRepository = Substitute.For<ICafeRepository>();
             var contactRepository = Substitute.For<IContactRepository>();
             var countryRepository = Substitute.For<ICountryRepository>();
-            var outputCacheDependencies = Substitute.For<IOutputCacheDependencies>();
-            
+
             contactRepository.GetCompanyContact().Returns(contact);
             countryRepository.GetCountry(country.CountryName).Returns(country);
             countryRepository.GetState(state.StateName).Returns(state);
 
             mFormItemRepository = Substitute.For<IFormItemRepository>();
-            mController = new ContactsController(cafeRepository, socialLinkRepository, contactRepository, mFormItemRepository, countryRepository, outputCacheDependencies);
+            mController = new ContactsController(cafeRepository, socialLinkRepository, contactRepository, mFormItemRepository, countryRepository);
             mMessageModel = CreateMessageModel();
         }
 

@@ -9,18 +9,6 @@ namespace DancingGoat.Models.Subscription
         [EmailAddress(ErrorMessage = "General.CorrectEmailFormat")]
         [DisplayName("DancingGoatMvc.News.SubscriberEmail")]
         [MaxLength(250, ErrorMessage = "DancingGoatMvc.News.LongEmail")]
-        public string Email
-        {
-            get;
-            set;
-        }
-
-
-        [Bindable(BindableSupport.No)]
-        public bool SubscriptionSaved
-        {
-            get;
-            set;
-        }
+        public string Email { get; set; }
     }
 }

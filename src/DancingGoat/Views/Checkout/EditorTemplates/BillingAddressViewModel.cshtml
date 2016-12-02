@@ -1,0 +1,14 @@
+﻿@model DancingGoat.Models.Checkout.BillingAddressViewModel
+
+<h4>@ResHelper.GetString("DancingGoatMvc.Checkout.BillingAddress")</h4>
+
+
+<div data-addresstype='BillingAddress' data-fields='["Line1", "Line2", "City", "PostalCode"]'>
+    @Html.EditorFor(m => m.BillingAddressSelector)
+    @Html.ValidatedEditorFor(m => m.BillingAddressLine1, @ResHelper.GetString("DancingGoatMvc.Address.Line1Explanation"))
+    @Html.ValidatedEditorFor(m => m.BillingAddressLine2, @ResHelper.GetString("DancingGoatMvc.Address.Line2Explanation"))
+    @Html.ValidatedEditorFor(m => m.BillingAddressCity)
+    @Html.ValidatedEditorFor(m => m.BillingAddressPostalCode)
+
+    @Html.EditorFor(m => m.BillingAddressCountryStateSelector)
+</div>

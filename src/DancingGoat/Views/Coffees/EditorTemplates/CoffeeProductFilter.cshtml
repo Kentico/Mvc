@@ -1,0 +1,11 @@
+﻿@model DancingGoat.Models.Coffees.CoffeeProductFilterCheckboxViewModel[]
+
+@for (var i = 0; i < Model.Length; i++)
+{
+    @Html.HiddenFor(m => Model[i].Value)
+    @Html.HiddenFor(m => Model[i].DisplayName)
+    <span class="checkbox js-postback">
+        @Html.CheckBoxFor(m => Model[i].IsChecked)
+        @Html.LabelFor(m => Model[i].IsChecked, @ResHelper.LocalizeString(Model[i].DisplayName))
+    </span>
+}

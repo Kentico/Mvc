@@ -1,0 +1,14 @@
+{
+    "dependencies": {
+		"Kentico.Libraries.Tests": "10.0.0",
+		"NSubstitute": "1.10.0",
+		"NUnit": "3.2.0",
+		"TestStack.FluentMVCTesting": "3.0.0"
+    },
+    "frameworks": {
+        "net45": { }
+    },
+    "runtimes": {
+        "win": { }
+    }
+}

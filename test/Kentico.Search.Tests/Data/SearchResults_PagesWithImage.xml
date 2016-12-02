@@ -1,4 +1,4 @@
 ﻿<SearResults>
-    <Result id="1;1_cms.document" type="cms.document" title="T1" content="C1" created="5/10/2016 21:54:55 AM" image="00000000-0000-0000-0000-000000000001" NodeID="1" ClassDisplayName="dn1" ClassName="n1" />
-    <Result id="2;2_cms.document" type="cms.document" title="T2" content="C2" created="5/11/2016 21:54:55 AM" image="00000000-0000-0000-0000-000000000002" NodeID="2" ClassDisplayName="dn2" ClassName="n2" />
+    <Result id="1;1_cms.document" type="cms.document" title="T1" content="C1" created="5/13/2016 6:54:55 AM" image="00000000-0000-0000-0000-000000000001" NodeID="1" ClassDisplayName="dn1" ClassName="n1" />
+    <Result id="2;2_cms.document" type="cms.document" title="T2" content="C2" created="5/13/2016 11:54:55 PM" image="00000000-0000-0000-0000-000000000002" NodeID="2" ClassDisplayName="dn2" ClassName="n2" />
 </SearResults>
