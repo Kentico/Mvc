@@ -23,6 +23,12 @@
 
 * The `Kentico.Web.Mvc` integration package's logic for generating preview URLs, working with attachments, and managing media library files was transferred to a new `Kentico.Content.Web.Mvc` integration package. To continue using this functionality, you have to install the `Kentico.Content.Web.Mvc` integration package into your MVC solution.
 
+### 1.0.1 (2015-12-14)
+
+#### Fixed
+
+- Fix an exception when invoking an asynchronous action if using global handling of the "Not found" status.
+[#1](https://github.com/Kentico/Mvc/pull/1)    
 
 ## Kentico.Search
 
@@ -56,12 +62,3 @@
 	* The `ConfirmSubscription` method was added to ease the use of the double opt-in feature.
 	* The return type of the `Unsubscribe` and `UnsubscribeFromAll` methods is void.
 
-
-## Kentico.Web.Mvc
-
-### 1.0.1 (2015-12-14)
-
-#### Fixed
-
-- Fix an exception when invoking an asynchronous action if using global handling of the "Not found" status.
-[#1](https://github.com/Kentico/Mvc/pull/1)    
