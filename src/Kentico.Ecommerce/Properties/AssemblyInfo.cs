@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Kentico.Ecommerce")]
-[assembly: AssemblyDescription("Improved API for Kentico Ecommerce.")]
+[assembly: AssemblyDescription("Kentico.Ecommerce contains API for product management, shopping cart manipulation, and other functionality needed to create and run on-line stores in web applications that access Kentico externally.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico Software")]
 [assembly: AssemblyProduct("Kentico.Ecommerce")]
@@ -14,6 +14,6 @@ using System.Runtime.InteropServices;
 [assembly: Guid("5047a2a8-707c-49f0-995b-15bd5456ab2f")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.1")]
 
 [assembly: InternalsVisibleTo("Kentico.Ecommerce.Tests")]

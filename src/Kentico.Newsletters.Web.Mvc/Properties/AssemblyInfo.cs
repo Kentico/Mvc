@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Kentico.Newsletters.Web.Mvc")]
-[assembly: AssemblyDescription("Improved API for Kentico Newsletters.")]
+[assembly: AssemblyDescription("Kentico.Newsletters.Web.Mvc contains API for tracking marketing emails in MVC applications.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico Software")]
 [assembly: AssemblyProduct("Kentico.Newsletters.Web.Mvc")]
