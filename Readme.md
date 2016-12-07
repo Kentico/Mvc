@@ -38,7 +38,7 @@ The Learning Kit is a functional website for learning purposes. It demonstrates 
 2. [Create a new site](https://docs.kentico.com/x/-hWzAw) in the **Sites** application based on the **MVC Blank Site** web template.
 3. [Enable web farms](https://docs.kentico.com/k10/configuring-kentico/optimizing-website-performance/setting-up-web-farms/configuring-web-farm-servers#Configuringwebfarmservers-Configuringwebfarmsautomatically) in automatic mode.
 4. Rename the `samples\LearningKit\ConnectionStrings.config.template` file to `ConnectionStrings.config`.
-5. Rename the `src\DancingGoat\AppSettings.config.template` file to `AppSettings.config`.
+5. Rename the `samples\LearningKit\AppSettings.config.template` file to `AppSettings.config`.
 6. Copy the `CMSConnectionString` connection string from the Kentico `web.config` file to the `samples\LearningKit\ConnectionStrings.config` file.
 7. Copy the `CMSHashStringSalt` app setting from the Kentico `web.config` file to the `samples\LearningKit\AppSettings.config` file.
 8. Open the `KenticoMvc` solution in Visual Studio and run the samples\LearningKit web application.
