@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Kentico.Newsletters.Web.Mvc")]
-[assembly: AssemblyDescription("Improved API for Kentico Newsletters.")]
+[assembly: AssemblyDescription("Kentico.Newsletters.Web.Mvc contains API for tracking marketing emails in MVC applications.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico Software")]
 [assembly: AssemblyProduct("Kentico.Newsletters.Web.Mvc")]
@@ -13,4 +13,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("4be77c2e-8f3d-4896-b00e-fa178e40bd7a")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.1")]

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Kentico.Newsletters")]
-[assembly: AssemblyDescription("Improved API for Kentico Newsletters.")]
+[assembly: AssemblyDescription("Kentico.Newsletters contains API for managing newsletter subscriptions and unsubscriptions for all types of email feeds in web applications that access Kentico externally.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico Software")]
 [assembly: AssemblyProduct("Kentico.Newsletters")]
@@ -13,4 +13,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("4be77c2e-8f3d-4896-b00e-fa178e40bd7a")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0")]
+[assembly: AssemblyInformationalVersion("2.0.1")]
