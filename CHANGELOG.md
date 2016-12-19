@@ -59,7 +59,7 @@
 * Methods of the newsletter subscription service (`NewsletterSubscriptionService`) were changed:
 	* Removed the `Subscribe` methods accepting an email or `SubscriberInfo` parameters. Use `Subscribe(ContactInfo contact, NewsletterInfo newsletter, NewsletterSubscriptionSettings subscriptionSettings)` instead.
 	* The return value of the `Subscribe` method now indicates whether a new subscription was created, or had already existed.
-	* The `ConfirmSubscription` method was added to ease the use of the double opt-in feature.
+	* The `ConfirmSubscription` method was added to simplify the use of the double opt-in feature.
 	* The return type of the `Unsubscribe` and `UnsubscribeFromAll` methods is void.
 
 ## Kentico.Newsletter.Web.Mvc
@@ -68,6 +68,6 @@
 
 #### Fixed
 
-- Fix NuGet dependency typo in Kentico.Newsletter.Web.Mvc package. This package could not be installed separately into projects with NuGet dependencies specified in project.json file.
-[#11](https://github.com/Kentico/Mvc/pull/16)
+- Fix NuGet dependency typo in Kentico.Newsletter.Web.Mvc package. This package could not be installed separately into projects with NuGet dependencies specified in the project.json file.
+[#16](https://github.com/Kentico/Mvc/pull/16)
 
