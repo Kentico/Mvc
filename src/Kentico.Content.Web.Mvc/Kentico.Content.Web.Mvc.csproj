@@ -52,6 +52,7 @@
     <Compile Include="Preview\IPreviewFeature.cs" />
     <Compile Include="Preview\PreviewFeature.cs" />
     <Compile Include="Preview\PreviewFeatureModule.cs" />
+    <Compile Include="Preview\PreviewOutputCacheFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

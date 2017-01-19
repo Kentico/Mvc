@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Helpers;
 
 using CMS.DocumentEngine;
@@ -21,6 +22,7 @@ namespace Kentico.Content.Web.Mvc
         public void Initialize(HttpApplication application)
         {
             application.BeginRequest += HandleBeginRequest;
+            GlobalFilters.Filters.Add(new PreviewOutputCacheFilter());
         }
 
 
@@ -29,7 +31,6 @@ namespace Kentico.Content.Web.Mvc
             var application = (HttpApplication)sender;
             var context = application.Context;
             var relativeFilePath = context.Request.AppRelativeCurrentExecutionFilePath.TrimStart('~');
-
 
             // Check whether the current request URL contains information about a preview mode
             if (HandleVirtualContext(ref relativeFilePath))
@@ -50,11 +51,6 @@ namespace Kentico.Content.Web.Mvc
 
                 // Remove preview mode information from the request URL
                 context.RewritePath("~" + relativeFilePath, context.Request.PathInfo, context.Request.Url.Query.TrimStart('?'));
-            }
-            else
-            {
-                // Add validation callback for the output cache item to ignore it in a preview mode
-                context.Response.Cache.AddValidationCallback(ValidateCacheItem, null);
             }
 
             var previewFeature = new PreviewFeature();
@@ -88,15 +84,6 @@ namespace Kentico.Content.Web.Mvc
             var query = new DocumentQuery().WhereEquals("DocumentWorkflowCycleGUID", identifier);
 
             return query.HasResults();
-        }
-
-
-        private static void ValidateCacheItem(HttpContext context, object data, ref HttpValidationStatus status)
-        {
-            if (context.Kentico().Preview().Enabled)
-            {
-                status = HttpValidationStatus.IgnoreThisRequest;
-            }
         }
     }
 }
