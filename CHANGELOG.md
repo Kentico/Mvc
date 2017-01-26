@@ -62,6 +62,8 @@
 #### Fixed
 
 * Updated Kentico package description for NuGet.org.
+* Fix client caching for static content when Preview module is enabled.
+[#20](https://github.com/Kentico/Mvc/pull/20)
 
 ## Kentico.Core
 
