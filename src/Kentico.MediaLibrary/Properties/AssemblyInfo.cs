@@ -14,6 +14,6 @@ using System.Runtime.InteropServices;
 [assembly: Guid("dcaa1096-aa1d-4a70-9b14-77ee7714e12a")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.1")]
+[assembly: AssemblyInformationalVersion("1.0.1.1")]
 
 [assembly: InternalsVisibleTo("Kentico.MediaLibrary.Tests")]
