@@ -125,7 +125,7 @@
 
 #### Release notes
 
-* New `Kentico.Glimpse` package that provides an integration with [Glimpse](http://getglimpse.com/) that provides debug information from Kentico. See [Debugging SQL queries with Glimpse on MVC sites](https://docs.kentico.com/x/WoDFAw).
+* New `Kentico.Glimpse` package that provides an integration with [Glimpse](http://getglimpse.com/) that provides debug information from Kentico. See [Debugging SQL queries with Glimpse on MVC sites](https://docs.kentico.com/x/jYDFAw).
 * This package version supports integration with Kentico 9.
 
 
