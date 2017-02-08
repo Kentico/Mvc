@@ -11,6 +11,7 @@
 #### Release notes
 
 * New `Kentico.Activities` integration package that provides API for logging of Kentico activities. See [Logging activities on MVC sites](https://docs.kentico.com/x/foDFAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.Activities.Web.Mvc
@@ -26,6 +27,7 @@
 #### Release notes
 
 * New `Kentico.Activities.Web.Mvc` integration package that provides API for logging of the external search and page related activities. See [Enabling tracking of activities on MVC sites](https://docs.kentico.com/x/qYLeAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.CampaignLogging.Web.Mvc
@@ -41,6 +43,7 @@
 #### Release notes
 
 * New `Kentico.CampaignLogging.Web.Mvc` integration package that allows tracking of campaign conversions for pages hosted on external MVC sites. See [Tracking campaigns on MVC sites](https://docs.kentico.com/x/TqDlAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.ContactManagement
@@ -57,6 +60,7 @@
 
 * New `Kentico.ContactManagement` integration package that provides an API for tracking contacts on MVC websites. See [Tracking contacts on MVC sites](https://docs.kentico.com/x/ygG9Aw).
 * Improved the API for creating content personalization conditions within MVC code. See [Content personalization on MVC sites](https://docs.kentico.com/x/86HlAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.Content.Web.Mvc
@@ -74,6 +78,7 @@
 #### Release notes
 
 * New `Kentico.Content.Web.Mvc` integration package that provides an API for working with attachments, media library files, and preview mode in MVC applications. See [Retrieving content on MVC sites](https://docs.kentico.com/x/1xyzAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.Core
@@ -89,6 +94,7 @@
 #### Release notes
 
 * New `Kentico.Core` integration package that provides a code used by other Kentico integration packages to help identify services and repositories suitable for management by a dependency injection container. This package is primarily intended for MVC projects using the Kentico integration packages.
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.Ecommerce
@@ -104,6 +110,7 @@
 #### Release notes
 
 * New `Kentico.Ecommerce` integration package that provides API for developing and running on-line stores. See [Developing on-line stores in MVC](https://docs.kentico.com/x/-RyzAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.MediaLibrary
@@ -119,6 +126,7 @@
 #### Release notes
 
 * New `Kentico.MediaLibrary` integration package that provides API for working with media library files. See [Working with media libraries on MVC sites](https://docs.kentico.com/x/EYD5Aw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.Membership
@@ -128,6 +136,7 @@
 #### Release notes
 
 * New `Kentico.Membership` integration package that provides an API for working with Kentico users and roles in MVC applications. See [Working with users on MVC sites](https://docs.kentico.com/x/Ph6zAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.Newsletter
@@ -139,6 +148,10 @@
 * Updated Kentico package description for NuGet.org.
 
 ### 2.0.0 (2016-12-02)
+
+#### Release notes
+
+* This package version supports integration with Kentico 10.
 
 #### Breaking changes
 
@@ -153,6 +166,7 @@
 #### Release notes
 
 * New `Kentico.Newsletter` intergration package that provides an API for managing newsletter subscriptions and unsubscriptions for all types of email feeds in web applications that access Kentico externally. See [Email marketing on MVC sites](https://docs.kentico.com/x/i6HlAw).
+* This package version supports integration with Kentico 9.
 
     
 ## Kentico.Newsletters.Web.Mvc
@@ -168,6 +182,7 @@
 #### Release notes
 
 * New `Kentico.Newsletters.Web.Mvc` integration package that provides tracking of marketing emails on MVC sites. See [Tracking marketing emails on MVC sites](https://docs.kentico.com/x/P4PeAw).
+* This package version supports integration with Kentico 10.
 
 
 ## Kentico.Search
@@ -179,6 +194,10 @@
 * Updated Kentico package description for NuGet.org.
 
 ### 2.0.0 (2016-12-02)
+
+#### Release notes
+
+* This package version supports integration with Kentico 10.
 
 #### Breaking changes
 
@@ -200,11 +219,16 @@
 #### Release notes
 
 * New `Kentico.Search` intergration package that provides an API for working with the Kentico smart search in web applications that access Kentico externally. See [Providing smart search on MVC sites](https://docs.kentico.com/x/3xyzAw).
+* This package version supports integration with Kentico 9.
 
 
 ## Kentico.Web.Mvc
 
 ### 2.0.0 (2016-12-02)
+
+#### Release notes
+
+* This package version supports integration with Kentico 10.
 
 #### Breaking changes
 
@@ -224,3 +248,4 @@
 #### Release notes
 
 * New `Kentico.Web.Mvc` package that provides an integration with Kentico for ASP.NET MVC 5 applications. See [Developing sites using ASP.NET MVC](https://docs.kentico.com/x/zByzAw).
+* This package version supports integration with Kentico 9.
