@@ -113,6 +113,22 @@
 * This package version supports integration with Kentico 10.
 
 
+## Kentico.Glimpse
+
+### 2.0.0 (2016-12-02)
+
+#### Release notes
+
+* This package version supports integration with Kentico 10.
+
+### 1.0.0 (2016-02-23)
+
+#### Release notes
+
+* New `Kentico.Glimpse` package that provides an integration with [Glimpse](http://getglimpse.com/) that provides debug information from Kentico. See [Debugging SQL queries with Glimpse on MVC sites](https://docs.kentico.com/x/WoDFAw).
+* This package version supports integration with Kentico 9.
+
+
 ## Kentico.MediaLibrary
 
 ### 1.0.1 (2016-12-21)
