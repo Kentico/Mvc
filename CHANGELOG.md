@@ -152,7 +152,7 @@
 
 #### Release notes
 
-* New `Kentico.Search` intergration package that provides an API for managing newsletter subscriptions and unsubscriptions for all types of email feeds in web applications that access Kentico externally. See [Email marketing on MVC sites](https://docs.kentico.com/x/i6HlAw).
+* New `Kentico.Newsletter` intergration package that provides an API for managing newsletter subscriptions and unsubscriptions for all types of email feeds in web applications that access Kentico externally. See [Email marketing on MVC sites](https://docs.kentico.com/x/i6HlAw).
 
     
 ## Kentico.Newsletters.Web.Mvc
@@ -210,7 +210,7 @@
 
 * The `Kentico.Web.Mvc` integration package's logic for generating preview URLs, working with attachments, and managing media library files was transferred to a new `Kentico.Content.Web.Mvc` integration package. To continue using this functionality, you have to install the `Kentico.Content.Web.Mvc` integration package into your MVC solution.
 
-* Attachment URL - To retrieve an attachment URL, install the `Kentico.Content.Web.Mvc` NuGet package and use `GetPath()` method of the `AttachmentInfo` object instead of `UrlHelper.Kentico().Attachment()` method.
+* Attachment URL - To retrieve an attachment URL, install the `Kentico.Content.Web.Mvc` NuGet package and use `GetPath()` method of the `Attachment` object instead of `UrlHelper.Kentico().Attachment(attachment)` method.
 
 ### 1.0.1 (2015-12-14)
 
