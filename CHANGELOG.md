@@ -1,6 +1,12 @@
 ## Kentico.Activities
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -16,7 +22,13 @@
 
 ## Kentico.Activities.Web.Mvc
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -32,7 +44,13 @@
 
 ## Kentico.CampaignLogging.Web.Mvc
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -48,7 +66,13 @@
 
 ## Kentico.ContactManagement
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -65,7 +89,13 @@
 
 ## Kentico.Content.Web.Mvc
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -83,7 +113,13 @@
 
 ## Kentico.Core
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -99,7 +135,13 @@
 
 ## Kentico.Ecommerce
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -121,7 +163,7 @@
 
 * This package version supports integration with Kentico 10.
 
-### 1.0.0 (2016-02-23)
+### 1.0.0 (2015-11-25)
 
 #### Release notes
 
@@ -131,7 +173,13 @@
 
 ## Kentico.MediaLibrary
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -157,7 +205,13 @@
 
 ## Kentico.Newsletter
 
-### 2.0.1 (2016-12-21)
+### 2.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 2.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -177,7 +231,7 @@
 	* The `ConfirmSubscription` method was added to ease the use of the double opt-in feature.
 	* The return type of the `Unsubscribe` and `UnsubscribeFromAll` methods is void.
 
-### 1.0.0 (2016-02-23)
+### 1.0.0 (2015-11-25)
 
 #### Release notes
 
@@ -187,7 +241,13 @@
     
 ## Kentico.Newsletters.Web.Mvc
 
-### 1.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 1.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -203,7 +263,13 @@
 
 ## Kentico.Search
 
-### 2.0.1 (2016-12-21)
+### 1.0.1.1 (2017-02-08)
+
+#### Fixed
+
+* Added missing package dependendies.
+
+### 2.0.1 (2017-02-01)
 
 #### Fixed
 
@@ -230,7 +296,7 @@
 - Fix searching in non-page search indexes. Search service no longer causes an exception for non-page search indexes.
 [#11](https://github.com/Kentico/Mvc/pull/11)
 
-### 1.0.0 (2016-02-23)
+### 1.0.0 (2015-11-25)
 
 #### Release notes
 
@@ -259,7 +325,7 @@
 - Fix an exception when invoking an asynchronous action if using global handling of the "Not found" status.
 [#1](https://github.com/Kentico/Mvc/pull/1)    
 
-### 1.0.0 (2016-02-23)
+### 1.0.0 (2015-11-25)
 
 #### Release notes
 
