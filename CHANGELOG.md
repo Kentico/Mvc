@@ -210,6 +210,8 @@
 
 * The `Kentico.Web.Mvc` integration package's logic for generating preview URLs, working with attachments, and managing media library files was transferred to a new `Kentico.Content.Web.Mvc` integration package. To continue using this functionality, you have to install the `Kentico.Content.Web.Mvc` integration package into your MVC solution.
 
+* Attachment URL - To retrieve an attachment URL, install the `Kentico.Content.Web.Mvc` NuGet package and use `GetPath()` method of the `AttachmentInfo` object instead of `UrlHelper.Kentico().Attachment()` method.
+
 ### 1.0.1 (2015-12-14)
 
 #### Fixed
