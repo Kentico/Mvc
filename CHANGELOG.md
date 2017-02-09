@@ -4,7 +4,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -26,7 +26,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -48,7 +48,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -70,7 +70,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -82,7 +82,7 @@
 
 #### Release notes
 
-* New `Kentico.ContactManagement` integration package that provides an API for tracking contacts on MVC websites. See [Tracking contacts on MVC sites](https://docs.kentico.com/x/ygG9Aw).
+* New `Kentico.ContactManagement` integration package that provides API for tracking contacts on MVC websites. See [Tracking contacts on MVC sites](https://docs.kentico.com/x/ygG9Aw).
 * Improved the API for creating content personalization conditions within MVC code. See [Content personalization on MVC sites](https://docs.kentico.com/x/86HlAw).
 * This package version supports integration with Kentico 10.
 
@@ -93,7 +93,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -107,7 +107,7 @@
 
 #### Release notes
 
-* New `Kentico.Content.Web.Mvc` integration package that provides an API for working with attachments, media library files, and preview mode in MVC applications. See [Retrieving content on MVC sites](https://docs.kentico.com/x/1xyzAw).
+* New `Kentico.Content.Web.Mvc` integration package that provides API for working with attachments, media library files, and preview mode in MVC applications. See [Retrieving content on MVC sites](https://docs.kentico.com/x/1xyzAw).
 * This package version supports integration with Kentico 10.
 
 
@@ -117,7 +117,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -129,7 +129,7 @@
 
 #### Release notes
 
-* New `Kentico.Core` integration package that provides a code used by other Kentico integration packages to help identify services and repositories suitable for management by a dependency injection container. This package is primarily intended for MVC projects using the Kentico integration packages.
+* New `Kentico.Core` integration package that provides code used by other Kentico integration packages to help identify services and repositories suitable for management by a dependency injection container. This package is primarily intended for MVC projects using the Kentico integration packages.
 * This package version supports integration with Kentico 10.
 
 
@@ -139,7 +139,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -167,7 +167,7 @@
 
 #### Release notes
 
-* New `Kentico.Glimpse` package that provides an integration with [Glimpse](http://getglimpse.com/) that provides debug information from Kentico. See [Debugging SQL queries with Glimpse on MVC sites](https://docs.kentico.com/x/jYDFAw).
+* New `Kentico.Glimpse` package that provides integration with [Glimpse](http://getglimpse.com/). Glimpse is a diagnostics platform that provides debug information from Kentico. See [Debugging SQL queries with Glimpse on MVC sites](https://docs.kentico.com/x/jYDFAw).
 * This package version supports integration with Kentico 9.
 
 
@@ -177,7 +177,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -199,7 +199,7 @@
 
 #### Release notes
 
-* New `Kentico.Membership` integration package that provides an API for working with Kentico users and roles in MVC applications. See [Working with users on MVC sites](https://docs.kentico.com/x/Ph6zAw).
+* New `Kentico.Membership` integration package that provides API for working with Kentico users and roles in MVC applications. See [Working with users on MVC sites](https://docs.kentico.com/x/Ph6zAw).
 * This package version supports integration with Kentico 10.
 
 
@@ -209,7 +209,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 2.0.1 (2017-02-01)
 
@@ -235,7 +235,7 @@
 
 #### Release notes
 
-* New `Kentico.Newsletter` intergration package that provides an API for managing newsletter subscriptions and unsubscriptions for all types of email feeds in web applications that access Kentico externally. See [Email marketing on MVC sites](https://docs.kentico.com/x/i6HlAw).
+* New `Kentico.Newsletter` intergration package that provides API for managing newsletter subscriptions and unsubscriptions for all types of email feeds in web applications that access Kentico externally. See [Email marketing on MVC sites](https://docs.kentico.com/x/i6HlAw).
 * This package version supports integration with Kentico 9.
 
     
@@ -245,7 +245,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 1.0.1 (2017-02-01)
 
@@ -267,7 +267,7 @@
 
 #### Fixed
 
-* Added missing package dependendies.
+* Added missing package dependencies.
 
 ### 2.0.1 (2017-02-01)
 
@@ -300,7 +300,7 @@
 
 #### Release notes
 
-* New `Kentico.Search` intergration package that provides an API for working with the Kentico smart search in web applications that access Kentico externally. See [Providing smart search on MVC sites](https://docs.kentico.com/x/3xyzAw).
+* New `Kentico.Search` intergration package that provides API for working with the Kentico smart search in web applications that access Kentico externally. See [Providing smart search on MVC sites](https://docs.kentico.com/x/3xyzAw).
 * This package version supports integration with Kentico 9.
 
 
@@ -316,7 +316,7 @@
 
 * The `Kentico.Web.Mvc` integration package's logic for generating preview URLs, working with attachments, and managing media library files was transferred to a new `Kentico.Content.Web.Mvc` integration package. To continue using this functionality, you have to install the `Kentico.Content.Web.Mvc` integration package into your MVC solution.
 
-* Attachment URL - To retrieve an attachment URL, install the `Kentico.Content.Web.Mvc` NuGet package and use `GetPath()` method of the `Attachment` object instead of `UrlHelper.Kentico().Attachment(attachment)` method.
+* Attachment URL - To retrieve an attachment URL, install the `Kentico.Content.Web.Mvc` NuGet package and use the `GetPath()` method of the `Attachment` object instead of the `UrlHelper.Kentico().Attachment(attachment)` method.
 
 ### 1.0.1 (2015-12-14)
 
@@ -329,5 +329,5 @@
 
 #### Release notes
 
-* New `Kentico.Web.Mvc` package that provides an integration with Kentico for ASP.NET MVC 5 applications. See [Developing sites using ASP.NET MVC](https://docs.kentico.com/x/zByzAw).
+* New `Kentico.Web.Mvc` package that provides integration with Kentico for ASP.NET MVC 5 applications. See [Developing sites using ASP.NET MVC](https://docs.kentico.com/x/zByzAw).
 * This package version supports integration with Kentico 9.
