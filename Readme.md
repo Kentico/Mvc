@@ -1,5 +1,7 @@
 # Kentico MVC
 
+[![Build status](https://ci.appveyor.com/api/projects/status/59lkg4bmkiwtoa6x/branch/master?svg=true)](https://ci.appveyor.com/project/kentico/mvc/branch/master) [![Q&As](https://img.shields.io/badge/chat-on%20DevNet-orange.svg)](https://devnet.kentico.com/questions-answers)
+
 [Kentico 10](https://docs.kentico.com/k10/) brings support for the development of [ASP.NET MVC 5 applications](https://docs.kentico.com/x/zByzAw). This repository contains source code for Kentico integration packages and a sample _Dancing Goat_ web application  that demonstrates all supported features related to the MVC development with Kentico. To find out more about the design of the sample web application, see the [How it works](https://github.com/Kentico/Mvc/wiki/how-it-works) page in the [Wiki](https://github.com/Kentico/Mvc/wiki). The page contains explanations of the decisions made when creating the application and can help you when building your own projects.
 
 ## Repository structure
@@ -42,3 +44,6 @@ The Learning Kit is a functional website for learning purposes. It demonstrates 
 6. Copy the `CMSConnectionString` connection string from the Kentico `web.config` file to the `samples\LearningKit\ConnectionStrings.config` file.
 7. Copy the `CMSHashStringSalt` app setting from the Kentico `web.config` file to the `samples\LearningKit\AppSettings.config` file.
 8. Open the `KenticoMvc` solution in Visual Studio and run the samples\LearningKit web application.
+
+## Feedback & Contributing
+Check out the [contributing](https://github.com/Kentico/Mvc/blob/master/CONTRIBUTING.md) page to see the best places to file issues, start discussions and begin contributing.
