@@ -10,7 +10,7 @@
         },
         watch: {
             styles: {
-                files: ['Content/Styles/**/*.less'],
+                files: ['Content/Styles/**/*a.less'],
                 tasks: ['less'],
                 options: {
                     nospawn: true
