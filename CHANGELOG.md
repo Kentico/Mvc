@@ -197,9 +197,9 @@
 
 ### 1.0.1 (2017-11-23)
 
-#### Fixed
+#### Fixed, Security
 
-* `UserManager` not to verify external and domain users' password
+* `UserManager` no longer successfully verifies passwords for external and domain users.
 
 ### 1.0.0 (2016-12-02)
 
