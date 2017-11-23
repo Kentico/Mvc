@@ -82,6 +82,24 @@ namespace Kentico.Membership.Tests
 
 
         [Test]
+        public void VerifyPassword_UserIsExternal_False()
+        {
+            var user = new User(mMembershipFakeFactory.UserExternal);
+
+            Assert.IsFalse(manager.CallProtectedVerifyPassword(user, ""));
+        }
+
+
+        [Test]
+        public void VerifyPassword_UserIsDomain_False()
+        {
+            var user = new User(mMembershipFakeFactory.UserDomain);
+
+            Assert.IsFalse(manager.CallProtectedVerifyPassword(user, ""));
+        }
+
+
+        [Test]
         public void VerifyPassword_PasswordFormatChanged_UserCanLogInWithOldPasswordHash()
         {
             settingsFake.IncludeData(new SettingsKeyInfo { KeyName = "CMSPasswordFormat", KeyValue = "sha2" });

@@ -195,6 +195,12 @@
 
 ## Kentico.Membership
 
+### 1.0.1 (2017-11-23)
+
+#### Fixed
+
+* `UserManager` not to verify external and domain users' password
+
 ### 1.0.0 (2016-12-02)
 
 #### Release notes
