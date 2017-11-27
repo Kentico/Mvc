@@ -38,6 +38,7 @@ namespace Kentico.Membership.Tests
                             USERNAME_NONEXISTENT = "NonExistentUser",
                             USERNAME_EXTERNAL = "ExternalUser",
                             USERNAME_EXTERNAL_WITH_SECURITY_STAMP = "ExternalUserWithSecurityStamp",
+                            USERNAME_DOMAIN = "DomainUser",
                             ROLE_ADMIN = "TestRoleAdmin",
                             ROLE_MEMBER = "TestRoleMember",
                             EXTERNAL_IDENTITY_KEY = "externalLogin",
@@ -52,6 +53,7 @@ namespace Kentico.Membership.Tests
                         UserDuplicateEmail2,
                         UserExternal,
                         UserExternalWithSecurityStamp,
+                        UserDomain,
                         UserWithoutPassword,
                         UserWithPassword,
                         UserWithSecurityStamp,
@@ -90,7 +92,7 @@ namespace Kentico.Membership.Tests
         {
             UserWithPassword = new UserInfo
             {
-                UserID = 10,
+                UserID = 11,
                 UserName = USERNAME_WITH_PASSWORD,
                 Enabled = true,
             };
@@ -106,9 +108,10 @@ namespace Kentico.Membership.Tests
                 UserWithoutPassword = new UserInfo { UserID = 7, UserName = USERNAME_NO_PASSWORD, Enabled = true },
                 UserExternal = new UserInfo { UserID = 8, UserName = USERNAME_EXTERNAL, Enabled = true, IsExternal = true },
                 UserExternalWithSecurityStamp = new UserInfo { UserID = 9, UserName = USERNAME_EXTERNAL_WITH_SECURITY_STAMP, Enabled = true, IsExternal = true, UserSecurityStamp = SECURITY_STAMP },
+                UserDomain = new UserInfo { UserID = 10, UserName = USERNAME_DOMAIN, Enabled = true, UserIsDomain = true },
                 UserWithPassword,
-                UserWithSecurityStamp = new UserInfo { UserID = 11, UserName = USERNAME_WITH_SECURITY_STAMP, Enabled = true, UserSecurityStamp = SECURITY_STAMP },
-                UserWithoutSecurityStamp = new UserInfo { UserID = 12, UserName = USERNAME_WITHOUT_SECURITY_STAMP, Enabled = true }           
+                UserWithSecurityStamp = new UserInfo { UserID = 12, UserName = USERNAME_WITH_SECURITY_STAMP, Enabled = true, UserSecurityStamp = SECURITY_STAMP },
+                UserWithoutSecurityStamp = new UserInfo { UserID = 13, UserName = USERNAME_WITHOUT_SECURITY_STAMP, Enabled = true }           
             };
         }
 

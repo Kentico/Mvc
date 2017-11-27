@@ -99,8 +99,9 @@ namespace Kentico.Membership
             }
 
             var userInfo = UserInfoProvider.GetUserInfo(user.UserName);
+            var result = !userInfo.IsExternal && !userInfo.UserIsDomain && !UserInfoProvider.IsUserPasswordDifferent(userInfo, password);
 
-            return Task.FromResult(!UserInfoProvider.IsUserPasswordDifferent(userInfo, password));
+            return Task.FromResult(result);
         }
 
 
