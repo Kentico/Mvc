@@ -77,7 +77,7 @@ namespace Kentico.Ecommerce
         public IEnumerable<ProductOptionCategory> GetVariantOptionCategories(int productId)
         {
             // Get a list of option categories
-            var optionCategoriesList = VariantHelper.GetProductVariantsCategories(productId, false).ToList();
+            var optionCategoriesList = VariantHelper.GetProductVariantsCategories(productId).ToList();
 
             // Get all variant's options
             var variantOptionIDs = VariantOptionInfoProvider.GetVariantOptions()

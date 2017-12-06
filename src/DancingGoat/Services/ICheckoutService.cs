@@ -111,6 +111,6 @@ namespace DancingGoat.Services
         /// <summary>
         /// Creates view model for Shopping cart step.
         /// </summary>
-        CartViewModel PrepareCartViewModel(string couponCode = null);
+        CartViewModel PrepareCartViewModel(IEnumerable<string> appliedCouponCodes = null);
     }
 }

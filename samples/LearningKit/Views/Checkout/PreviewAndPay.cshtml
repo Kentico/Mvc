@@ -41,7 +41,7 @@
 <div id="shoppingCartTotals">
     <p>Total tax: @currency.FormatPrice(Model.Cart.TotalTax)</p>
     <p>Total shipping: @currency.FormatPrice(Model.Cart.Shipping)</p>
-    <p>Total (incl. tax): @currency.FormatPrice(Model.Cart.TotalPrice)</p>
+    <p>Total (incl. tax): @currency.FormatPrice(Model.Cart.GrandTotal)</p>
 </div>
 
 @using (Html.BeginForm("PreviewAndPay", "Checkout", FormMethod.Post))

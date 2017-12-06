@@ -35,8 +35,8 @@ namespace Kentico.Ecommerce.Tests
         [SetUp]
         public void TestSetUp()
         {
-            ObjectFactory<IActivityLogService>.SetObjectTypeTo<ActivityLogServiceFake>(true);
-            ObjectFactory<ILocalizationService>.SetObjectTypeTo<LocalizationServiceFake>();
+            Service.Use<IActivityLogService, ActivityLogServiceFake>(Guid.NewGuid().ToString());
+            Service.Use<ILocalizationService, LocalizationServiceFake>(Guid.NewGuid().ToString());
             OrderInfoProvider.ProviderObject = new OrderInfoProviderWithMailLogging();
 
             SiteContext.CurrentSite = SiteInfo;
@@ -205,9 +205,9 @@ namespace Kentico.Ecommerce.Tests
 
             var order = ShoppingService.CreateOrder(cart);
             var mainCurrency = new Currency(CurrencyInfoProvider.GetMainCurrency(SiteContext.CurrentSiteID));
-            var orderTotalPrice = (decimal)order.OriginalOrder.OrderTotalPriceInMainCurrency;
+            var orderTotalPrice = order.OriginalOrder.OrderTotalPriceInMainCurrency;
 
-            var activityLogger = (ActivityLogServiceFake)Service.Entry<IActivityLogService>();
+            var activityLogger = (ActivityLogServiceFake)Service.Resolve<IActivityLogService>();
             var purchaseActivity = activityLogger.LoggedActivities.First(x => x.ActivityType == PredefinedActivityType.PURCHASE);
             var formattedPrice = mainCurrency.FormatPrice(orderTotalPrice);
 
@@ -228,12 +228,12 @@ namespace Kentico.Ecommerce.Tests
 
             ShoppingService.CreateOrder(cart);
 
-            var activityLogger = (ActivityLogServiceFake)Service.Entry<IActivityLogService>();
+            var activityLogger = (ActivityLogServiceFake)Service.Resolve<IActivityLogService>();
             var productPurchasedActivity = activityLogger.LoggedActivities.Where(act => act.ActivityType == PredefinedActivityType.PURCHASEDPRODUCT).ToArray();
             var listItems = cart.Items.ToList();
 
             CMSAssert.All(
-                () => Assert.That(productPurchasedActivity.Count, Is.EqualTo(2), "Logged different count of product purchased activities"),
+                () => Assert.That(productPurchasedActivity.Length, Is.EqualTo(2), "Logged different count of product purchased activities"),
                 () => Assert.That(productPurchasedActivity[0].ActivityItemID, Is.EqualTo(listItems[0].OriginalCartItem.SKUID), "SKU ID of first product differs"),
                 () => Assert.That(productPurchasedActivity[0].ActivityTitle, Is.EqualTo(listItems[0].Name), "SKU name of first product differs"),
                 () => Assert.That(productPurchasedActivity[0].ActivityValue, Is.EqualTo(listItems[0].Units.ToString()), "Product quantity of first product differs"),
@@ -294,6 +294,7 @@ namespace Kentico.Ecommerce.Tests
             cart.Customer = new Customer(Factory.CustomerAnonymous);
             cart.BillingAddress = new CustomerAddress(Factory.CustomerAddressCZE);
             cart.ShippingAddress = new CustomerAddress(Factory.CustomerAddressUSA);
+            cart.OriginalCart.Evaluate();
 
             var order = ShoppingService.CreateOrder(cart);
 
@@ -311,6 +312,7 @@ namespace Kentico.Ecommerce.Tests
             cart.AddItem(Factory.SKUAvailable.SKUID);
             cart.Customer = new Customer(Factory.CustomerAnonymous);
             cart.BillingAddress = new CustomerAddress(Factory.CustomerAddressCZE);
+            cart.OriginalCart.Evaluate();
 
             var order = ShoppingService.CreateOrder(cart);
 
@@ -329,6 +331,7 @@ namespace Kentico.Ecommerce.Tests
             cart.Customer = new Customer(Factory.CustomerAnonymous);
             cart.BillingAddress = new CustomerAddress(Factory.CustomerAddressCZE);
             cart.ShippingAddress = null;
+            cart.OriginalCart.Evaluate();
 
             var order = ShoppingService.CreateOrder(cart);
 
@@ -346,10 +349,11 @@ namespace Kentico.Ecommerce.Tests
             var cart = CreateEmptyShoppingCart();
             cart.AddItem(Factory.SKUAvailable.SKUID, itemUnits);
             cart.ShippingOption = Factory.ShippingOptionDefault;
+            cart.OriginalCart.Evaluate();
 
             var service = new PricingService();
 
-            decimal expectedAmount = (decimal)(ShippingDiscount.DiscountItemMinOrderAmount - cart.OriginalCart.TotalItemsPrice);
+            decimal expectedAmount = ShippingDiscount.DiscountItemMinOrderAmount - (cart.OriginalCart.TotalItemsPrice - cart.OriginalCart.OrderDiscount);
             expectedAmount = Math.Max(0, expectedAmount);
 
             decimal remainingAmount = service.CalculateRemainingAmountForFreeShipping(cart);

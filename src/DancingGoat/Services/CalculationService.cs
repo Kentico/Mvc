@@ -31,7 +31,7 @@ namespace DancingGoat.Services
         /// <param name="product">Product to calculate prices for.</param>
         public ProductPrice CalculateListingPrice(SKUInfo product)
         {
-            return mPricingService.CalculatePrice(product, mShoppingService.GetCurrentShoppingCart(), true, false);
+            return mPricingService.CalculatePrice(product, mShoppingService.GetCurrentShoppingCart());
         }
 
 
@@ -41,7 +41,7 @@ namespace DancingGoat.Services
         /// <param name="product">Product to calculate prices for.</param>
         public ProductPrice CalculateDetailPrice(SKUInfo product)
         {
-            return mPricingService.CalculatePrice(product, mShoppingService.GetCurrentShoppingCart(), true, false);
+            return mPricingService.CalculatePrice(product, mShoppingService.GetCurrentShoppingCart());
         }
 
 
@@ -52,7 +52,7 @@ namespace DancingGoat.Services
         /// <returns></returns>
         public ProductPrice CalculateDetailPrice(Variant variant)
         {
-            return mPricingService.CalculatePrice(variant, mShoppingService.GetCurrentShoppingCart(), true, false);
+            return mPricingService.CalculatePrice(variant, mShoppingService.GetCurrentShoppingCart());
         }
     }
 }

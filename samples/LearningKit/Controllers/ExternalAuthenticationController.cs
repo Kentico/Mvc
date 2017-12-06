@@ -3,7 +3,8 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
-
+using CMS.Helpers;
+using CMS.SiteProvider;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -133,13 +134,13 @@ namespace LearningKit.Controllers
             // Prepares a new user entity based on the external login data
             Kentico.Membership.User user = new User
             {
-                UserName = loginInfo.DefaultUserName ?? loginInfo.Email,
+                UserName = ValidationHelper.GetSafeUserName(loginInfo.DefaultUserName ?? loginInfo.Email, SiteContext.CurrentSiteName),
                 Email = loginInfo.Email,
                 Enabled = true, // The user is enabled by default
                 IsExternal = true // IsExternal must always be true for users created via external authentication
                 // Set any other required user properties using the data available in loginInfo
             };
-            
+
             // Attempts to create the user in the Kentico database
             IdentityResult result = await UserManager.CreateAsync(user);
             if (result.Succeeded)

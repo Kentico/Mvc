@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 
 using CMS.Base;
+using CMS.DataEngine;
 using CMS.Ecommerce;
 using CMS.SiteProvider;
 using CMS.Tests;
@@ -20,9 +21,10 @@ namespace Kentico.Ecommerce.Tests
         private const string PATH_TO_PRODUCT_IMAGE = "parent-product.jpg";
 
         private SKUInfo skuWithVariants;
+        private SKUInfo skuWithoutVariants;
         private OptionCategoryInfo categorySize;
         private OptionCategoryInfo categoryColor;
-
+        private const int NONEXISTENT_SKU_ID = -1;
 
         [OneTimeSetUp]
         public void FixtureSetUp()
@@ -46,16 +48,16 @@ namespace Kentico.Ecommerce.Tests
         public void SetUpOptionCategories()
         {
             // Create categories
-            categorySize = Factory.NewOptionCategory("Size", OptionCategoryTypeEnum.Attribute);
-            categorySize.Insert();
-
-            categoryColor = Factory.NewOptionCategory("Color", OptionCategoryTypeEnum.Attribute);
-            categoryColor.Insert();
+            categorySize = Factory.NewOptionCategory("Size").With(c => c.Insert());
+            categoryColor = Factory.NewOptionCategory("Color").With(c => c.Insert());
 
             // Create parent product
             skuWithVariants = Factory.NewSKU("Hammer");
             skuWithVariants.SKUImagePath = PATH_TO_PRODUCT_IMAGE;
             skuWithVariants.Insert();
+
+            // Create product without variants
+            skuWithoutVariants = Factory.NewSKU("Hammer without nails").With(s => s.Insert());
 
             // Assign categories to product
             new SKUOptionCategoryInfo
@@ -69,6 +71,13 @@ namespace Kentico.Ecommerce.Tests
             {
                 AllowAllOptions = true,
                 SKUID = skuWithVariants.SKUID,
+                CategoryID = categoryColor.CategoryID,
+            }.Insert();
+
+            new SKUOptionCategoryInfo
+            {
+                AllowAllOptions = true,
+                SKUID = skuWithoutVariants.SKUID,
                 CategoryID = categoryColor.CategoryID,
             }.Insert();
         }
@@ -184,6 +193,30 @@ namespace Kentico.Ecommerce.Tests
             CMSAssert.All(
                 () => Assert.AreEqual(2, categories.Count(), "Variant option categories are not returned."),
                 () => Assert.AreEqual(COLORS.Count(), colorCategory.CategoryOptions.Count(), "Category has wrong option count.")
+            );
+        }
+
+
+        [Test]
+        public void GetVariantOptionCategories_ExistingSKUWithoutCategories_ReturnsEmptyCollection()
+        {
+            var categories = variantRepository.GetVariantOptionCategories(skuWithoutVariants.SKUID);
+
+            CMSAssert.All(
+                () => Assert.IsNotNull(categories, "Returned null instead of an empty collection."),
+                () => Assert.IsEmpty(categories, "Returned option categories for a product without variants.")
+            );
+        }
+
+
+        [Test]
+        public void GetVariantOptionCategories_NonExistentSKU_ReturnsEmptyCollection()
+        {
+            var categories = variantRepository.GetVariantOptionCategories(NONEXISTENT_SKU_ID);
+
+            CMSAssert.All(
+                () => Assert.IsNotNull(categories, "Returned null instead of an empty collection."),
+                () => Assert.IsEmpty(categories, "Returned option categories for non-existent SKU")
             );
         }
 

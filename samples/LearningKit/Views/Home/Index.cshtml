@@ -31,19 +31,23 @@
 <ul>
     <li>
         @Html.ActionLink("Media library files listing", "ShowMediaFiles", "MediaLibrary") <br />
-    <strong>Note</strong>: The media library files listing displays files from the "SampleMediaLibrary". An error will occur if the media library does not exist in the connected Kentico database.
-</li>
+        <strong>Note</strong>: The media library files listing displays files from the "SampleMediaLibrary". An error will occur if the media library does not exist in the connected Kentico database.
+    </li>
 </ul>
 
 <h2>Forms</h2>
 <ul>
     <li>@Html.ActionLink("Sample feedback form", "Fill", "FeedbackForm")</li>
+    <li>
+        @Html.ActionLink("Sample feedback form with consent", "Fill", "FeedbackFormConsent") <br />
+        <strong>Note</strong>: The feedback form with consent demonstrates the ability to add consents to forms. An error will occur if a consent with code name "SampleFormConsent" does not exist in the connected Kentico database.
+    </li>
 </ul>
 
 <h2>E-commerce</h2>
 <ul>
     <li>@Html.ActionLink("Product listing with links to product details", "LearningProductType", "Store")<br />
-        <strong>Note</strong>: The product listing displays products from the "DancingGoatMvc.LearningProductType" <strong>product</strong> page type. An error will occur if the page type does not exist in the connected Kentico database. The page type's required properties:<br/>
+        <strong>Note</strong>: The product listing displays products from the "LearningKit.LearningProductType" <strong>product</strong> page type. An error will occur if the page type does not exist in the connected Kentico database. The page type's required properties:<br/>
         Display name: LearningProductType; Namespace: LearningKit; Name: LearningProductType; Content only page type: Yes (selected)<br/>
         2 standard fields: 1) Field name: LPTCountry; Data type: Text; 2) Field name: LPTWithFeature; Data type: Boolean (Yes/No)
     </li>
@@ -67,6 +71,16 @@
     </li>
     <li>@Html.ActionLink("Display and edit order details", "OrderDetail", "Order")</li>
     <li>@Html.ActionLink("Order listing with reorder option", "MyOrders", "Order")</li>
+</ul>
+<h2>Data protection</h2>
+<ul>
+    <li>
+        @Html.ActionLink("Tracking consent", "DisplayConsent", "TrackingConsent")<br />
+        <strong>Note</strong>: An error will occur if a consent with code name "SampleTrackingConsent" does not exist in the connected Kentico database.
+    </li>
+    <li>
+        @Html.ActionLink("Privacy page", "Index", "PrivacyPage")
+    </li>
 </ul>
 <h2>On-line marketing</h2>
 <ul>

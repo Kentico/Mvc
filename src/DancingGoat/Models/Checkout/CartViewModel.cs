@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 using Kentico.Ecommerce;
 
@@ -12,8 +12,6 @@ namespace DancingGoat.Models.Checkout
         public decimal RemainingAmountForFreeShipping { get; set; }
 
 
-        [Display(Name = "DancingGoatMvc.Checkout.CouponCode")]
-        [MaxLength(200, ErrorMessage = "General.MaxlengthExceeded")]
-        public string CouponCode { get; set; }
+        public IEnumerable<string> AppliedCouponCodes { get; set; }
     }
 }

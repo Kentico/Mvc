@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using CMS.Ecommerce;
 using CMS.SiteProvider;
 using CMS.Tests;
@@ -123,30 +122,6 @@ namespace Kentico.Ecommerce.Tests.Unit
             CMSAssert.All(
                 () => Assert.IsNotNull(variants, "Returned null instead of an empty collection."),
                 () => Assert.IsEmpty(variants, "Returned variants for a product without variant")
-            );
-        }
-
-
-        [Test]
-        public void GetVariantOptionCategories_ExistingSKUWithoutCategories_ReturnsEmptyCollection()
-        {
-            var categories = mRepository.GetVariantOptionCategories(PARENT_SKU_WITHOUTVARIANTS);
-
-            CMSAssert.All(
-                () => Assert.IsNotNull(categories, "Returned null instead of an empty collection."),
-                () => Assert.IsEmpty(categories, "Returned option categories for a product without variants.")
-            );
-        }
-
-
-        [Test]
-        public void GetVariantOptionCategories_NonExistentSKU_ReturnsEmptyCollection()
-        {
-            var categories = mRepository.GetVariantOptionCategories(NONEXISTENT_SKU_ID);
-
-            CMSAssert.All(
-                () => Assert.IsNotNull(categories, "Returned null instead of an empty collection."),
-                () => Assert.IsEmpty(categories, "Returned option categories for non-existent SKU")
             );
         }
 

@@ -739,4 +739,7 @@ If you did not submit the request please let us know.</value>
   <data name="DancingGoatMvc.PasswordReset.Email.Subject" xml:space="preserve">
     <value>Request for changing your password</value>
   </data>
+  <data name="DancingGoatMvc.Checkout.CouponCodeInvalid" xml:space="preserve">
+    <value>Discount coupon is not valid</value>
+  </data>
 </root>

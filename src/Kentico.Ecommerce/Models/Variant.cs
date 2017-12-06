@@ -46,9 +46,9 @@ namespace Kentico.Ecommerce
         /// Gets the product variant's price.
         /// </summary>
         /// <remarks>
-        /// Catalog discounts or taxes are not included. Use <see cref="PricingService.CalculatePrice(Variant, ShoppingCart, bool, bool)"/> to return the final price. 
+        /// Catalog discounts or taxes are not included. Use <see cref="PricingService.CalculatePrice(Variant, ShoppingCart)"/> to return the final price. 
         /// </remarks>
-        public decimal VariantPrice => (decimal)VariantSKU.SKUPrice;
+        public decimal VariantPrice => VariantSKU.SKUPrice;
 
 
         /// <summary>

@@ -68,6 +68,13 @@ namespace Kentico.Search.Tests
             }
 
 
+            public string ActivityUTMContent
+            {
+                get;
+                set;
+            }
+
+
             public int ActivityItemDetailID
             {
                 get;

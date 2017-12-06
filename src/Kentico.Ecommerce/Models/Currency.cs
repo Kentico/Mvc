@@ -32,7 +32,7 @@ namespace Kentico.Ecommerce
         /// <param name="price">Price amount to be formatted.</param>
         public string FormatPrice(decimal price)
         {
-            return CurrencyInfoProvider.GetFormattedPrice((double)price, OriginalCurrency, false);
+            return CurrencyInfoProvider.GetFormattedPrice(price, OriginalCurrency, false);
         }
     }
 }

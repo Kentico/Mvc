@@ -1,9 +1,26 @@
 ﻿@model DancingGoat.Models.Checkout.PaymentMethodViewModel
 
-<div class="payment-selector">                        
+<div class="payment-selector">
     @Html.LabelFor(m => m.PaymentMethodID, new { @class = "delivery-label" })
-    @Html.DropDownListFor(m => m.PaymentMethodID, Model.PaymentMethods, ResHelper.GetString("DancingGoatMvc.Payment.SelectPaymentMethod"))      
+    @Html.DropDownListFor(m => m.PaymentMethodID, Model.PaymentMethods, ResHelper.GetString("DancingGoatMvc.Payment.SelectPaymentMethod"))
     <div class="message message-error">
         @Html.ValidationMessageFor(m => m.PaymentMethodID)
-    </div>   
+    </div>
 </div>
+
+<script type="text/javascript">
+    document.onreadystatechange = function() {
+        $("#PaymentMethod_PaymentMethodID").unbind();
+        $("#PaymentMethod_PaymentMethodID").change(function() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ShippingChanged", "Checkout")',
+                dataType: "html",
+                data: { paymentId: $("#PaymentMethod_PaymentMethodID").val() },
+                success: function (result) {
+                    $("#shoppingCartTotals").html(result);
+                }
+            });
+        });
+    };
+</script>

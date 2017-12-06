@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System;
 
 using CMS.Ecommerce;
@@ -53,9 +52,9 @@ namespace Kentico.Ecommerce.Tests
         }
 
 
-        internal CurrencyInfo InitMainCurrency()
+        internal CurrencyInfo InitMainCurrency(int? siteId)
         {
-            return MainCurrency = new CurrencyInfo
+            MainCurrency = new CurrencyInfo
             {
                 CurrencyDisplayName = "Default US Dollar",
                 CurrencyCode = "USD",
@@ -64,8 +63,14 @@ namespace Kentico.Ecommerce.Tests
                 CurrencyName = "Dollar",
                 CurrencyEnabled = true,
                 CurrencyRoundTo = 2,
-                CurrencySiteID = SiteInfo.SiteID
             };
+
+            if (siteId.HasValue)
+            {
+                MainCurrency.CurrencySiteID = siteId.Value;
+            }
+
+            return MainCurrency;
         }
 
 
@@ -346,7 +351,7 @@ namespace Kentico.Ecommerce.Tests
         }
 
 
-        public SKUInfo NewSKU(string name = null, double price = 10)
+        public SKUInfo NewSKU(string name = null, decimal price = 10)
         {
             return new SKUInfo
             {
@@ -361,7 +366,7 @@ namespace Kentico.Ecommerce.Tests
         }
 
 
-        public DiscountInfo NewCatalogDiscount(double value = 10, bool isFlat = false, int order = 1)
+        public DiscountInfo NewCatalogDiscount(decimal value = 10, bool isFlat = false, int order = 1)
         {
             return new DiscountInfo
             {
@@ -374,13 +379,13 @@ namespace Kentico.Ecommerce.Tests
                 DiscountApplyTo = DiscountApplicationEnum.Products,
                 DiscountCustomerRestriction = DiscountCustomerEnum.All,
                 DiscountApplyFurtherDiscounts = true,
-                ItemDiscountIsFlat = isFlat,
+                DiscountIsFlat = isFlat,
                 DiscountValue = value
             };
         }
 
 
-        public DiscountInfo NewOrderDiscount(double value = 10, bool isFlat = false, int order = 1)
+        public DiscountInfo NewOrderDiscount(decimal value = 10, bool isFlat = false, int order = 1)
         {
             return new DiscountInfo
             {
@@ -393,13 +398,26 @@ namespace Kentico.Ecommerce.Tests
                 DiscountApplyTo = DiscountApplicationEnum.Order,
                 DiscountCustomerRestriction = DiscountCustomerEnum.All,
                 DiscountApplyFurtherDiscounts = true,
-                ItemDiscountIsFlat = isFlat,
+                DiscountIsFlat = isFlat,
                 DiscountValue = value
             };
         }
 
 
-        public DiscountInfo NewShippingDiscount(double value, bool isFlat, double minDiscountOrderAmount)
+        public GiftCardInfo NewGiftCard(decimal value = 10m)
+        {
+            return new GiftCardInfo
+            {
+                GiftCardName = NewUniqueName(),
+                GiftCardDisplayName = "Gift card",
+                GiftCardSiteID = SiteInfo.SiteID,
+                GiftCardEnabled = true,
+                GiftCardValue = value
+            };
+        }
+
+
+        public DiscountInfo NewShippingDiscount(decimal value, bool isFlat, decimal minDiscountOrderAmount)
         {
             return new DiscountInfo
             {
@@ -412,7 +430,7 @@ namespace Kentico.Ecommerce.Tests
                 DiscountApplyTo = DiscountApplicationEnum.Shipping,
                 DiscountCustomerRestriction = DiscountCustomerEnum.All,
                 DiscountApplyFurtherDiscounts = true,
-                ItemDiscountIsFlat = isFlat,
+                DiscountIsFlat = isFlat,
                 DiscountValue = value,
                 DiscountOrderAmount = minDiscountOrderAmount
             };

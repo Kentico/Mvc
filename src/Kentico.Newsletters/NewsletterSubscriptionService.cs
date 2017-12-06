@@ -63,7 +63,7 @@ namespace Kentico.Newsletters
                 throw new ArgumentNullException(nameof(newsletter));
             }
 
-            var subscriptionService = Service<ISubscriptionService>.Entry();
+            var subscriptionService = Service.Resolve<ISubscriptionService>();
 
             if (!subscriptionService.IsSubscribed(contact, newsletter))
             {
@@ -177,7 +177,7 @@ namespace Kentico.Newsletters
                 throw new ArgumentNullException(nameof(hash));
             }
 
-            var emailHashValidatorService = Service<IEmailHashValidator>.Entry();
+            var emailHashValidatorService = Service.Resolve<IEmailHashValidator>();
             bool emailIsValid = emailHashValidatorService.ValidateEmailHash(hash, email);
 
             return emailIsValid;
@@ -197,7 +197,7 @@ namespace Kentico.Newsletters
         /// <returns>Subscription confirmation result</returns>
         private ApprovalResult ConfirmSubscriptionInternal(string subscriptionHash, bool sendConfirmationEmail, DateTime datetime)
         {
-            var approvalService = Service<ISubscriptionApprovalService>.Entry();
+            var approvalService = Service.Resolve<ISubscriptionApprovalService>();
 
             return approvalService.ApproveSubscription(subscriptionHash, sendConfirmationEmail, SiteName, datetime);
         }
@@ -236,8 +236,8 @@ namespace Kentico.Newsletters
             }
 
             // Creates required Services
-            var subscriptionService = Service<ISubscriptionService>.Entry();
-            var unsubscriptionProvider = Service<IUnsubscriptionProvider>.Entry();
+            var subscriptionService = Service.Resolve<ISubscriptionService>();
+            var unsubscriptionProvider = Service.Resolve<IUnsubscriptionProvider>();
 
             if (unsubscribeFromAll)
             {

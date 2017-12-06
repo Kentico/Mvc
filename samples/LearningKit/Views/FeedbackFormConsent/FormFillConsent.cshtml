@@ -1,0 +1,67 @@
+﻿@model LearningKit.Models.Form.FeedbackFormMessageConsentModel
+
+@{
+    ViewBag.Title = "Send a feedback form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Submit a feedback form</h2>
+
+@using (Html.BeginForm("SendFeedback", "FeedbackFormConsent", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    if (!Html.ViewData.ModelState.IsValid)
+    {
+        @Html.ValidationSummary(true, "")
+    }
+    <div role="form">
+        <div>
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName, "")
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName, "")
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email, "")
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.MessageText)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.MessageText)
+            @Html.ValidationMessageFor(model => model.MessageText, "")
+        </div>
+        <div>
+            @Html.EditorFor(model => model.ConsentIsAgreed)
+            @Html.LabelFor(model => model.ConsentIsAgreed, Model.ConsentShortText)
+        </div>
+
+        <input type="submit" value="Submit" />
+    </div>
+}
+
+<p>
+    <strong>Note</strong>: This form attempts to submit data to a form with the "FeedbackFormWithConsent" code name and the following fields: UserName, UserLastName, UserEmail, UserFeedback, ConsentAgreement (Data type: GUID). An error will occur if such a form is not present in the connected Kentico database.
+</p>
+<p>
+    After submitting, the collected data will appear in your connected Kentico instance in the corresponding form's <strong>Recorded data</strong> tab.
+</p>
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

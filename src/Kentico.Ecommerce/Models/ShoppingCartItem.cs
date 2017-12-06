@@ -30,13 +30,13 @@ namespace Kentico.Ecommerce
         /// <summary>
         /// Gets the total price of the shopping cart item in the shopping cart's currency.
         /// </summary>
-        public decimal Subtotal => (decimal)OriginalCartItem.TotalPrice;
+        public decimal Subtotal => OriginalCartItem.TotalPrice;
         
 
         /// <summary>
         /// Gets the unit price of the shopping cart item.
         /// </summary>
-        public decimal UnitPrice => (decimal)OriginalCartItem.UnitPrice;
+        public decimal UnitPrice => OriginalCartItem.UnitPrice;
 
 
         /// <summary>

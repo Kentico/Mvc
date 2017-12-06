@@ -32,7 +32,7 @@ namespace LearningKit.Controllers
 
             // Inserts the collected form data to the connected database
             InsertFeedbackFormItem(model);
-        
+
             return View("FormSendSuccess");
         }
 

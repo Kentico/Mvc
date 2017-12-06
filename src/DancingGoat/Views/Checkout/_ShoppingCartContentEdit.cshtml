@@ -12,7 +12,7 @@
             <div class="cart-item-info">
                 @Html.ActionLink(cartItem.Name, "ItemDetail", new { skuId = cartItem.SKUID })
             </div>
-            @using (Html.BeginForm("ModifyItem", "Checkout", FormMethod.Post))
+            @using (Html.BeginForm("ShoppingCart", "Checkout", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <div class="cart-item-amount">

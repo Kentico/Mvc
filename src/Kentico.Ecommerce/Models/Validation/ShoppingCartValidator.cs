@@ -11,8 +11,7 @@
         /// <summary>
         /// Indicates if some validation failed.
         /// </summary>
-        public bool CheckFailed => UserDisabled || UserFromDifferentSite
-            || PaymentMethodDisabled || PaymentMethodFromDifferentSite
+        public bool CheckFailed => UserDisabled || PaymentMethodDisabled || PaymentMethodFromDifferentSite
             || ShoppingOptionDisabled || ShippingOptionFromDifferentSite
             || ((BillingAddress != null) && BillingAddress.CheckFailed)
             || ((ShippingAddress != null) && ShippingAddress.CheckFailed)
@@ -24,12 +23,6 @@
         /// True when user is not enabled.
         /// </summary>
         public bool UserDisabled { get; private set; }
-
-
-        /// <summary>
-        /// True when user is not available on the current site.
-        /// </summary>
-        public bool UserFromDifferentSite { get; private set; }
 
 
         /// <summary>
@@ -122,7 +115,6 @@
             if (mCart.User != null)
             {
                 UserDisabled = !mCart.User.Enabled;
-                UserFromDifferentSite = !mCart.User.IsInSite(mCart.OriginalCart.SiteName);
             }
         }
 

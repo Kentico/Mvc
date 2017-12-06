@@ -1968,6 +1968,24 @@ dd.product-price--retail {
 .cart-coupon-input > div {
   margin-top: 0.625rem;
 }
+.cart-coupon-input .cart-coupon-code {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+.cart-coupon-input .cart-coupon-code .label {
+  float: left;
+  padding-top: 0.5em;
+}
+.cart-coupon-input .cart-coupon-code .button {
+  text-align: right;
+}
+.cart-coupon-input .cart-coupon-code input[type="submit"] {
+  background-color: inherit;
+  border: none;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 .cart-total-viewer {
   font-size: 1rem;
 }
@@ -1983,11 +2001,6 @@ dd.product-price--retail {
   font-size: 1.125rem;
 }
 .cart-coupon-info-label {
-  font-size: 0.9rem;
-  float: left;
-}
-.cart-coupon-input .error {
-  color: #B24143;
   font-size: 0.9rem;
   float: left;
 }

@@ -10,7 +10,6 @@ namespace Kentico.Ecommerce.Tests
     [TestFixture, SharedDatabaseForAllTests]
     class ShoppingCartValidatorTests : EcommerceTestsBase
     {
-        private UserInfo mUserFromDifferentSite;
         private SiteInfo mDifferentSite;
         private CustomerInfo mDifferentCustomer;
 
@@ -29,13 +28,6 @@ namespace Kentico.Ecommerce.Tests
                 Status = SiteStatusEnum.Running,
             };
             mDifferentSite.Insert();
-
-            mUserFromDifferentSite = new UserInfo()
-            {
-                Enabled = false,
-                UserName = "DisabledUser",
-            };
-            mUserFromDifferentSite.Insert();
 
             mDifferentCustomer = new CustomerInfo()
             {
@@ -74,21 +66,6 @@ namespace Kentico.Ecommerce.Tests
             CMSAssert.All(
                 () => Assert.IsTrue(validator.CheckFailed),
                 () => Assert.IsTrue(validator.UserDisabled)
-            );
-        }
-
-
-        [Test]
-        public void Validate_UserFromDifferentSite_CheckFailed()
-        {
-            var cart = CreateValidShoppingCart();
-            cart.User = mUserFromDifferentSite;
-
-            var validator = GetValidator(cart);
-
-            CMSAssert.All(
-                () => Assert.IsTrue(validator.CheckFailed),
-                () => Assert.IsTrue(validator.UserFromDifferentSite)
             );
         }
 
@@ -239,8 +216,9 @@ namespace Kentico.Ecommerce.Tests
                 ShoppingCartShippingAddress = Factory.CustomerAddressCZE
             };
             cartInfo.Insert();
+            cartInfo.Evaluate();
 
-            var cart =  new ShoppingCart(cartInfo);
+            var cart = new ShoppingCart(cartInfo);
             cart.User = Factory.DefaultUser;
 
             return cart;

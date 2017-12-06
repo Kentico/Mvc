@@ -42,16 +42,35 @@ else
 }
 
 
-<h2>Coupon code</h2>
+<h2>Coupon codes</h2>
 
 @*DocSection:CouponCode*@
 @* Coupon code text box and apply button *@
-@using (Html.BeginForm("ShoppingCart", "Checkout", FormMethod.Post))
+@using (Html.BeginForm("AddCouponCode", "Checkout", FormMethod.Post))
 {
-    <input type="text" name="CouponCode" value="@Model.CouponCode" />
-    <input type="submit" name="ApplyCouponCode" value="Apply" />
+    <input type="text" name="CouponCode" />
+    <input type="submit" value="Apply" />
+    @Html.ValidationMessage("CouponCodeError")
 }
+@* List of applied coupon codes with remove buttons *@
+<ul>
+    @* Loops through all applied coupon codes *@
+    @foreach (string couponCode in Model.Cart.AppliedCouponCodes)
+    {
+        <li>
+            @couponCode
+            
+            @using (Html.BeginForm("RemoveCouponCode", "Checkout", FormMethod.Post))
+            {
+                <input type="hidden" name="CouponCode" value="@couponCode" />
+                <input type="submit" value="Remove" />
+            }
+        </li>
+    }
+</ul>
 @*EndDocSection:CouponCode*@
+
+<h2>Total price: @currency.FormatPrice(Model.Cart.GrandTotal)</h2>
 
 <p>
     @*DocSection:Button*@

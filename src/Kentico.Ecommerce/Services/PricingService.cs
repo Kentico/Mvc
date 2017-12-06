@@ -1,4 +1,8 @@
-﻿using CMS.Ecommerce;
+﻿using System;
+using System.Linq;
+
+using CMS.Core;
+using CMS.Ecommerce;
 
 namespace Kentico.Ecommerce
 {
@@ -12,56 +16,32 @@ namespace Kentico.Ecommerce
         /// </summary>
         /// <param name="product">SKU info object (<see cref="SKUInfo"/>) of the product for which the prices are calculated.</param>
         /// <param name="cart">Shopping cart (<see cref="ShoppingCart"/>) used to gather the price calculation information.</param>
-        /// <param name="applyDiscounts">Indicates if the prices are returned after applying catalog discounts.</param>
-        /// <param name="applyTaxes">Indicates if the prices are returned after applying taxes.</param>
         /// <returns><see cref="ProductPrice"/> object containing the product's prices.</returns>
-        public virtual ProductPrice CalculatePrice(SKUInfo product, ShoppingCart cart, bool applyDiscounts = true, bool applyTaxes = true)
+        public virtual ProductPrice CalculatePrice(SKUInfo product, ShoppingCart cart)
         {
             if ((product == null) || (cart == null))
             {
                 return null;
             }
 
-            // If the product is a variant, get the parent product's SKU object for tax calculation
-            var parent = product.IsProductVariant ? product.Parent as SKUInfo : product;
-            if (parent == null)
-            {
-                return null;
-            }
-
-            // Get the product's price and list price without taxes
             var originalCart = cart.OriginalCart;
-            var price = SKUInfoProvider.GetSKUPrice(product, originalCart, applyDiscounts, false);
-            var listPrice = product.SKURetailPrice;
+            var cartCurrency = originalCart.Currency;
 
-            // Calculate discounts and taxes if required
-            var discount = applyDiscounts ? (SKUInfoProvider.GetSKUPrice(product, originalCart) - price) : 0.0;
-            var tax = 0.0;
+            var prices = Service.Resolve<ICatalogPriceCalculatorFactory>()
+                .GetCalculator(originalCart.ShoppingCartSiteID)
+                .GetPrices(product, Enumerable.Empty<SKUInfo>(), originalCart);
 
-            if (applyTaxes)
-            {
-                // Calculate taxes and add them to the prices
-                if (price > 0)
-                {
-                    tax = SKUInfoProvider.CalculateSKUTotalTax(parent, originalCart, price);
-                    price += tax;
-                }
-
-                if (listPrice > 0)
-                {
-                    var listPriceTax = SKUInfoProvider.CalculateSKUTotalTax(parent, originalCart, listPrice);
-                    listPrice += listPriceTax;
-                } 
-            }
+            var listPriceSource = Service.Resolve<ISKUPriceSourceFactory>().GetSKUListPriceSource(originalCart.ShoppingCartSiteID);
+            var listPrice = listPriceSource.GetPrice(product, cartCurrency);
 
             // Return the calculated values
             return new ProductPrice
             {
-                Currency = new Currency(CurrencyInfoProvider.GetMainCurrency(parent.SKUSiteID)),
-                Discount = (decimal) originalCart.RoundTo(discount),
-                ListPrice = (decimal) originalCart.RoundTo(listPrice),
-                Price = (decimal) originalCart.RoundTo(price),
-                Tax = (decimal) originalCart.RoundTo(tax)
+                Currency = new Currency(cartCurrency),
+                Discount = prices.StandardPrice - prices.Price,
+                ListPrice = listPrice,
+                Price = prices.Price,
+                Tax = prices.Tax
             };
         }
 
@@ -71,12 +51,10 @@ namespace Kentico.Ecommerce
         /// </summary>
         /// <param name="variant">Variant model (<see cref="Variant"/>) of the variant's parent product for which the prices are calculated.</param>
         /// <param name="cart">Shopping cart (<see cref="ShoppingCart"/>) used to gather the price calculation information.</param>
-        /// <param name="applyDiscounts">Indicates if the prices are returned after applying catalog discounts.</param>
-        /// <param name="applyTaxes">Indicates if the prices are returned after applying taxes.</param>
         /// <returns><see cref="ProductPrice"/> object containing the variant's prices.</returns>
-        public virtual ProductPrice CalculatePrice(Variant variant, ShoppingCart cart, bool applyDiscounts = true, bool applyTaxes = true)
+        public virtual ProductPrice CalculatePrice(Variant variant, ShoppingCart cart)
         {
-            return CalculatePrice(variant.VariantSKU, cart, applyDiscounts, applyTaxes);
+            return CalculatePrice(variant.VariantSKU, cart);
         }
 
 
@@ -85,27 +63,39 @@ namespace Kentico.Ecommerce
         /// </summary>
         /// <param name="shippingInfo">Shipping option info object (<see cref="ShippingOptionInfo"/>) for which the prices are calculated.</param>
         /// <param name="cart">Shopping cart (<see cref="ShoppingCart"/>) used to gather the price calculation information.</param>
-        /// <param name="applyTaxes">Indicates if the prices are returned after applying taxes.</param>
         /// <returns><see cref="ShippingPrice"/> object containing the shipping's prices.</returns>
-        public virtual ShippingPrice CalculateShippingOptionPrice(ShippingOptionInfo shippingInfo, ShoppingCart cart, bool applyTaxes = true)
+        public virtual ShippingPrice CalculateShippingOptionPrice(ShippingOptionInfo shippingInfo, ShoppingCart cart)
         {
+            if (shippingInfo == null)
+            {
+                throw new ArgumentNullException(nameof(shippingInfo));
+            }
+
+            if (cart == null)
+            {
+                throw new ArgumentNullException(nameof(cart));
+            }
+
             var originalCart = cart.OriginalCart;
 
-            lock (originalCart)
+            // Evaluate the cart to get total items price
+            originalCart.Evaluate();
+
+            var request = Service.Resolve<IShoppingCartAdapterService>().GetCalculationRequest(originalCart);
+            request.ShippingOption = shippingInfo;
+            var calculatorData = new CalculatorData(request, new CalculationResult());
+
+            // Get shipping price
+            var shippingPrice = Service.Resolve<IShippingPriceService>().GetShippingPrice(calculatorData, originalCart.TotalItemsPrice).Price;
+
+            var roundingService = Service.Resolve<IRoundingServiceFactory>().GetRoundingService(originalCart.ShoppingCartSiteID);
+
+            return new ShippingPrice
             {
-                // Store the original shipping option ID 
-                var origShippingOptionId = originalCart.ShoppingCartShippingOptionID;
-
-                // Calculate a hypothetical shipping cost for the shipping option from the supplied list item
-                originalCart.ShoppingCartShippingOptionID = shippingInfo.ShippingOptionID;
-
-                var price = CalculateShippingOptionPrice(originalCart, applyTaxes);
-
-                // Restore the original shipping option ID
-                originalCart.ShoppingCartShippingOptionID = origShippingOptionId;
-
-                return price;
-            }
+                Currency = cart.Currency,
+                Price = roundingService.Round(shippingPrice, cart.Currency.OriginalCurrency),
+                Tax = 0m
+            };
         }
 
 
@@ -118,31 +108,10 @@ namespace Kentico.Ecommerce
         {
             if ((cart == null) || cart.IsEmpty || !cart.IsShippingNeeded)
             {
-                return 0;
+                return 0m;
             }
 
-            return (decimal)cart.OriginalCart.CalculateRemainingAmountForFreeShipping();
-        }
-
-
-        private ShippingPrice CalculateShippingOptionPrice(ShoppingCartInfo cartInfo, bool applyTaxes)
-        {
-            // Get the shipping cost for the currently processed shipping option
-            var shippingPrice = cartInfo.Shipping;
-            var tax = 0.0;
-
-            if (applyTaxes)
-            {
-                tax = cartInfo.TotalShipping - shippingPrice;
-                shippingPrice += tax;
-            }
-
-            return new ShippingPrice
-            {
-                Currency = new Currency(CurrencyInfoProvider.GetMainCurrency(cartInfo.ShoppingCartSiteID)),
-                Price = (decimal)cartInfo.RoundTo(shippingPrice),
-                Tax = (decimal)cartInfo.RoundTo(tax)
-            };
+            return cart.OriginalCart.CalculateRemainingAmountForFreeShipping();
         }
     }
 }

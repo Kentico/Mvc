@@ -27,7 +27,7 @@ namespace LearningKit.Models.Form
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "The email address field is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address format.")]
-        [MaxLength(254, ErrorMessage ="The email address cannot be longer than 254 characters.")]
+        [MaxLength(254, ErrorMessage = "The email address cannot be longer than 254 characters.")]
         public string Email
         {
             get;

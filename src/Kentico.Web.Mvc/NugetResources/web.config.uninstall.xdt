@@ -5,10 +5,6 @@
     <!-- Remove CMSHashStringSalt -->
     <add xdt:Transform="Remove" 
          xdt:Locator="Condition(@key='CMSHashStringSalt' and @value='') "/>
-
-    <!-- Remove CMSEnable51D -->
-    <add xdt:Transform="Remove" 
-         xdt:Locator="Condition(@key='CMSEnable51D' and @value='false')"/>
   </appSettings>
 
   <!-- Remove CMS connection string -->

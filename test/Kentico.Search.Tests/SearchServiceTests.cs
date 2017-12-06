@@ -23,7 +23,7 @@ namespace Kentico.Search.Tests
         [SetUp]
         public void SetUp()
         {
-            ObjectFactory<IActivityLogService>.SetObjectTypeTo<ActivityLogServiceFake>();
+            Service.Use<IActivityLogService, ActivityLogServiceFake>(Guid.NewGuid().ToString());
             Fake<UserInfo, UserInfoProvider>()
                 .WithData(new UserInfo
                 {
@@ -213,7 +213,7 @@ namespace Kentico.Search.Tests
         public void Search_WithQuery_LogsInternalSearchActivity()
         {
             // Arrange
-            var logger = (ActivityLogServiceFake)Service.Entry<IActivityLogService>();
+            var logger = (ActivityLogServiceFake)Service.Resolve<IActivityLogService>();
             var searchPhrase = "Search phrase";
 
             // Act

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-using CMS.Base;
 using CMS.Ecommerce;
 using CMS.Globalization;
 
@@ -101,13 +101,14 @@ namespace DancingGoat.Services
         /// Checks if coupon code value can be used during checkout process.
         /// </summary>
         /// <param name="couponCode">Coupon code to be checked.</param>
-        /// <returns>True if coupon code defined in <paramref name="couponCode"/> is accepted by shopping cart or if coupon code is empty.</returns>
+        /// <returns>
+        /// True if coupon code defined in <paramref name="couponCode"/> is accepted by shopping cart or if coupon code is empty or null.
+        /// </returns>
         public bool IsCouponCodeValueValid(string couponCode)
         {
             var cart = mShoppingService.GetCurrentShoppingCart();
-            var assignedCode = cart.CouponCode;
-
-            return string.IsNullOrEmpty(couponCode) || (cart.HasUsableCoupon && assignedCode.EqualsCSafe(couponCode)); 
+            
+            return string.IsNullOrEmpty(couponCode) || cart.AppliedCouponCodes.Contains(couponCode, ECommerceHelper.CouponCodeComparer);
         }
 
 
@@ -241,7 +242,7 @@ namespace DancingGoat.Services
         /// <summary>
         /// Creates view model for Shopping cart step.
         /// </summary>
-        public CartViewModel PrepareCartViewModel(string couponCode = null)
+        public CartViewModel PrepareCartViewModel(IEnumerable<string> appliedCouponCodes = null)
         {
             var cart = mShoppingService.GetCurrentShoppingCart();
 
@@ -249,7 +250,7 @@ namespace DancingGoat.Services
             {
                 Cart = cart,
                 RemainingAmountForFreeShipping = mPricingService.CalculateRemainingAmountForFreeShipping(cart),
-                CouponCode = couponCode ?? cart.CouponCode
+                AppliedCouponCodes = appliedCouponCodes ?? cart.AppliedCouponCodes
             };
         }
 

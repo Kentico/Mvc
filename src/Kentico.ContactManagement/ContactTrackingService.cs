@@ -2,12 +2,9 @@
 
 using CMS.Base;
 using CMS.ContactManagement;
+using CMS.ContactManagement.Internal;
 using CMS.Core;
-using CMS.DataEngine;
-using CMS.Helpers;
-using CMS.Helpers.Internal;
 using CMS.Membership;
-using CMS.SiteProvider;
 
 using Kentico.Membership;
 
@@ -20,9 +17,7 @@ namespace Kentico.ContactManagement
     {
         private readonly ICurrentContactProvider mCurrentContactProvider;
         private readonly ISiteService mSiteService;
-        private readonly ILicenseService mLicenseService;
-        private readonly ICrawlerChecker mCrawlerChecker;
-        private readonly ISettingsService mSettingsService;
+        private readonly IContactProcessingChecker mContactProcessingChecker;
 
 
         /// <summary>
@@ -30,11 +25,9 @@ namespace Kentico.ContactManagement
         /// </summary>
         public ContactTrackingService()
         {
-            mCurrentContactProvider = Service.Entry<ICurrentContactProvider>();
-            mSiteService = Service.Entry<ISiteService>();
-            mLicenseService = Service.Entry<ILicenseService>();
-            mCrawlerChecker = Service.Entry<ICrawlerChecker>();
-            mSettingsService = Service.Entry<ISettingsService>();
+            mCurrentContactProvider = Service.Resolve<ICurrentContactProvider>();
+            mSiteService = Service.Resolve<ISiteService>();
+            mContactProcessingChecker = Service.Resolve<IContactProcessingChecker>();
         }
 
 
@@ -77,10 +70,7 @@ namespace Kentico.ContactManagement
         /// <returns><see cref="ContactInfo"/> returned for the user.</returns>
         private async Task<ContactInfo> GetContactAsync(string userName, bool forceMatching)
         {
-            var currentSite = (SiteInfo) mSiteService.CurrentSite;
-            var requestDependencies = GetRequestDependencies();
-
-            if (!CheckEnabled(currentSite, requestDependencies))
+            if (!mContactProcessingChecker.CanProcessContactInCurrentContext())
             {
                 return null;
             }
@@ -104,10 +94,7 @@ namespace Kentico.ContactManagement
         /// <returns><see cref="ContactInfo"/> for the user from persistent storage. Returns <c>null</c> if the feature is unavailable or disabled.</returns>
         public async Task<ContactInfo> GetExistingContactAsync(string userName = null)
         {
-            var currentSite = (SiteInfo)mSiteService.CurrentSite;
-            var requestDependencies = GetRequestDependencies();
-
-            if (!CheckEnabled(currentSite, requestDependencies))
+            if (!mContactProcessingChecker.CanProcessContactInCurrentContext())
             {
                 return null;
             }
@@ -143,33 +130,6 @@ namespace Kentico.ContactManagement
         {
             var userStore = new UserStore(mSiteService.CurrentSite.SiteName);
             return await userStore.FindByNameAsync(userName);
-        }
-
-
-        /// <summary>
-        /// Creates and returns request dependencies based on <see cref="RequestContext"/>.
-        /// </summary>
-        /// <returns><see cref="RequestDependencies"/> build from <see cref="RequestContext"/>.</returns>
-        private RequestDependencies GetRequestDependencies()
-        {
-            return new RequestDependencies
-            {
-                RequestDomain = RequestContext.CurrentDomain,
-                RequestUserAgent = RequestContext.UserAgent,
-                RequestIPAddress = RequestContext.UserHostAddress,
-            };
-        }
-
-        
-        /// <summary>
-        /// Checks if Online marketing is enabled, including license check and crawler check.
-        /// </summary>
-        /// <returns>True if online marketing is enabled, license is available and check pro crawlers passed.</returns>
-        private bool CheckEnabled(ISiteInfo site, RequestDependencies requestDependencies)
-        {
-            return mSettingsService[site.SiteName + ".CMSEnableOnlineMarketing"].ToBoolean(false) &&
-                   mLicenseService.CheckLicense(FeatureEnum.FullContactManagement, requestDependencies.RequestDomain, false) &&
-                   !mCrawlerChecker.IsCrawler();
         }
     }
 }

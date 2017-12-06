@@ -45,15 +45,21 @@ namespace Kentico.Ecommerce
 
 
         /// <summary>
-        /// Gets the total price of the shopping cart. All discounts, taxes and shipping costs are included.
+        /// Gets the total price of the shopping cart. All discounts except for the order discount, taxes and shipping costs are included.
         /// </summary>
-        public decimal TotalPrice => (decimal)OriginalCart.TotalPrice;
-        
+        public decimal TotalPrice => OriginalCart.TotalPrice;
+
+
+        /// <summary>
+        /// Gets the grand total of the shopping cart. All discount, taxes and shipping costs are included.
+        /// </summary>
+        public decimal GrandTotal => OriginalCart.GrandTotal;
+
 
         /// <summary>
         /// Gets the total tax which is applied to all shopping cart items altogether.
         /// </summary>
-        public decimal TotalTax => (decimal)OriginalCart.TotalTax;
+        public decimal TotalTax => OriginalCart.TotalTax;
 
 
         /// <summary>
@@ -63,9 +69,9 @@ namespace Kentico.Ecommerce
         
 
         /// <summary>
-        /// Total shipping costs without taxes.
+        /// Total shipping costs.
         /// </summary>
-        public decimal Shipping => (decimal)OriginalCart.Shipping;
+        public decimal Shipping => OriginalCart.TotalShipping;
         
 
         /// <summary>
@@ -75,25 +81,9 @@ namespace Kentico.Ecommerce
         
 
         /// <summary>
-        /// Indicates if the assigned coupon code is usable for the shopping cart.
+        /// Customer's coupon codes applied to shopping cart.
         /// </summary>
-        public bool HasUsableCoupon => OriginalCart.HasUsableCoupon;
-
-
-        /// <summary>
-        /// Customer's coupon code used during the checkout process.
-        /// </summary>
-        public string CouponCode
-        {
-            get
-            {
-                return OriginalCart.ShoppingCartCouponCode;
-            }
-            set
-            {
-                OriginalCart.ShoppingCartCouponCode = value;
-            }
-        }
+        public IEnumerable<string> AppliedCouponCodes => OriginalCart.CouponCodes.AllAppliedCodes.Select(x => x.Code);
 
 
         /// <summary>
@@ -227,7 +217,7 @@ namespace Kentico.Ecommerce
         /// </summary>
         /// <param name="originalCart"><see cref="ShoppingCartInfo"/> object representing an original Kentico shopping cart info object from which the model is created.</param>
         public ShoppingCart(ShoppingCartInfo originalCart)
-            :this(originalCart, new EcommerceActivityLogger(), Service<ICurrentContactProvider>.Entry())
+            :this(originalCart, new EcommerceActivityLogger(), Service.Resolve<ICurrentContactProvider>())
         {
         }
 
@@ -319,7 +309,6 @@ namespace Kentico.Ecommerce
             }
             
             ShoppingCartItemInfoProvider.UpdateShoppingCartItemUnits(item.OriginalCartItem, quantity);
-            OriginalCart.InvalidateCalculations();
 
             mItems = null;
         }
@@ -341,7 +330,7 @@ namespace Kentico.Ecommerce
             }
 
             var originalItem = item.OriginalCartItem;
-            OriginalCart.RemoveShoppingCartItem(originalItem.CartItemID);
+            ShoppingCartInfoProvider.RemoveShoppingCartItem(OriginalCart, originalItem.CartItemID);
             
             mActivityLogger?.LogProductRemovedFromShoppingCartActivity(originalItem.SKU ,originalItem.CartItemUnits);
             ShoppingCartItemInfoProvider.DeleteShoppingCartItemInfo(originalItem);
@@ -378,6 +367,15 @@ namespace Kentico.Ecommerce
 
 
         /// <summary>
+        /// Evaluates the price information.
+        /// </summary>
+        public void Evaluate()
+        {
+            OriginalCart.Evaluate();
+        }
+
+
+        /// <summary>
         /// Saves the shopping cart into the database.
         /// </summary>
         /// <param name="validate">Specifies whether the validation should be performed.</param>
@@ -402,6 +400,26 @@ namespace Kentico.Ecommerce
                 item.ShoppingCartID = OriginalCart.ShoppingCartID;
                 ShoppingCartItemInfoProvider.SetShoppingCartItemInfo(item);
             }
+        }
+
+
+        /// <summary>
+        /// Add the specified coupon code to the shopping cart.
+        /// </summary>
+        /// <param name="couponCode">Coupon code to add</param>
+        public bool AddCouponCode(string couponCode)
+        {
+            return OriginalCart.AddCouponCode(couponCode);
+        }
+
+
+        /// <summary>
+        /// Remove specified coupon code from the shopping cart.
+        /// </summary>
+        /// <param name="couponCode">Coupon code to remove</param>
+        public void RemoveCouponCode(string couponCode)
+        {
+            OriginalCart.RemoveCouponCode(couponCode);
         }
 
 
@@ -466,7 +484,8 @@ namespace Kentico.Ecommerce
                 CustomerEmail = user.Email,
                 CustomerFirstName = user.FirstName,
                 CustomerLastName = user.LastName,
-                CustomerUserID = user.UserID
+                CustomerUserID = user.UserID,
+                CustomerPhone = user.UserSettings.UserPhone
             };
         }
 
@@ -481,7 +500,7 @@ namespace Kentico.Ecommerce
             var currentContact = mCurrentContactProvider.GetCurrentContact(MembershipContext.AuthenticatedUser, false);
             mCurrentContactProvider.SetCurrentContact(currentContact);
 
-            Service.Entry<IContactRelationAssigner>().Assign(MemberTypeEnum.EcommerceCustomer, customerInfo, currentContact, true);
+            Service.Resolve<IContactRelationAssigner>().Assign(MemberTypeEnum.EcommerceCustomer, customerInfo, currentContact);
             ContactInfoProvider.UpdateContactFromExternalData(
                 customerInfo,
                 DataClassInfoProvider.GetDataClassInfo(CustomerInfo.TYPEINFO.ObjectClassName).ClassContactOverwriteEnabled,

@@ -23,7 +23,7 @@ namespace DancingGoat.Web.Controllers
 
         private NewsletterSubscriptionSettings mNewsletterSubscriptionSettings;
 
-        private readonly IContactProvider mContactProvider = Service<IContactProvider>.Entry();
+        private readonly IContactProvider mContactProvider = Service.Resolve<IContactProvider>();
 
         private NewsletterSubscriptionSettings NewsletterSubscriptionSettings
         {
@@ -132,7 +132,7 @@ namespace DancingGoat.Web.Controllers
             DateTime parsedDateTime = DateTimeHelper.ZERO_TIME;
 
             // Parse date and time from query string, if present
-            if (!string.IsNullOrEmpty(model.DateTime) && !DateTime.TryParseExact(model.DateTime, SecurityHelper.EMAIL_CONFIRMATION_DATETIME_FORMAT, null, System.Globalization.DateTimeStyles.None, out parsedDateTime))
+            if (!string.IsNullOrEmpty(model.DateTime) && !DateTimeUrlFormatter.TryParse(model.DateTime, out parsedDateTime))
             {
                 ModelState.AddModelError(String.Empty, ResHelper.GetString("DancingGoatMvc.News.ConfirmSubscriptionInvalidDateTime"));
 

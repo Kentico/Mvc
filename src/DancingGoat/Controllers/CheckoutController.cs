@@ -21,19 +21,6 @@ namespace DancingGoat.Controllers
         private readonly IProductRepository mProductRepository;
 
 
-        private ViewDataDictionary CheckoutViewData
-        {
-            get
-            {
-                return (ViewDataDictionary)TempData["ViewData"];
-            }
-            set
-            {
-                TempData["ViewData"] = value;
-            }
-        }
-
-
         public CheckoutController(IShoppingService shoppingService, IContactRepository contactRepository, IProductRepository productRepository, ICheckoutService checkoutService)
         {
             mShoppingService = shoppingService;
@@ -45,13 +32,7 @@ namespace DancingGoat.Controllers
 
         public ActionResult ShoppingCart(CartViewModel cartViewModel)
         {
-            // Check if there are some stored view data from another actions (e.g. from UpdateItem, coupon code application)
-            if (CheckoutViewData != null)
-            {
-                ViewData = CheckoutViewData;
-            }
-
-            var viewModel = mCheckoutService.PrepareCartViewModel(cartViewModel.CouponCode);
+            var viewModel = mCheckoutService.PrepareCartViewModel();
 
             return View(viewModel);
         }
@@ -64,23 +45,19 @@ namespace DancingGoat.Controllers
         {
             var cart = mShoppingService.GetCurrentShoppingCart();
             var checkResult = cart.ValidateContent();
-            var code = model.CouponCode;
+                        
+            cart.Evaluate();
 
-            var isValid = ModelState.IsValidField("CouponCode");
-
-            // Remove a valid coupon in case it was applied before an invalid coupon was submitted
-            cart.CouponCode = isValid ? code : "";
-
-            if (isValid && ProcessCouponCodeValueCheck(code) && !checkResult.CheckFailed)
+            if (!checkResult.CheckFailed)
             {
                 cart.Save();
                 return RedirectToAction("DeliveryDetails");
             }
-
+            
             // Fill model state with errors from the check result
             ProcessCheckResult(checkResult);
 
-            var viewModel = mCheckoutService.PrepareCartViewModel(code);
+            var viewModel = mCheckoutService.PrepareCartViewModel(cart.AppliedCouponCodes);
 
             return View("ShoppingCart", viewModel);
         }
@@ -89,28 +66,37 @@ namespace DancingGoat.Controllers
         [HttpPost]
         [ButtonNameAction]
         [ValidateInput(false)]
-        public ActionResult ApplyCouponCode(CartViewModel model)
+        public ActionResult AddCouponCode(CouponCodesUpdateModel model)
         {
             var cart = mShoppingService.GetCurrentShoppingCart();
 
-            var isValid = ModelState.IsValidField("CouponCode");
-            var code = model.CouponCode;
-
-            // Remove a valid coupon in case it was applied before an invalid coupon was submitted
-            cart.CouponCode = isValid ? code : "";
-
-            // Validate the coupon code based on the view model attributes
-            if (isValid && ProcessCouponCodeValueCheck(code))
+            var couponCode = model.NewCouponCode;
+            if (string.IsNullOrEmpty(couponCode))
             {
-                CheckoutViewData = ViewData;
-                cart.Save();
-
-                return RedirectToAction("ShoppingCart");
+                return View("ShoppingCart", mCheckoutService.PrepareCartViewModel(cart.AppliedCouponCodes));
             }
 
-            // Display the invalid coupon code
-            var cartViewModel = mCheckoutService.PrepareCartViewModel(model.CouponCode);
+            couponCode = couponCode.Trim();
+            if (!cart.AddCouponCode(couponCode))
+            {
+                ModelState.AddModelError("NewCouponCode", ResHelper.GetString("DancingGoatMvc.Checkout.CouponCodeInvalid"));
+            }            
+            
+            var cartViewModel = mCheckoutService.PrepareCartViewModel(cart.AppliedCouponCodes);
+            return View("ShoppingCart", cartViewModel);
+        }
 
+
+        [HttpPost]
+        [ButtonNameAction]
+        [ValidateInput(false)]
+        public ActionResult RemoveCouponCode(CouponCodesUpdateModel model)
+        {
+            var cart = mShoppingService.GetCurrentShoppingCart();
+
+            cart.RemoveCouponCode(model.RemoveCouponCode);
+
+            var cartViewModel = mCheckoutService.PrepareCartViewModel(cart.AppliedCouponCodes);
             return View("ShoppingCart", cartViewModel);
         }
 
@@ -175,6 +161,7 @@ namespace DancingGoat.Controllers
             }
 
             cart.PaymentMethod = mCheckoutService.GetPaymentMethod(model.PaymentMethod.PaymentMethodID);
+            cart.Evaluate();
 
             mShoppingService.CreateOrder(cart);
             mShoppingService.DeleteShoppingCart(cart);
@@ -216,7 +203,8 @@ namespace DancingGoat.Controllers
             var cart = mShoppingService.GetCurrentShoppingCart();
             var customer = cart.Customer ?? new Customer();
 
-            model.Customer.ApplyToCustomer(customer);
+            bool emailCanBeChanged = !User.Identity.IsAuthenticated || string.IsNullOrWhiteSpace(customer.Email);
+            model.Customer.ApplyToCustomer(customer, emailCanBeChanged);
             cart.Customer = customer;
 
             var modelAddressID = model.BillingAddress.BillingAddressSelector?.AddressID ?? 0;
@@ -228,6 +216,7 @@ namespace DancingGoat.Controllers
             cart.BillingAddress = billingAddress;
             cart.ShippingOption = mCheckoutService.GetShippingOption(model.ShippingOption.ShippingOptionID);
 
+            cart.Evaluate();
             cart.Save();
 
             return RedirectToAction("PreviewAndPay");
@@ -256,6 +245,7 @@ namespace DancingGoat.Controllers
             {
                 var cart = mShoppingService.GetCurrentShoppingCart();
                 cart.AddItem(item.SKUID, item.Units);
+                cart.Evaluate();
             }
 
             return RedirectToAction("ShoppingCart");
@@ -272,16 +262,17 @@ namespace DancingGoat.Controllers
             if (ModelState.IsValid)
             {
                 cart.UpdateQuantity(item.ID, item.Units);
-                return RedirectToAction("ShoppingCart");
+                cart.Evaluate();
+            }
+            else
+            {
+                // Add an item error and save ViewData so that the ShoppingCart action can show validation errors
+                var key = item.ID.ToString();
+                ModelState.Add(key, ModelState["Units"]);
             }
 
-            // Add an item error and save ViewData so that the ShoppingCart action can show validation errors
-            var key = item.ID.ToString();
-            ModelState.Add(key, ModelState["Units"]);
-
-            CheckoutViewData = ViewData;
-
-            return RedirectToAction("ShoppingCart");
+            var cartViewModel = mCheckoutService.PrepareCartViewModel(cart.AppliedCouponCodes);
+            return View("ShoppingCart", cartViewModel);
         }
 
 
@@ -292,8 +283,10 @@ namespace DancingGoat.Controllers
         {
             var cart = mShoppingService.GetCurrentShoppingCart();
             cart.RemoveItem(item.ID);
+            cart.Evaluate();
 
-            return RedirectToAction("ShoppingCart");
+            var cartViewModel = mCheckoutService.PrepareCartViewModel(cart.AppliedCouponCodes);
+            return View("ShoppingCart", cartViewModel);
         }
 
 
@@ -353,15 +346,14 @@ namespace DancingGoat.Controllers
         }
 
 
-        private bool ProcessCouponCodeValueCheck(string couponCode)
+        [HttpPost]
+        public ActionResult ShippingChanged(int? paymentId)
         {
-            var isCouponCodeValid = mCheckoutService.IsCouponCodeValueValid(couponCode);
-            if (!isCouponCodeValid)
-            {
-                ModelState.AddModelError("CouponCode", ResHelper.GetString("DancingGoatMvc.Checkout.InvalidCouponCode"));
-            }
+            var cart = mShoppingService.GetCurrentShoppingCart();
+            cart.PaymentMethod = mCheckoutService.GetPaymentMethod(paymentId ?? 0);
+            cart.Evaluate();
 
-            return isCouponCodeValid;
+            return PartialView("_ShoppingCartTotals", cart);
         }
 
 

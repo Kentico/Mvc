@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "Kentico.Libraries": "10.0.0"
+    "Kentico.Libraries": "11.0.0-*"
   },
   "frameworks": {
-    "net45": {}
+    "net46": {}
   },
   "runtimes": {
     "win": {}

@@ -47,6 +47,7 @@ namespace LearningKit.Controllers
                 }
             }
 
+            cart.Evaluate();
             cart.Save();
 
             return RedirectToAction("ShoppingCart", "Checkout");
@@ -69,7 +70,7 @@ namespace LearningKit.Controllers
                         SKUName = "SampleProduct No. " + (i + 1),
                         SKUDescription = "This is a sample product for MVC Learning Kit.",
                         SKUShortDescription = "LearningKit_SampleData",
-                        SKUPrice = 15.99 + new Random().Next(1, 25),
+                        SKUPrice = 15.99m + new Random().Next(1, 25),
                         SKUSiteID = 1,
                         SKUEnabled = true,
                         SKUTrackInventory = TrackInventoryTypeEnum.ByProduct,
@@ -106,6 +107,7 @@ namespace LearningKit.Controllers
             var cart = mService.GetCurrentShoppingCart();
 
             cart.RemoveAllItems();
+            cart.Evaluate();
 
             return RedirectToAction("Index", "Home");
         }
