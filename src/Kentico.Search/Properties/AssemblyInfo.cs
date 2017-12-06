@@ -14,6 +14,6 @@ using System.Runtime.InteropServices;
 [assembly: Guid("1ffef41a-db53-4353-ae78-15e128f72b8f")]
 [assembly: AssemblyVersion("3.0.0.0")]
 [assembly: AssemblyFileVersion("3.0.0.0")]
-[assembly: AssemblyInformationalVersion("3.0.0-unstable")]
+[assembly: AssemblyInformationalVersion("3.0.0")]
 
 [assembly: InternalsVisibleTo("Kentico.Search.Tests")]

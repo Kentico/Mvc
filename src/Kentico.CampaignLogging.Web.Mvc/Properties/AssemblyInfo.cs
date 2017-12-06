@@ -16,5 +16,5 @@ using CMS;
 [assembly: Guid("e721b72a-3c32-4a0d-bb03-e4eb1756aafe")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-unstable")]
+[assembly: AssemblyInformationalVersion("2.0.0")]
 [assembly: InternalsVisibleTo("Kentico.Activities.Tests")]

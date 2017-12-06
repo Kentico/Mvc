@@ -16,6 +16,6 @@ using CMS;
 [assembly: Guid("dcaa1096-aa1d-4a70-9b14-77ee7714e12a")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-unstable")]
+[assembly: AssemblyInformationalVersion("2.0.0")]
 
 [assembly: InternalsVisibleTo("Kentico.MediaLibrary.Tests")]
