@@ -17,7 +17,7 @@ The Learning Kit is a functional website for learning purposes. It demonstrates 
 ### Requirements
 
 - IIS 7.5+
-- Microsoft .NET Framework 4.5+
+- Microsoft .NET Framework 4.6/4.7
 - Visual Studio 2015 Update 1+
 
 ### Instructions &ndash; Dancing Goat
