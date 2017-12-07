@@ -14,7 +14,7 @@
 		<releaseNotes></releaseNotes>
       <dependencies>
         <group targetFramework=".NETFramework4.6">
-          <dependency id="Kentico.Core" version="[2.0.0-unstable,3)" />
+          <dependency id="Kentico.Core" version="[2.0.0,3)" />
           <dependency id="Kentico.Libraries" version="[11.0.0,12)" />
         </group>
       </dependencies>
