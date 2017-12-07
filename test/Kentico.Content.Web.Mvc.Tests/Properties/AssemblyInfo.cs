@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico software")]
 [assembly: AssemblyProduct("Kentico.Content.Web.Mvc.Tests")]
-[assembly: AssemblyCopyright("Copyright © Kentico software 2016")]
+[assembly: AssemblyCopyright("Copyright © Kentico software 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

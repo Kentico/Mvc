@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico software")]
 [assembly: AssemblyProduct("Kentico.MediaLibrary.Tests")]
-[assembly: AssemblyCopyright("© 2016 Kentico Software. All rights reserved.")]
+[assembly: AssemblyCopyright("© 2017 Kentico Software. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

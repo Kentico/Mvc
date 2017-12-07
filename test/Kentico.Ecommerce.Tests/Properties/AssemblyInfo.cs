@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico software")]
 [assembly: AssemblyProduct("Kentico.Ecommerce.Tests")]
-[assembly: AssemblyCopyright("Copyright © Kentico software 2015")]
+[assembly: AssemblyCopyright("Copyright © Kentico software 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
