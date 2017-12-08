@@ -8,6 +8,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using Owin;
 
+using CMS.Helpers;
 using CMS.SiteProvider;
 
 using Kentico.Membership;
@@ -24,6 +25,10 @@ namespace LearningKit.App_Start
 {
     public partial class Startup
     {
+        // Cookie name prefix used by OWIN when creating authentication cookies
+        private const string OWIN_COOKIE_PREFIX = ".AspNet.";
+
+
         public void Configuration(IAppBuilder app)
         {
             // Registers the Kentico.Membership identity implementation
@@ -44,6 +49,12 @@ namespace LearningKit.App_Start
                                                  + new Uri(context.RedirectUri).Query)
                 }
             });
+
+            // Registers the authentication cookie with the 'Essential' cookie level
+            // Ensures that the cookie is preserved when changing a visitor's allowed cookie level below 'Visitor'
+            CookieHelper.RegisterCookie(OWIN_COOKIE_PREFIX + DefaultAuthenticationTypes.ApplicationCookie, CookieLevel.Essential);
+
+            // Uses a cookie to temporarily store information about users signing in via external authentication services
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Registers a WS-Federation authentication service

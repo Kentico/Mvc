@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
 
-using CMS.SiteProvider;
-
 using Kentico.Ecommerce;
 
 using LearningKit.Models.Checkout;
@@ -135,7 +133,9 @@ namespace LearningKit.Controllers
             {
                 cart.AddItem(item.SKUID, item.Units);
             }
-            
+
+            // Evaluates the shopping cart
+            cart.Evaluate();
             // Saves the shopping cart
             cart.Save();
             //EndDocSection:Reorder

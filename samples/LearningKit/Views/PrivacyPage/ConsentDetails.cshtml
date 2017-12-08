@@ -1,0 +1,23 @@
+﻿@model LearningKit.Models.PrivacyPage.ConsentDetailsModel
+
+@{
+    ViewBag.Title = "Consent details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Consent details</h2>
+<h3>Display name</h3>
+<p>@Model.ConsentDisplayName</p>
+@*DocSection:ConsentTexts*@
+<h3>Short text</h3>
+<p>@Html.Raw(Model.ConsentShortText)</p>
+<h3>Full text</h3>
+<p>@Html.Kentico().ResolveUrls(Model.ConsentFullText)</p>
+@*EndDocSection:ConsentTexts*@
+
+<p>
+    @Html.ActionLink("> Back to the privacy page", "Index", "PrivacyPage")
+</p>
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

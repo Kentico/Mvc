@@ -30,7 +30,7 @@ namespace Kentico.Ecommerce.Tests
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
-            ObjectFactory<IActivityLogService>.SetObjectTypeTo<ActivityLogServiceFake>(true);
+            Service.Use<IActivityLogService, ActivityLogServiceFake>();
             mEcommerceActivitiesLogger = new EcommerceActivitiesLoggerFake();
 
             SetUpSite();
@@ -47,7 +47,7 @@ namespace Kentico.Ecommerce.Tests
         {
             SiteContext.CurrentSite = SiteInfo;
 
-            ObjectFactory<IActivityLogService>.SetObjectTypeTo<ActivityLogServiceFake>(true);
+            Service.Use<IActivityLogService, ActivityLogServiceFake>(Guid.NewGuid().ToString());
 
             // Setting order generates invoice which has a macro in the subject. The macro cannot be resolved and an error is logged.
             TestsEventLogProvider.FailForErrorEvent = false;
@@ -90,6 +90,7 @@ namespace Kentico.Ecommerce.Tests
                 ShoppingCartCustomerID = Factory.CustomerAnonymous.CustomerID,
                 ShoppingCartBillingAddress = Factory.CustomerAddressUSA
             };
+            cartInfo.Evaluate();
             cartInfo.Insert();
 
             var cart = new ShoppingCart(cartInfo, mEcommerceActivitiesLogger, null);
@@ -119,7 +120,7 @@ namespace Kentico.Ecommerce.Tests
 
             var result = new PaymentResultInfo
             {
-                PaymentIsCompleted = true,
+                PaymentIsCompleted = true
             };
 
             order.SetPaymentResult(result);
@@ -140,9 +141,10 @@ namespace Kentico.Ecommerce.Tests
             var result = new PaymentResultInfo
             {
                 PaymentIsCompleted = false,
+                PaymentIsFailed = true
             };
 
-            order.SetPaymentResult(result, true);
+            order.SetPaymentResult(result);
 
             CMSAssert.All(
                 () => Assert.IsFalse(order.IsPaid, "Order payment failed but order is marked as paid."),
@@ -162,7 +164,7 @@ namespace Kentico.Ecommerce.Tests
 
             var result = new PaymentResultInfo
             {
-                PaymentIsCompleted = true,
+                PaymentIsCompleted = true
             };
 
             order.SetPaymentResult(result);
@@ -186,9 +188,10 @@ namespace Kentico.Ecommerce.Tests
             var result = new PaymentResultInfo
             {
                 PaymentIsCompleted = false,
+                PaymentIsFailed = true
             };
 
-            order.SetPaymentResult(result, true);
+            order.SetPaymentResult(result);
 
             CMSAssert.All(
                 () => Assert.IsFalse(order.IsPaid, "Order payment failed but order is marked as paid."),
@@ -228,9 +231,10 @@ namespace Kentico.Ecommerce.Tests
             var result = new PaymentResultInfo
             {
                 PaymentIsCompleted = true,
+                PaymentIsFailed = true
             };
 
-            Assert.That(() => order.SetPaymentResult(result, true), Throws.Exception.TypeOf<InvalidOperationException>());
+            Assert.That(() => order.SetPaymentResult(result), Throws.Exception.TypeOf<InvalidOperationException>());
         }
     }
 }

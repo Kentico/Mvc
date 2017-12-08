@@ -21,10 +21,12 @@ namespace DancingGoat.Helpers
         /// <param name="html">The HTML helper instance that this method extends.</param>
         /// <param name="expression">An expression that identifies the object that contains the displayed properties.</param>
         /// <param name="explanationText">An explanation text describing usage of the rendered field.</param>
-        public static MvcHtmlString ValidatedEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string explanationText = "")
+        /// <param name="disabled">Indicates that field has to be disabled.</param>
+        public static MvcHtmlString ValidatedEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string explanationText = "", bool disabled = false)
         {
             var label = html.LabelFor(expression).ToString();
-            var editor = html.EditorFor(expression).ToString();
+            var additionalViewData = disabled ? new { htmlAttributes = new { disabled = "disabled" } } : null;
+            var editor = html.EditorFor(expression, additionalViewData).ToString();
             var message = html.ValidationMessageFor(expression).ToString();
             var explanationTextHtml = "";
 

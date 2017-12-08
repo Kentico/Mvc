@@ -19,7 +19,7 @@ namespace Kentico.Ecommerce.Tests.Fakes
         public int OrderId { get; set; }
 
 
-        public double TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
 
         public string TotalPriceAsString { get; set; }

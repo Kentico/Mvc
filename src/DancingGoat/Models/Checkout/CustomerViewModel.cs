@@ -72,15 +72,19 @@ namespace DancingGoat.Models.Checkout
         }
 
 
-        public void ApplyToCustomer(Customer customer)
+        public void ApplyToCustomer(Customer customer, bool emailCanBeChanged)
         {
             customer.FirstName = FirstName;
             customer.LastName = LastName;
-            customer.Email = Email;
             customer.PhoneNumber = PhoneNumber;
             customer.Company = Company;
             customer.OrganizationID = OrganizationID;
             customer.TaxRegistrationID = TaxRegistrationID;
+
+            if (emailCanBeChanged)
+            {
+                customer.Email = Email;
+            }
         }
     }
 }

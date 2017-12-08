@@ -10,7 +10,7 @@
 @using (Html.BeginForm("SendFeedback", "FeedbackForm", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-            
+
     if (!Html.ViewData.ModelState.IsValid)
     {
         @Html.ValidationSummary(true, "")
@@ -22,7 +22,7 @@
         <div>
             @Html.EditorFor(model => model.FirstName)
             @Html.ValidationMessageFor(model => model.FirstName, "")
-        </div>        
+        </div>
 
         <div>
             @Html.LabelFor(model => model.LastName)
@@ -31,7 +31,7 @@
             @Html.EditorFor(model => model.LastName)
             @Html.ValidationMessageFor(model => model.LastName, "")
         </div>
-        
+
         <div>
             @Html.LabelFor(model => model.Email)
         </div>
@@ -46,17 +46,17 @@
         <div>
             @Html.EditorFor(model => model.MessageText)
             @Html.ValidationMessageFor(model => model.MessageText, "")
-        </div>        
+        </div>
 
         <input type="submit" value="Submit" />
     </div>
 }
 
-<p> 
-    <strong>Note</strong>: This form attempts to submit data to a form with the "FeedbackForm" code name and the following fields: UserName, UserLastName, UserEmail, UserFeedback. An error will occur if such a form is not present in the connected Kentico database. 
+<p>
+    <strong>Note</strong>: This form attempts to submit data to a form with the "FeedbackForm" code name and the following fields: UserName, UserLastName, UserEmail, UserFeedback. An error will occur if such a form is not present in the connected Kentico database.
 </p>
-<p> 
-    After submitting, the collected data will appear in your connected Kentico instance in the corresponding form's <strong>Recorded data</strong> tab. 
+<p>
+    After submitting, the collected data will appear in your connected Kentico instance in the corresponding form's <strong>Recorded data</strong> tab.
 </p>
 <p>
     @Html.ActionLink("> Back to the home index", "Index", "Home")

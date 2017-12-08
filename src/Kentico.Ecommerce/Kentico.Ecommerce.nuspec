@@ -1,22 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
-        <id>$id$</id>
-        <version>$version$</version>
-        <authors>$author$</authors>
-        <licenseUrl>http://kentico.github.io/licenses/kentico-mvc.txt</licenseUrl>
-        <iconUrl>http://www.kentico.com/favicon.ico</iconUrl>
-        <requireLicenseAcceptance>true</requireLicenseAcceptance>
-        <description>$description$</description>
-        <tags>kentico ecommerce</tags>
-        <copyright>© 2016 Kentico Software. All rights reserved.</copyright>
-        <language>en-US</language>
-        <dependencies>
-            <group targetFramework=".NETFramework4.5">
-                <dependency id="Kentico.Activities" version="[1.0.0,2)" />
-                <dependency id="Kentico.Core" version="[1.0.0,2)" />
-                <dependency id="Kentico.Libraries" version="[10.0.0,11)" />
-            </group>
-        </dependencies>
+      <id>$id$</id>
+      <version>$version$</version>
+      <authors>$author$</authors>
+      <licenseUrl>http://kentico.github.io/licenses/kentico-mvc.txt</licenseUrl>
+      <iconUrl>http://www.kentico.com/favicon.ico</iconUrl>
+      <requireLicenseAcceptance>true</requireLicenseAcceptance>
+      <description>$description$</description>
+      <tags>kentico ecommerce</tags>
+      <copyright>© 2017 Kentico Software.</copyright>
+      <language>en-US</language>
+      <releaseNotes></releaseNotes>
+      <dependencies>
+        <group targetFramework=".NETFramework4.6">
+          <dependency id="Kentico.Activities" version="[2.0.0,3)" />
+          <dependency id="Kentico.Core" version="[2.0.0,3)" />
+          <dependency id="Kentico.Libraries" version="[11.0.0,12)" />
+        </group>
+      </dependencies>
     </metadata>
+    <files />
 </package>

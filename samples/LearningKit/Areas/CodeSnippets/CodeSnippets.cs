@@ -29,8 +29,6 @@ namespace LearningKit.Areas.CodeSnippets
             IPricingService pricingService = null;
             ShoppingCart shoppingCart = null;
             SKUInfo productSku = null;
-            bool applyDiscounts = false;
-            bool applyTaxes = false;
             Variant variant = null;
             IVariantRepository mVariantRepository = null;
             SKUTreeNode product = null;
@@ -40,7 +38,7 @@ namespace LearningKit.Areas.CodeSnippets
             PaymentResultInfo result = null;
 
             //DocSection:CalculatePriceOptions
-            ProductPrice productPrice = pricingService.CalculatePrice(productSku, shoppingCart, applyDiscounts, applyTaxes);
+            ProductPrice productPrice = pricingService.CalculatePrice(productSku, shoppingCart);
             //EndDocSection:CalculatePriceOptions
 
             //DocSection:FormatPriceOptions
@@ -87,7 +85,7 @@ namespace LearningKit.Areas.CodeSnippets
             //EndDocSection:DifferentPaymentMethods
 
             //DocSection:SetPaymentResult
-            order.SetPaymentResult(result, true);
+            order.SetPaymentResult(result);
             //EndDocSection:SetPaymentResult
 
             //DocSection:RedirectForManualPayment
@@ -110,7 +108,7 @@ namespace LearningKit.Areas.CodeSnippets
             ShoppingCart shoppingCart = shoppingService.GetCurrentShoppingCart();
             
             // Calculates prices for the specified product
-            ProductPrice price = pricingService.CalculatePrice(sku, shoppingCart, true, false);
+            ProductPrice price = pricingService.CalculatePrice(sku, shoppingCart);
             
             // Gets the catalog discount
             decimal catalogDiscount = price.Discount;
@@ -145,7 +143,10 @@ namespace LearningKit.Areas.CodeSnippets
             {
                 cart.AddItem(item.SKUID, item.Units);
             }
-            
+
+            // Evaluates the shopping cart
+            cart.Evaluate();
+
             // Saves the shopping cart
             cart.Save();
             //EndDocSection:ReorderExistingOrder

@@ -1,0 +1,46 @@
+﻿@model LearningKit.Models.PrivacyPage.ConsentListingModel
+
+@{
+    ViewBag.Title = "Privacy page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Privacy page</h2>
+<p>This page displays all consents accepted by the current visitor.</p>
+<h3>Your accepted consents</h3>
+@if (Model.Consents.Any())
+{
+    <table border="1">
+        <tr>
+            <th>Consent ID</th>
+            <th>Consent display name</th>
+            <th>Consent short text</th>
+            <th>Consent details</th>
+            <th>Revoke button</th>
+        </tr>
+        @foreach (var item in Model.Consents)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.DisplayName</td>
+                <td>@Html.Raw(item.GetConsentText("en-US").ShortText)</td>
+                <td>@Html.ActionLink("View details", "ConsentDetails", "PrivacyPage", new { consentId = item.Id }, null)</td>
+                <td>
+                    @using (Html.BeginForm("Revoke", "PrivacyPage", new { consentId = item.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Revoke" />
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>You have not given an agreement for any consents.</p>
+}
+
+<p>
+    @Html.ActionLink("> Back to the home index", "Index", "Home")
+</p>

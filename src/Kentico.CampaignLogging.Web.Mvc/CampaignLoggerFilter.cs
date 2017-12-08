@@ -23,7 +23,7 @@ namespace Kentico.CampaignLogging.Web.Mvc
         /// </summary>
         public CampaignLoggerFilter()
         {
-            mCampaignService = Service.Entry<ICampaignService>();
+            mCampaignService = Service.Resolve<ICampaignService>();
         }
 
 

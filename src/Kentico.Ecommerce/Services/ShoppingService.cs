@@ -113,7 +113,7 @@ namespace Kentico.Ecommerce
 
             var mainCurrency = new Currency(CurrencyInfoProvider.GetMainCurrency(SiteContext.CurrentSiteID));
 
-            var priceString = mainCurrency.FormatPrice((decimal)orderInfo.OrderTotalPriceInMainCurrency);
+            var priceString = mainCurrency.FormatPrice(orderInfo.OrderTotalPriceInMainCurrency);
 
             foreach (var product in cart.Items)
             {

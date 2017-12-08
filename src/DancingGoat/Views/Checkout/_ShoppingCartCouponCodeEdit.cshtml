@@ -1,0 +1,31 @@
+﻿@model DancingGoat.Models.Checkout.CartViewModel
+
+<div class="cart-coupon-input">
+    <label>@ResHelper.GetString("DancingGoatMvc.Checkout.CouponCode")</label>
+    @using (Html.BeginForm("AddCouponCode", "Checkout", FormMethod.Post))
+    {
+        <div>
+            <input type="text" name="NewCouponCode" value="" class="form-control" />
+            <input type="submit" name="AddCouponCode" value="@ResHelper.GetString("DancingGoatMvc.Apply")" class="btn btn-primary" />
+        </div>
+        <div class="message message-error">
+            @Html.ValidationMessage("NewCouponCode", new { @class = "red" })
+        </div>
+    }
+
+    @foreach (var couponCode in Model.AppliedCouponCodes)
+    {
+        <div class="cart-coupon-code">
+            @using (Html.BeginForm("RemoveCouponCode", "Checkout", FormMethod.Post))
+            {
+                <input type="hidden" name="RemoveCouponCode" value="@couponCode" />
+                <div class="label">
+                    <span>@couponCode</span>
+                </div>
+                <div class="button">
+                    <input type="submit" name="RemoveCouponCode" value="@ResHelper.GetString("DancingGoatMvc.ShoppingCart.Remove")" class="btn btn-default" />
+                </div>
+            }
+        </div>
+    }
+</div>

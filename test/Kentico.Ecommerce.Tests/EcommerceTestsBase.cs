@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using CMS.ContactManagement;
+﻿using CMS.ContactManagement;
 using CMS.DataEngine;
 using CMS.Ecommerce;
 using CMS.SiteProvider;
@@ -27,6 +25,7 @@ namespace Kentico.Ecommerce.Tests
         {
             InsertDefaultSite();
             InsertDefaultMainCurrency();
+            InsertDefaultGlobalMainCurrency();
             InsertDefaultUser();
 
             InsertDefaultOrderStatuses();            
@@ -49,7 +48,13 @@ namespace Kentico.Ecommerce.Tests
         protected void InsertDefaultMainCurrency()
         {
             SettingsKeyInfoProvider.SetValue(ECommerceSettings.USE_GLOBAL_CURRENCIES, SiteID, false);
-            mFakeFactory.InitMainCurrency().Insert();
+            mFakeFactory.InitMainCurrency(SiteID).Insert();
+        }
+
+
+        protected void InsertDefaultGlobalMainCurrency()
+        {
+            mFakeFactory.InitMainCurrency(null).Insert();
         }
 
 
@@ -111,7 +116,9 @@ namespace Kentico.Ecommerce.Tests
         {
             mFakeFactory.InitSKUs().InsertDB();
 
-            SKUTaxClassInfoProvider.AddTaxClassToSKU(mFakeFactory.TaxClassDefault.TaxClassID, mFakeFactory.SKUWithTaxes.SKUID);
+            mFakeFactory.SKUWithTaxes.SKUTaxClassID = mFakeFactory.TaxClassDefault.TaxClassID;
+
+            mFakeFactory.SKUWithTaxes.Update();
         }
 
         
@@ -131,6 +138,7 @@ namespace Kentico.Ecommerce.Tests
             cartInfo.ShoppingCartCurrencyID = Factory.MainCurrency.CurrencyID;
             cartInfo.Customer = customer;
             cartInfo.ShoppingCartBillingAddress = address;
+            cartInfo.Evaluate();
 
             ShoppingCartInfoProvider.SetShoppingCartInfo(cartInfo);
 

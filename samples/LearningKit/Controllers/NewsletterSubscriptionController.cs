@@ -56,7 +56,7 @@ namespace LearningKit.Controllers
             }
             
             // Gets the default Kentico contact provider
-            IContactProvider contactProvider = Service<IContactProvider>.Entry();
+            IContactProvider contactProvider = Service.Resolve<IContactProvider>();
             // Either gets an existing contact by email or creates a new contact object with the given email
             ContactInfo contact = contactProvider.GetContactForSubscribing(model.Email);
             
@@ -134,7 +134,7 @@ namespace LearningKit.Controllers
             // Attempts to parse the date and time parameter from the request query string
             // Uses the date and time formats required by the Kentico API
             DateTime parsedDateTime = DateTimeHelper.ZERO_TIME;
-            if (!string.IsNullOrEmpty(model.DateTime) && !DateTime.TryParseExact(model.DateTime, SecurityHelper.EMAIL_CONFIRMATION_DATETIME_FORMAT, null, System.Globalization.DateTimeStyles.None, out parsedDateTime))
+            if (!string.IsNullOrEmpty(model.DateTime) && !DateTimeUrlFormatter.TryParse(model.DateTime, out parsedDateTime))
             {
                 // Returns a view informing the user that the subscription confirmation was not successful
                 ModelState.AddModelError(String.Empty, "The confirmation link is invalid.");

@@ -2,12 +2,8 @@
 
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <!-- Add empty CMSHashStringSalt -->
-  <!-- Disable CMSEnable51D -->
   <appSettings xdt:Transform="InsertIfMissing">
     <add key="CMSHashStringSalt" value="" 
-         xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
-
-    <add key="CMSEnable51D" value="false" 
          xdt:Transform="InsertIfMissing" xdt:Locator="Match(key)" />
   </appSettings>
 

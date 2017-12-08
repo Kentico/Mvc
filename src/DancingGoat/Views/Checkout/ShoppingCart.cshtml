@@ -38,26 +38,13 @@
         </div>
         <div class="col-md-4">
             <div class="cart-right-panel floating-box">
+                
+                @Html.Partial("_ShoppingCartCouponCodeEdit", Model)
+                
+                <hr>
 
                 @using (Html.BeginForm("ShoppingCart", "Checkout", FormMethod.Post))
                 {
-                    <div class="cart-coupon-input">
-                        @Html.LabelFor(m => m.CouponCode)
-                        <div>
-                            <input type="text" name="CouponCode" value="@Model.CouponCode" autocomplete="on" class="form-control" />
-                            <input type="submit" name="ApplyCouponCode" value="@ResHelper.GetString("DancingGoatMvc.Apply")" class="btn btn-primary" />
-                        </div>
-                        <div class="message message-error">
-                            @Html.ValidationMessage("CouponCode", new { @class = "red" })
-                        </div>
-                        @if (Model.Cart.HasUsableCoupon)
-                        {
-                            <div class="message green">
-                                <span>@ResHelper.GetString("DancingGoatMvc.Checkout.CouponCodeApplied")</span>
-                            </div>
-                        }
-                    </div>
-                    <hr>
                     @Html.Partial("_ShoppingCartTotals", Model.Cart)
 
                     <p>@ResHelper.GetString("DancingGoatMvc.Checkout.ReviewAndCheckout")</p>

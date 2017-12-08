@@ -57,7 +57,7 @@ namespace Kentico.Ecommerce
 
                 return mCurrency;
             }
-        } 
+        }
 
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace Kentico.Ecommerce
             get
             {
                 return mStatusName ?? (mStatusName =
-                    OrderStatusInfoProvider.GetOrderStatusInfo(StatusID)
-                        ?.StatusDisplayName);
+                           OrderStatusInfoProvider.GetOrderStatusInfo(StatusID)
+                                                  ?.StatusDisplayName);
             }
         }
 
@@ -121,10 +121,10 @@ namespace Kentico.Ecommerce
         {
             get
             {
-                return mOrderItems ?? (mOrderItems = 
-                    OrderItemInfoProvider.GetOrderItems(OrderID)
-                    .Select(orderItem => new OrderItem(orderItem))
-                    .ToList());
+                return mOrderItems ?? (mOrderItems =
+                           OrderItemInfoProvider.GetOrderItems(OrderID)
+                                                .Select(orderItem => new OrderItem(orderItem))
+                                                .ToList());
             }
         }
 
@@ -136,6 +136,12 @@ namespace Kentico.Ecommerce
 
 
         /// <summary>
+        /// Indicates whether the order payment is authorized.
+        /// </summary>
+        public bool IsAuthorized => OriginalOrder.OrderIsAuthorized;
+
+
+        /// <summary>
         /// Gets the order's payment result. See <see cref="PaymentResultInfo"/> for detailed information.
         /// </summary>
         public PaymentResultInfo PaymentResult => OriginalOrder.OrderPaymentResult;
@@ -144,7 +150,7 @@ namespace Kentico.Ecommerce
         /// <summary>
         /// Gets the order's total price.
         /// </summary>
-        public decimal TotalPrice => (decimal)OriginalOrder.OrderTotalPrice;
+        public decimal TotalPrice => OriginalOrder.OrderTotalPrice;
 
 
         /// <summary>
@@ -180,46 +186,29 @@ namespace Kentico.Ecommerce
         /// </summary>
         /// <remarks>
         /// In case the <see cref="PaymentResultInfo.PaymentIsCompleted"/> property of <paramref name="paymentResult"/> is true, the order is marked as paid and the order status is set according to <see cref="PaymentOptionInfo.PaymentOptionSucceededOrderStatusID"/>.
-        /// The <paramref name="paymentFailed"/> parameter indicates if the order is marked as unpaid and the order status is set according to <see cref="PaymentOptionInfo.PaymentOptionFailedOrderStatusID"/>.
+        /// The <see cref="PaymentResultInfo.PaymentIsFailed"/> property value of <paramref name="paymentResult"/> indicates if the order is marked as unpaid and the order status is set according to <see cref="PaymentOptionInfo.PaymentOptionFailedOrderStatusID"/>.
         /// </remarks>
         /// <param name="paymentResult"><see cref="PaymentResultInfo"/> object representing an original Kentico payment result object from which the model is created.</param>
-        /// <param name="paymentFailed">Indicates if the payment failed.</param>
-        public void SetPaymentResult(PaymentResultInfo paymentResult, bool paymentFailed = false)
+        public void SetPaymentResult(PaymentResultInfo paymentResult)
         {
             if (paymentResult == null)
             {
                 throw new ArgumentNullException(nameof(paymentResult));
             }
-            if (paymentResult.PaymentIsCompleted && paymentFailed)
+            if (paymentResult.PaymentIsCompleted && paymentResult.PaymentIsFailed)
             {
                 throw new InvalidOperationException("Order payment failed but paymentResult.PaymentIsCompleted is true");
             }
 
             OriginalOrder.OrderPaymentResult = paymentResult;
-            var payment = PaymentOptionInfoProvider.GetPaymentOptionInfo(OriginalOrder.OrderPaymentOptionID);
 
-            if (paymentResult.PaymentIsCompleted)
+            if (!paymentResult.PaymentIsCompleted && !paymentResult.PaymentIsFailed)
             {
-                var successStatusId = payment?.PaymentOptionSucceededOrderStatusID ?? 0;
-                if (successStatusId > 0)
-                {
-                    OriginalOrder.OrderStatusID = successStatusId;
-                }
-
-                OriginalOrder.OrderIsPaid = true;
+                Save();
+                return;
             }
 
-            if (paymentFailed)
-            {
-                var failedStatusId = payment?.PaymentOptionFailedOrderStatusID ?? 0;
-                if (failedStatusId > 0)
-                {
-                    OriginalOrder.OrderStatusID = failedStatusId;
-                }
-
-                OriginalOrder.OrderIsPaid = false;
-            }
-
+            OriginalOrder.UpdateOrderStatus(paymentResult);
             Save();
         }
 

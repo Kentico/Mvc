@@ -15,7 +15,7 @@ namespace DancingGoat.Repositories.Implementation
         /// <returns>Collection of all available countries</returns>
         public IEnumerable<CountryInfo> GetAllCountries()
         {
-            return CountryInfoProvider.GetAllCountries();
+            return CountryInfoProvider.GetCountries();
         }
 
 
@@ -48,7 +48,7 @@ namespace DancingGoat.Repositories.Implementation
         /// <returns>Collection of all states in county.</returns>
         public IEnumerable<StateInfo> GetCountryStates(int countryId)
         {
-            return StateInfoProvider.GetCountryStates(countryId);
+            return StateInfoProvider.GetStates().WhereEquals("CountryID", countryId);
         }
 
 

@@ -1,15 +1,13 @@
-{
+﻿{
   "dependencies": {
-    "Kentico.Libraries.Tests": "10.0.0",
-    "Microsoft.Owin.Security.Cookies": "3.0.1",
-    "Newtonsoft.Json": "8.0.3",
+    "Kentico.Libraries.Tests": "11.0.0-*",
     "NSubstitute": "1.10.0",
-    "NUnit": "3.2.0"
+    "NUnit": "3.8.1"
   },
-    "frameworks": {
-        "net45": { }
-    },
-    "runtimes": {
-        "win": { }
-    }
+  "frameworks": {
+    "net46": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
 }

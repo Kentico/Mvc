@@ -588,7 +588,9 @@ namespace Kentico.Membership
             var info = ExternalLoginInfoProvider.GetExternalLogins()
                                                 .WhereEquals("LoginProvider", login.LoginProvider)
                                                 .WhereEquals("IdentityKey", login.ProviderKey)
-                                                .WhereEquals("UserID", user.Id);
+                                                .WhereEquals("UserID", user.Id)
+                                                .FirstOrDefault();
+
             ExternalLoginInfoProvider.DeleteExternalLoginInfo(info);
 
             return Task.FromResult(0);

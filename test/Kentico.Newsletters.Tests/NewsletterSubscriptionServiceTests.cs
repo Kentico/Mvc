@@ -37,10 +37,9 @@ namespace Kentico.Newsletters.Tests
                 TemplateName = "MyCustomNewsletterEmailTemplate",
                 TemplateDisplayName = "My Custom Newsletter Email Template",
                 TemplateSiteID = siteId,
-                TemplateBody = "body",
-                TemplateHeader = "header",
-                TemplateFooter = "footer",
-                TemplateType = "A",
+                TemplateCode = "<!DOCTYPE html><html><head><title>Email title</title></head><body>Email body</body></html>",
+                TemplateType = EmailTemplateTypeEnum.Issue,
+                TemplateInlineCSS = true
             };
         }
 
@@ -53,7 +52,6 @@ namespace Kentico.Newsletters.Tests
                 NewsletterDisplayName = "My Custom Newsletter",
                 NewsletterSiteID = siteId,
                 NewsletterSource = String.Empty,
-                NewsletterTemplateID = emailTemplateId,
                 NewsletterSubscriptionTemplateID = emailTemplateId,
                 NewsletterUnsubscriptionTemplateID = emailTemplateId,
                 NewsletterOptInTemplateID = emailTemplateId,
@@ -78,7 +76,7 @@ namespace Kentico.Newsletters.Tests
 
         private static ContactInfo GetContact(string email)
         {
-            IContactProvider contactProvider = Service<IContactProvider>.Entry();
+            IContactProvider contactProvider = Service.Resolve<IContactProvider>();
             return contactProvider.GetContactForSubscribing(email);
         }
 
@@ -108,7 +106,7 @@ namespace Kentico.Newsletters.Tests
 
                 mNewsletterSubscriptionSettings = CreateNewsletterSubscriptionSettings(false);
                 mNewsletterSubscriptionService = new NewsletterSubscriptionService();
-                Service<IActivityLogService>.Use<ActivityLogServiceInMemoryFake>();
+                Service.Use<IActivityLogService, ActivityLogServiceInMemoryFake>();
 
                 SiteContext.CurrentSite = mSite;
             }
@@ -170,7 +168,7 @@ namespace Kentico.Newsletters.Tests
                 );
             }
         }
-        
+
 
         [TestFixture]
         public class ConfirmSubscription : IsolatedIntegrationTests
@@ -195,7 +193,7 @@ namespace Kentico.Newsletters.Tests
 
                 mNewsletterSubscriptionSettings = CreateNewsletterSubscriptionSettings(true);
                 mNewsletterSubscriptionService = new NewsletterSubscriptionService();
-                Service<IActivityLogService>.Use<ActivityLogServiceInMemoryFake>();
+                Service.Use<IActivityLogService, ActivityLogServiceInMemoryFake>();
 
                 SiteContext.CurrentSite = mSite;
             }

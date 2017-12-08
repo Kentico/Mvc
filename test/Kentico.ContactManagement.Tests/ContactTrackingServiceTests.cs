@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
+
 using CMS.Base;
 using CMS.ContactManagement;
+using CMS.ContactManagement.Internal;
 using CMS.Core;
-using CMS.DataEngine;
-using CMS.Helpers.Internal;
 using CMS.Membership;
+using CMS.SiteProvider;
 using CMS.Tests;
-
-
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Kentico.ContactManagement.Tests
@@ -16,21 +16,30 @@ namespace Kentico.ContactManagement.Tests
     [Category.Unit]
     public class ContactTrackingServiceTests : UnitTests
     {
-        private CurrentContactProviderFake mCurrectContactProvider;
+        private ICurrentContactProvider mCurrectContactProvider;
         private IContactTrackingService mContactTrackingService;
+        private IContactProcessingChecker mContactProcessingChecker;
 
         [SetUp]
         public void SetUp()
-        { 
-            Service<ICurrentContactProvider>.Use<CurrentContactProviderFake>();
-            Service<ISiteService>.Use<SiteServiceFake>();
-            Service<ILicenseService>.Use<LicenseServiceFake>();
-            Service<ICrawlerChecker>.Use<CrawlerCheckerFake>();
-            Service<ISettingsService>.Use<SettingsServiceFake>();
+        {
+            mCurrectContactProvider = Substitute.For<ICurrentContactProvider>();
+            Service.Use<ICurrentContactProvider>(mCurrectContactProvider);
+
+            var site = Substitute.For<SiteInfo>();
+            site.SiteName.Returns("TestSite");
+
+            var siteService = Substitute.For<ISiteService>();
+            siteService.CurrentSite.Returns(site);
+            siteService.IsLiveSite.Returns(false);
+            Service.Use<ISiteService>(siteService);
+
+            mContactProcessingChecker = Substitute.For<IContactProcessingChecker>();
+            mContactProcessingChecker.CanProcessContactInCurrentContext().Returns(true);
+            Service.Use<IContactProcessingChecker>(mContactProcessingChecker);
 
             mContactTrackingService = new ContactTrackingService();
-            mCurrectContactProvider = Service<ICurrentContactProvider>.Entry() as CurrentContactProviderFake;
-
+            
             Fake<ContactInfo>();
             Fake<UserInfo, UserInfoProvider>().WithData(
                 new UserInfo
@@ -47,39 +56,17 @@ namespace Kentico.ContactManagement.Tests
 
 
         [Test]
-        public async Task GetCurrentContactAsync_IsCrawler_ReturnsNull()
+        public async Task GetCurrentContactAsync_CannotProcessContact_ReturnsNull()
         {
-            // Arrange
-            var crawlerService = (CrawlerCheckerFake)Service<ICrawlerChecker>.Entry();
-            crawlerService.Crawler = true;
-
+            mContactProcessingChecker.CanProcessContactInCurrentContext().Returns(false);
             // Act
             var result = await mContactTrackingService.GetCurrentContactAsync(string.Empty);
 
             // Assert
             CMSAssert.All(
                 () => Assert.That(result, Is.Null, "Result contact should be null"),
-                () => Assert.That(() => mCurrectContactProvider.GetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.GetCurrentContact should not be called."),
-                () => Assert.That(() => mCurrectContactProvider.SetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.SetCurrentContact should not be called.")
-            );
-        }
-
-
-        [Test]
-        public async Task GetCurrentContactAsync_InvalidLicense_ReturnsNull()
-        {
-            // Arrange
-            var licenceService = (LicenseServiceFake)Service<ILicenseService>.Entry();
-            licenceService.HasLicence = false;
-
-            // Act
-            var result = await mContactTrackingService.GetCurrentContactAsync(string.Empty);
-
-            // Assert
-            CMSAssert.All(
-                () => Assert.That(result, Is.Null, "Result contact should be null"),
-                () => Assert.That(() => mCurrectContactProvider.GetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.GetCurrentContact should not be called."),
-                () => Assert.That(() => mCurrectContactProvider.SetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.SetCurrentContact should not be called.")
+                () => mCurrectContactProvider.DidNotReceive().GetCurrentContact(Arg.Any<IUserInfo>(), Arg.Any<bool>()),
+                () => mCurrectContactProvider.DidNotReceive().SetCurrentContact(Arg.Any<ContactInfo>())
             );
         }
 
@@ -93,7 +80,8 @@ namespace Kentico.ContactManagement.Tests
             {
                 ContactLastName = "TestContact"
             };
-            mCurrectContactProvider.CurrentContact = expectedContact;
+            
+            mCurrectContactProvider.GetCurrentContact(Arg.Any<IUserInfo>(), false).Returns(expectedContact);
 
             // Act
             var result = await mContactTrackingService.GetCurrentContactAsync(userName);
@@ -101,44 +89,25 @@ namespace Kentico.ContactManagement.Tests
             // Assert
             CMSAssert.All(
                 () => Assert.That(result, Is.SameAs(expectedContact), "Result contact should be the same as the expected one"),
-                () => Assert.That(() => mCurrectContactProvider.GetCurrentContactFlag, Is.EqualTo(1), "CurrectContactProvider.GetCurrentContact should be called."),
-                () => Assert.That(() => mCurrectContactProvider.SetCurrentContactFlag, Is.EqualTo(1), "CurrectContactProvider.SetCurrentContact should be called.")
+                () => mCurrectContactProvider.Received(1).GetCurrentContact(Arg.Any<IUserInfo>(), Arg.Any<bool>()),
+                () => mCurrectContactProvider.Received(1).SetCurrentContact(Arg.Any<ContactInfo>())
             );
         }
 
 
         [Test]
-        public async Task MergeUserContactsAsync_IsCrawler_ReturnsNull()
+        public async Task MergeUserContactsAsync_ConnotProcessContact_ReturnsNull()
         {
             // Arrange
-            var crawlerService = (CrawlerCheckerFake)Service<ICrawlerChecker>.Entry();
-            crawlerService.Crawler = true;
+            mContactProcessingChecker.CanProcessContactInCurrentContext().Returns(false);
 
             // Act
             await mContactTrackingService.MergeUserContactsAsync(string.Empty);
 
             // Assert
             CMSAssert.All(
-                () => Assert.That(() => mCurrectContactProvider.GetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.GetCurrentContact should not be called."),
-                () => Assert.That(() => mCurrectContactProvider.SetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.SetCurrentContact should not be called.")
-            );
-        }
-
-
-        [Test]
-        public async Task MergeUserContactsAsync_InvalidLicense_ReturnsNull()
-        {
-            // Arrange
-            var licenceService = (LicenseServiceFake)Service<ILicenseService>.Entry();
-            licenceService.HasLicence = false;
-
-            // Act
-            await mContactTrackingService.MergeUserContactsAsync(string.Empty);
-
-            // Assert
-            CMSAssert.All(
-                () => Assert.That(() => mCurrectContactProvider.GetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.GetCurrentContact should not be called."),
-                () => Assert.That(() => mCurrectContactProvider.SetCurrentContactFlag, Is.EqualTo(0), "CurrectContactProvider.SetCurrentContact should not be called.")
+                () => mCurrectContactProvider.DidNotReceive().GetCurrentContact(Arg.Any<IUserInfo>(), Arg.Any<bool>()),
+                () => mCurrectContactProvider.DidNotReceive().SetCurrentContact(Arg.Any<ContactInfo>())
             );
         }
 
@@ -152,15 +121,16 @@ namespace Kentico.ContactManagement.Tests
             {
                 ContactLastName = "TestContact"
             };
-            mCurrectContactProvider.CurrentContact = expectedContact;
+
+            mCurrectContactProvider.GetCurrentContact(Arg.Any<IUserInfo>(), false).Returns(expectedContact);
 
             // Act
             await mContactTrackingService.MergeUserContactsAsync(userName);
 
             // Assert
             CMSAssert.All(
-                () => Assert.That(() => mCurrectContactProvider.GetCurrentContactFlag, Is.EqualTo(1), "CurrectContactProvider.GetCurrentContact should be called."),
-                () => Assert.That(() => mCurrectContactProvider.SetCurrentContactFlag, Is.EqualTo(1), "CurrectContactProvider.SetCurrentContact should be called.")
+                () => mCurrectContactProvider.Received(1).GetCurrentContact(Arg.Any<IUserInfo>(), Arg.Any<bool>()),
+                () => mCurrectContactProvider.Received(1).SetCurrentContact(Arg.Any<ContactInfo>())
             );
         }
 
@@ -184,7 +154,7 @@ namespace Kentico.ContactManagement.Tests
             {
                 ContactLastName = "TestContact"
             };
-            mCurrectContactProvider.CurrentContact = expectedContact;
+            mCurrectContactProvider.GetCurrentContact(Arg.Any<IUserInfo>(), false).Returns(expectedContact);
 
             // Act
             var contact = await mContactTrackingService.GetCurrentContactAsync("NotExisting");

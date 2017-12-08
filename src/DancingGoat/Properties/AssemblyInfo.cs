@@ -9,7 +9,7 @@ using CMS;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico Software")]
 [assembly: AssemblyProduct("DancingGoat")]
-[assembly: AssemblyCopyright("© 2016 Kentico Software. All rights reserved.")]
+[assembly: AssemblyCopyright("© 2017 Kentico Software. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

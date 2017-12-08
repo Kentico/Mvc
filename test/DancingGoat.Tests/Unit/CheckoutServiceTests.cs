@@ -17,6 +17,7 @@ namespace DancingGoat.Tests.Unit
     public class CheckoutServiceTests : UnitTests
     {
         private CheckoutService checkoutService;
+        private ShoppingCartInfo mShoppingCartInfo;
 
         private const int SHIPPING_OPTION_ID = 33;
         private const int SHIPPING_OPTION_NOT_EXISTING_ID = 17;
@@ -27,6 +28,7 @@ namespace DancingGoat.Tests.Unit
         private const int COUNTRY_NOT_EXISTING_ID = 66;
         private const int COUNTRY_WITHOUT_STATES_ID = 4444;
         private const int STATE_ID = 8;
+        private const string COUPON_CODE = "CouponCode";
 
 
         [SetUp]
@@ -37,8 +39,11 @@ namespace DancingGoat.Tests.Unit
             Fake<ShoppingCartInfo, ShoppingCartInfoProvider>();
             Fake<CountryInfo, CountryInfoProvider>();
             Fake<StateInfo, StateInfoProvider>();
+            Fake<ShoppingCartCouponCodeInfo, ShoppingCartCouponCodeInfoProvider>().WithData();
 
-            var cart = new ShoppingCart(new ShoppingCartInfo());
+            mShoppingCartInfo = new ShoppingCartInfo();
+
+            var cart = new ShoppingCart(mShoppingCartInfo);
 
             var paymentMethodRepository = Substitute.For<IPaymentMethodRepository>();
             var shippingOptionRepository = Substitute.For<IShippingOptionRepository>();
@@ -73,12 +78,6 @@ namespace DancingGoat.Tests.Unit
             {
                 CountryName = "USA",
                 CountryID = COUNTRY_ID
-            };
-
-            var countryWithoutStates = new CountryInfo
-            {
-                CountryName = "Canada",
-                CountryID = COUNTRY_WITHOUT_STATES_ID
             };
 
             var stateOregon = new StateInfo
@@ -116,6 +115,33 @@ namespace DancingGoat.Tests.Unit
         public void IsCouponCodeValueValid_False_For_InvalidCouponCode()
         {
             Assert.IsFalse(checkoutService.IsCouponCodeValueValid("not_valid"), "Coupon code not accepted by shopping cart is invalid.");
+        }
+
+
+        [Test]
+        public void IsCouponCodeValueValid_True_For_ValidCouponCode()
+        {
+            mShoppingCartInfo.CouponCodes.Merge(new []
+            {
+                new CouponCode(COUPON_CODE, CouponCodeApplicationStatusEnum.AppliedInOrder)
+            });
+
+            Assert.IsTrue(checkoutService.IsCouponCodeValueValid(COUPON_CODE), "Coupon code accepted by shopping cart is valid.");
+        }
+
+
+        [TestCase("Couponcode")]
+        [TestCase("couponCode")]
+        [TestCase("COUPONCODE")]
+        [TestCase("couponcode")]
+        public void IsCouponCodeValueValid_True_For_CaseInsensitiveCouponCode(string couponCode)
+        {
+            mShoppingCartInfo.CouponCodes.Merge(new[]
+            {
+                new CouponCode(COUPON_CODE, CouponCodeApplicationStatusEnum.AppliedInOrder)
+            });
+
+            Assert.IsTrue(checkoutService.IsCouponCodeValueValid(couponCode), "Coupon code accepted by shopping cart is valid not depending on case sensitivity.");
         }
 
 

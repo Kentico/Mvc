@@ -30,13 +30,13 @@ namespace Kentico.Ecommerce
         /// <summary>
         /// Gets the total price of the order item in the main currency.
         /// </summary>
-        public decimal Subtotal => (decimal)OriginalOrderItem.OrderItemTotalPriceInMainCurrency;
+        public decimal Subtotal => OriginalOrderItem.OrderItemTotalPriceInMainCurrency;
 
 
         /// <summary>
         /// Gets the unit price of the order item.
         /// </summary>
-        public decimal UnitPrice => (decimal)OriginalOrderItem.OrderItemUnitPrice;
+        public decimal UnitPrice => OriginalOrderItem.OrderItemUnitPrice;
 
 
         /// <summary>

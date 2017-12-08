@@ -1,0 +1,26 @@
+﻿@model LearningKit.Models.TrackingConsent.TrackingConsentViewModel
+
+<div>
+    <p>
+        @Html.Raw(Model.ShortText)
+    </p>
+    @if (Model.IsAgreed)
+    {
+        using (Html.BeginForm("Revoke", "TrackingConsent", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Revoke" />
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("Accept", "TrackingConsent", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Accept" />
+        }
+    }
+    <p>
+        @Html.ActionLink("> Back to the home index", "Index", "Home")
+    </p>
+</div>

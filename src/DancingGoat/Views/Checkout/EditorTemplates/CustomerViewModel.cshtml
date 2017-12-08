@@ -4,7 +4,16 @@
 
 @Html.ValidatedEditorFor(m => m.FirstName)
 @Html.ValidatedEditorFor(m => m.LastName)
-@Html.ValidatedEditorFor(m => m.Email)
+@if (User.Identity.IsAuthenticated && !string.IsNullOrWhiteSpace(Model.Email))
+{
+    @Html.HiddenFor(model => model.Email)
+    @Html.ValidatedEditorFor(model => model.Email, disabled: true)
+}
+else
+{
+    @Html.ValidatedEditorFor(model => model.Email)
+}
+
 @Html.ValidatedEditorFor(m => m.PhoneNumber)
 
 <h4>@ResHelper.GetString("com.customeredit.companydeatils")</h4>

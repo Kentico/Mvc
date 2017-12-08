@@ -69,6 +69,13 @@ namespace Kentico.Ecommerce.Tests.Fakes
             }
 
 
+            public string ActivityUTMContent
+            {
+                get;
+                set;
+            }
+
+
             public int ActivityItemDetailID
             {
                 get;
