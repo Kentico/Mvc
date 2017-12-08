@@ -1,8 +1,8 @@
 ﻿{
   "dependencies": {
     "Antlr": "3.5.0.2",
-    "Kentico.LanguagePack.English": "11.0.0-*",
-    "Kentico.Libraries": "11.0.0-*",
+    "Kentico.LanguagePack.English": "11.0.0",
+    "Kentico.Libraries": "11.0.0",
     "Microsoft.AspNet.Identity.Owin": "2.2.1",
     "Microsoft.AspNet.Mvc": "5.2.3",
     "Microsoft.AspNet.Web.Optimization": "1.1.3",
