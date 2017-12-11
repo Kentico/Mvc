@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/59lkg4bmkiwtoa6x/branch/master?svg=true)](https://ci.appveyor.com/project/kentico/mvc/branch/master) [![Q&As](https://img.shields.io/badge/chat-on%20DevNet-orange.svg)](https://devnet.kentico.com/questions-answers)
 
-[Kentico 11](https://docs.kentico.com/k11/) brings support for the development of [ASP.NET MVC 5 applications](https://docs.kentico.com/x/PQgbB). This repository contains source code for Kentico integration packages and a sample _Dancing Goat_ web application  that demonstrates all supported features related to the MVC development with Kentico. To find out more about the design of the sample web application, see the [How it works](https://github.com/Kentico/Mvc/wiki/how-it-works) page in the [Wiki](https://github.com/Kentico/Mvc/wiki). The page contains explanations of the decisions made when creating the application and can help you when building your own projects.
+[Kentico 11](https://docs.kentico.com/k11/) brings support for the development of [ASP.NET MVC 5 applications](https://docs.kentico.com/x/PQgbB). This repository contains source code for Kentico integration packages and a sample _Dancing Goat_ web application  that demonstrates all supported features related to the MVC development with Kentico. To find out more about the design of the sample web application, see the [How the Dancing Goat web application works](https://github.com/Kentico/Mvc/wiki/How-Dancing-Goat-web-application-works) page in the [Wiki](https://github.com/Kentico/Mvc/wiki). The page contains explanations of the decisions made when creating the application and can help you when building your own projects.
 
 ## Repository structure
 
@@ -11,6 +11,14 @@ The repository consists of projects representing integration packages specified 
 There are also the **DancingGoat** and **LearningKit** projects. Both are sample ASP.NET MVC 5 applications built using Kentico. The Dancing Goat site represents a real-life website suitable for exploring the full MVC experience.
 
 The Learning Kit is a functional website for learning purposes. It demonstrates how to implement various Kentico features on MVC websites in the form of code snippets, which you can run if you connect the website to a Kentico database. Also, the project source code is used in documentation examples.
+
+## Accessing older versions of the repository
+
+You can find the MVC repository for older versions of Kentico under the [Releases](https://github.com/Kentico/Mvc/releases) section (open the corresponding commit for the required version and click **Browse files**).
+
+Quick links:
+
+- [Kentico 10 (latest hotfix)](https://github.com/Kentico/Mvc/tree/2a6e48b1e4a3e27da562becccec4d9a584ef5a0c)
 
 ## Running sample sites
 
