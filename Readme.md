@@ -19,6 +19,7 @@ You can find the MVC repository for older versions of Kentico under the [Release
 Quick links:
 
 - [Kentico 10 (latest hotfix)](https://github.com/Kentico/Mvc/tree/2a6e48b1e4a3e27da562becccec4d9a584ef5a0c)
+- [Kentico 9 (latest hotfix)](https://github.com/Kentico/Mvc/tree/29c7a7ca9c99e80f4a34c267a912ff348002a775)
 
 ## Running sample sites
 
