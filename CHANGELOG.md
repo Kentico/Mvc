@@ -122,6 +122,9 @@
 
 
 ## Kentico.Ecommerce
+### 2.0.1 (2018-02-07)
+#### Fixed
+* Fixed licensing errors that occurred when saving a shopping cart on sites with a lower license edition than EMS.
 
 ### 2.0.0 (2017-12-11)
 #### Release notes
