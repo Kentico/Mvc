@@ -14,5 +14,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("c38f0f75-8dbd-4d65-9cf4-3da992ab7413")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0")]
+[assembly: AssemblyInformationalVersion("2.0.1")]
 [assembly: InternalsVisibleTo("Kentico.ContactManagement.Tests")]

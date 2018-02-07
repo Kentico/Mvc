@@ -93,7 +93,7 @@ namespace Kentico.Ecommerce.Tests
             cartInfo.Evaluate();
             cartInfo.Insert();
 
-            var cart = new ShoppingCart(cartInfo, mEcommerceActivitiesLogger, null);
+            var cart = new ShoppingCart(cartInfo, mEcommerceActivitiesLogger, null, null);
 
             return mService.CreateOrder(cart);
         }

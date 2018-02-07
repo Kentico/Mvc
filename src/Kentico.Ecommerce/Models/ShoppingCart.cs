@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using CMS.ContactManagement;
+using CMS.ContactManagement.Internal;
 using CMS.Core;
 using CMS.DataEngine;
 using CMS.Ecommerce;
@@ -19,6 +20,7 @@ namespace Kentico.Ecommerce
     {
         private readonly EcommerceActivityLogger mActivityLogger;
         private readonly ICurrentContactProvider mCurrentContactProvider;
+        private readonly IContactProcessingChecker mContactProcessingChecker;
         private IEnumerable<ShoppingCartItem> mItems;
         private Customer mCustomer;
         private CustomerAddress mBillingAddress;
@@ -217,12 +219,12 @@ namespace Kentico.Ecommerce
         /// </summary>
         /// <param name="originalCart"><see cref="ShoppingCartInfo"/> object representing an original Kentico shopping cart info object from which the model is created.</param>
         public ShoppingCart(ShoppingCartInfo originalCart)
-            :this(originalCart, new EcommerceActivityLogger(), Service.Resolve<ICurrentContactProvider>())
+            :this(originalCart, new EcommerceActivityLogger(), Service.Resolve<ICurrentContactProvider>(), Service.Resolve<IContactProcessingChecker>())
         {
         }
 
 
-        internal ShoppingCart(ShoppingCartInfo originalCart, EcommerceActivityLogger activityLogger, ICurrentContactProvider currentContactProvider)
+        internal ShoppingCart(ShoppingCartInfo originalCart, EcommerceActivityLogger activityLogger, ICurrentContactProvider currentContactProvider, IContactProcessingChecker contactProcessingChecker)
         {
             if (originalCart == null)
             {
@@ -232,6 +234,7 @@ namespace Kentico.Ecommerce
             OriginalCart = originalCart;
             mActivityLogger = activityLogger;
             mCurrentContactProvider = currentContactProvider;
+            mContactProcessingChecker = contactProcessingChecker;
         }
 
 
@@ -492,7 +495,12 @@ namespace Kentico.Ecommerce
 
         private void SetCustomerRelationAndUpdateContact(CustomerInfo customerInfo)
         {
-            if (mCurrentContactProvider == null)
+            if (mCurrentContactProvider == null || mContactProcessingChecker == null)
+            {
+                return;
+            }
+
+            if (!mContactProcessingChecker.CanProcessContactInCurrentContext())
             {
                 return;
             }
