@@ -4,6 +4,7 @@ using System.Linq;
 using CMS.Activities;
 using CMS.Base;
 using CMS.ContactManagement;
+using CMS.ContactManagement.Internal;
 using CMS.Core;
 using CMS.Ecommerce;
 using CMS.SiteProvider;
@@ -533,6 +534,25 @@ namespace Kentico.Ecommerce.Tests
 
 
         [Test]
+        public void CartSave_ContactProcessingNotAllowed_ContactNotCreated()
+        {
+            SiteContext.CurrentSite = SiteInfo;
+            var customer = Factory.CustomerAnonymous;
+
+            var currentContactProvider = Substitute.For<ICurrentContactProvider>();
+
+            var contactProcessingChecker = Substitute.For<IContactProcessingChecker>();
+            contactProcessingChecker.CanProcessContactInCurrentContext().Returns(false);
+
+            var cart = CreateCartWithCustomerInfo(customer, null, currentContactProvider, contactProcessingChecker);
+
+            cart.Save();
+
+            currentContactProvider.DidNotReceive().GetCurrentContact(Arg.Any<IUserInfo>(), Arg.Any<bool>());
+        }
+
+
+        [Test]
         public void CartSave_UpdateContactRelations_ContactIsUpdated()
         {
             SiteContext.CurrentSite = SiteInfo;
@@ -542,7 +562,10 @@ namespace Kentico.Ecommerce.Tests
             var currentContactProvider = Substitute.For<ICurrentContactProvider>();
             currentContactProvider.GetCurrentContact(Arg.Any<IUserInfo>(), Arg.Any<bool>()).Returns(contact);
 
-            var cart = CreateCartWithCustomerInfo(customer, null, currentContactProvider);
+            var contactProcessingChecker = Substitute.For<IContactProcessingChecker>();
+            contactProcessingChecker.CanProcessContactInCurrentContext().Returns(true);
+
+            var cart = CreateCartWithCustomerInfo(customer, null, currentContactProvider, contactProcessingChecker);
 
             cart.Save();
 

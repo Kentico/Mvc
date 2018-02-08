@@ -1,4 +1,5 @@
 ﻿using CMS.ContactManagement;
+using CMS.ContactManagement.Internal;
 using CMS.DataEngine;
 using CMS.Ecommerce;
 using CMS.SiteProvider;
@@ -132,7 +133,7 @@ namespace Kentico.Ecommerce.Tests
         }
 
 
-        public ShoppingCart CreateCartWithCustomerInfo(CustomerInfo customer, AddressInfo address = null, ICurrentContactProvider currentContactProvider = null)
+        public ShoppingCart CreateCartWithCustomerInfo(CustomerInfo customer, AddressInfo address = null, ICurrentContactProvider currentContactProvider = null, IContactProcessingChecker contactProcessingChecker = null)
         {
             var cartInfo = ShoppingCartFactory.CreateCart(SiteID);
             cartInfo.ShoppingCartCurrencyID = Factory.MainCurrency.CurrencyID;
@@ -142,7 +143,7 @@ namespace Kentico.Ecommerce.Tests
 
             ShoppingCartInfoProvider.SetShoppingCartInfo(cartInfo);
 
-            return new ShoppingCart(cartInfo, new EcommerceActivitiesLoggerFake(), currentContactProvider);
+            return new ShoppingCart(cartInfo, new EcommerceActivitiesLoggerFake(), currentContactProvider, contactProcessingChecker);
         }
         
 
@@ -152,7 +153,7 @@ namespace Kentico.Ecommerce.Tests
 
             ShoppingCartInfoProvider.SetShoppingCartInfo(originalCart);
 
-            return new ShoppingCart(originalCart, new EcommerceActivitiesLoggerFake(), null);
+            return new ShoppingCart(originalCart, new EcommerceActivitiesLoggerFake(), null, null);
         }
 
 
