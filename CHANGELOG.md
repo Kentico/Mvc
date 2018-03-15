@@ -83,7 +83,7 @@
 
 ### 2.0.1 (2018-03-16)
 #### Fixed
-* Fix concurrent GlobalFilters registration.
+* Fix concurrent GlobalFilters registration which led to failed application initialization under high traffic.
 [#30](https://github.com/Kentico/Mvc/pull/30)
 
 ### 2.0.0 (2017-12-11)
