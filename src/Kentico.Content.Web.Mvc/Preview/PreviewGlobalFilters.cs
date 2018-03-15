@@ -16,7 +16,7 @@ namespace Kentico.Content.Web.Mvc
             var globalFilters = GlobalFilters.Filters;
 
             // Add a filter to disable output cache for preview
-            if (!globalFilters.Any(f => f.GetType().Equals(typeof(PreviewOutputCacheFilter))))
+            if (!globalFilters.Any(f => f.Instance.GetType().Equals(typeof(PreviewOutputCacheFilter))))
             {
                 globalFilters.Add(new PreviewOutputCacheFilter());
             }
