@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.Helpers;
 
 using CMS.DocumentEngine;
 using CMS.Helpers;
+
 using Kentico.Web.Mvc;
 
 namespace Kentico.Content.Web.Mvc
@@ -22,7 +22,6 @@ namespace Kentico.Content.Web.Mvc
         public void Initialize(HttpApplication application)
         {
             application.BeginRequest += HandleBeginRequest;
-            GlobalFilters.Filters.Add(new PreviewOutputCacheFilter());
         }
 
 

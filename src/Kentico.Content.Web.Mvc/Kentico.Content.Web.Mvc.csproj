@@ -51,6 +51,7 @@
     <Compile Include="HelperMethods\UrlHelperFileMethods.cs" />
     <Compile Include="IFeatureSetExtensions.cs" />
     <Compile Include="Preview\IPreviewFeature.cs" />
+    <Compile Include="Preview\PreviewGlobalFilters.cs" />
     <Compile Include="Preview\PreviewOutputCacheFilter.cs" />
     <Compile Include="Preview\PreviewFeature.cs" />
     <Compile Include="Preview\PreviewFeatureModule.cs" />
