@@ -13,6 +13,8 @@ namespace Kentico.Content.Web.Mvc
         /// <param name="builder">The application builder.</param>
         public static void UsePreview(this ApplicationBuilder builder)
         {
+            PreviewGlobalFilters.Register();
+
             var module = new PreviewFeatureModule();
             builder.RegisterModule(module);
         }

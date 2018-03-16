@@ -14,6 +14,6 @@ using System.Runtime.InteropServices;
 [assembly: Guid("430a1add-4583-459f-879c-a22a61e44a3b")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0")]
+[assembly: AssemblyInformationalVersion("2.0.1")]
 
 [assembly: InternalsVisibleTo("Kentico.Content.Web.Mvc.Tests")]

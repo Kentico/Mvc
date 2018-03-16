@@ -47,6 +47,7 @@
     <Compile Include="HelperMethods\NameValueCollectionExtensionsTests.cs" />
     <Compile Include="HelperMethods\SizeConstraintTests.cs" />
     <Compile Include="HelperMethods\UrlHelperFileMethodsTests.cs" />
+    <Compile Include="Preview\PreviewGlobalFiltersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
