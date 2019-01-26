@@ -9,8 +9,8 @@ If no issue exists, what is the fix or new feature? Were there any reasons to fi
 - [ ] Code follows coding conventions held in this repo
 - [ ] Automated tests have been added
 - [ ] Tests are passing
-- [ ] Docu has been updated (if applicable)
-- [ ] Temporary settings (e.g. project ID used during development and testing) have been reverted to defaults
+- [ ] Docs have been updated (if applicable)
+- [ ] Temporary settings (e.g. variables used during development and testing) have been reverted to defaults
 
 ### How to test
 

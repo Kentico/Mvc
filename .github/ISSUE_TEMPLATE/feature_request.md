@@ -10,7 +10,7 @@ Why is this feature required? What problems does it solve?
 
 ### Proposed solution
 
-An ideal solution of the above problems.
+An ideal solution for the above problems.
 
 ### Additional context
 
